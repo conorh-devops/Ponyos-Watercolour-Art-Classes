@@ -36,7 +36,7 @@ Rotating scrum master so that everyone gets to experience the role once.
 <<List name>> (Permanent)
 
 # Rockstars
-<<list team member names here>>
+Alan Staunton
 
 
 # Project Deadline
