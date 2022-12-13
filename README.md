@@ -1,4 +1,4 @@
-# ProjTemplate
+# Ponyos Watercolour Art Classes
 BScDevOps Assign - Team Marvel
 
 # Table of Contents
