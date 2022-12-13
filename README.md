@@ -37,6 +37,7 @@ Rotating scrum master so that everyone gets to experience the role once.
 
 # Rockstars
 Alan Staunton
+ 
 Airton Esmerio
 
 
