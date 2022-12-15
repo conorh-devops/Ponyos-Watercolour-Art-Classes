@@ -42,7 +42,7 @@ Airton Esmerio
 
 Mara Lima
 
-Conor Horan 2
+Conor Horan
 
 # Project Deadline
 Refer to BB for deadlines
