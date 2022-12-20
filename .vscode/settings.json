@@ -1,0 +1,17 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#5c7204",
+    "activityBar.foreground": "#ffffff"
+  },
+  "editor.formatOnSave": true,
+  "javascript.format.semicolons": "remove",
+  "editor.tabSize": 2,
+  "vetur.format.defaultFormatter.js": "prettier",
+  "vetur.format.defaultFormatterOptions": {
+    "prettier": {
+      "tabWidth": 2,
+      "printWidth": 180,
+    }
+  },
+  "liveServer.settings.port": 8081
+}
