@@ -29,8 +29,16 @@ Each team should fill in the blanks <<>> and add additional content that the tea
 Our product will be delivered using an Agile methodology that embraces the DevOps culture. Please note that our culture embraces change and these documents are treated as living, breathing artefacts that will be continuously updated.
 
 # Scrum Master
-<<list week number, student name>>
 Rotating scrum master so that everyone gets to experience the role once.
+19/12/2022 - Alan Staunton
+02/01/2023 - Airton Esmerio
+09/01/2023 - Mara Lima
+16/01/2023 - Conor Horan
+23/01/2023 - Louise McBride
+30/01/2023 - Monish Pawar
+
+
+
 
 # Product Owner
 <<List name>> (Permanent)
