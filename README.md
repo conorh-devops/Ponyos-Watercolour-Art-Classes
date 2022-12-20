@@ -29,8 +29,21 @@ Each team should fill in the blanks <<>> and add additional content that the tea
 Our product will be delivered using an Agile methodology that embraces the DevOps culture. Please note that our culture embraces change and these documents are treated as living, breathing artefacts that will be continuously updated.
 
 # Scrum Master
-<<list week number, student name>>
 Rotating scrum master so that everyone gets to experience the role once.
+19/12/2022 - Alan Staunton
+
+02/01/2023 - Airton Esmerio
+
+09/01/2023 - Mara Lima
+
+16/01/2023 - Conor Horan
+
+23/01/2023 - Louise McBride
+
+30/01/2023 - Monish Pawar
+
+
+
 
 # Product Owner
 <<List name>> (Permanent)
@@ -44,25 +57,29 @@ Mara Lima
 
 Conor Horan
 
+Monish Pawar
+
+Louise McBride
+
 # Project Deadline
-Refer to BB for deadlines
+Thursday, 23 March 2023 23:59
 
 # Project Specification
 Clean and simple design
 User access levels (client, administrator)
 Includes at least one self developed api and one webservice
-To be run over <specify platform>
+To be run on AWS.
 
 # Frameworks
-We will be using MongoDB for our database
+We will be using MongoDB for our databasehttps://github.com/conorh-devops/Ponyos-Watercolour-Art-Classes/edit/atu-alans-patch-1/README.md
 Database persistence technology
 Define the buisness Requirements
 Named queries and database triggers for security
 Regex for cleansing and validation of data before sending to the database.
 
 # Useful Links
- - Project Slack: https://atudevops.slack.com
- - GitHub: <<staff member's github repo for the student project>>
+ - Project Slack: https://atudevops.slack.com #pgdip_devops_prj_man_group_3
+ - GitHub: https://github.com/conorh-devops/Ponyos-Watercolour-Art-Classes.git
 
 # More Information
 For more information visit our other sections
@@ -121,11 +138,12 @@ The code framework to be used will be <<>>, we will be programming using the IDE
     Use Agile methodoligies in the project at all times.
 
 # Meetings
-Stand-ups will occur on Every <<day/time>> during class and <<day/time>> using Automated bot. Two per week.
-The order that people give their updates will be << >>.
+Stand-ups will occur on Every Monday @ 18:30, during class and every Thursday @ 18:30. Stands up will occur a minimum of twice weekly.
+The order that people give their updates will be random.
 Updates will be in the form: What I've done, Impediments, What I plan to do.
-Sprint planning will occur at <<date/time>> every week.
-Please add and update items within <<issue management tool>> a prior to the sprint planning session.
+Sprint planning will occur at 18:30 every week.
+Please add and update items within Jira prior to the sprint planning session.
+Jira link is: https://atudevops.atlassian.net/jira/software/projects/PWA/boards/7
 Sprint retro will at the end of our sprint on <<Date/Time>> (timebox retro for 15 minutes, to be organised by the scrum master).
 The order that people present their sprint retro updates will be based on The Team 1 list in the Assign_BSc_DevOps_2022.pdf file on blackboard of those present at the meeting.
 Points raised in the sprint retro will be noted and posted on the slack channel by the Scrum Master. The Scrum Master is rotated per team member every week.
@@ -142,7 +160,7 @@ Be honest.
 Slack is the preferred method of communication.
 Communication in this order: <<Slack, Microsoft Teams, E-Mail>> *Note that if the lecturers can't see the communications we cannot grade it!
 If a demonstration is required use Zoom, record the session and upload to the Slack channel.
-No Slack communications between <<time and time>>.
+No Slack communications between 21:00 - 09:00.
 Raise a problem as soon as you see it.
 Respect each other and understand differences in knowledge.
 All team documents are to be created using Markdown language and shared on GitHub.
