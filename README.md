@@ -43,8 +43,6 @@ Rotating scrum master so that everyone gets to experience the role once.
 30/01/2023 - Monish Pawar
 
 
-
-
 # Product Owner
 <<List name>> (Permanent)
 
@@ -98,7 +96,11 @@ Security	Overview of security
 Project Log	Team log for the project
 
 # Risk Register
-These are the current Risks on the project, re-aligned on a weekly basis
+This section will list the Risks associated with the project along with along with its contingency and mitigation plan. The risk will be captured and udpated through out the project and re-aligned on a weekly basis.
+
+Risk                            Contingency                          Mitigation 
+
+
 
 
 # Tenants of Design
@@ -110,7 +112,15 @@ The code framework to be used will be <<>>, we will be programming using the IDE
 - <<>>.
 
 # Testing:
-    
+
+The quality of the application will be assessed through three main testing types as defined below.
+
+- Unit Test - For better code coverage, code will be written with the unit test. The developer will be responsible for writing the unit test. These unit tests will be used in our pipeline to achieve our CI approach.
+
+- Functional Test: The test engineer will conduct functional testing via automated test scripts created through the Playwrite automation tool for UI (black box testing). The Regression pack will be created via a subset of the Automated test suite. This regression pack will be utilized in the Pipeline before the deployment stage to achieve our CD approach. Also, a tester will assess the scope of API test and write API automation tests in Postman(if required) 
+
+- Exploratory Test: Along with UI and API tests, the tester will perform an Exploratory test to make sure the non-functional aspects of the application like responsiveness, usability, etc
+
     
 # Environments:
     staging and production
