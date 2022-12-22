@@ -140,7 +140,7 @@ The quality of the application will be assessed through three main testing type
     Everyone has an equal voice and valuable contribution.
     When you are assigned a job, take ownership of it and keep it up to date, do not be afraid to ask others for help, always be honest about your work.
     Do not speak over someone when they are expressing a point, everyone has an equal voice.
-    No blame culture.
+    No blame culture.   
     Do not be afraid to ask for help, we are all learning.
     No invisble work.
     Ask questions to make sure you understand the task given to you.
@@ -203,4 +203,32 @@ The teams team's velocity is calculated by <<Team decides>>.
 The teams current story point velocity is "N/A".
 
 # Definition of Ready
-<<List criteria that are common here>>
+
+Before the team starts estimating the Stories from complexity perspective everyone must understand what "Ready" means. Although this varies significantly per Scrum Team, members must have a shared understanding of what it means for a Story to be "Ready" for estimation. This is the "Definition of "Ready" " for the Scrum Team and is used to assess when the Story can be included in the estimation.
+
+The following checks should be marked as done before declaring a Story ready to be estimated. Unless all the steps are marked the Story will not be moved to the product backlog and therefore not be estimated. 
+
+- The Story template is filled in
+- The Story is understood by all
+- The Story has been estimated by the team (and can be re-estimated in planning if necessary)
+- The Story is testable within the sprint
+- The Story can be completed (Definition of Done) in approx. 1/3 of a sprint
+- The Story does NOT include known impediments
+- The way to demo the Story is understood (or is conceivable)
+
+
+# Definition of Done
+When the Story is described as "Done", everyone must understand what "Done" means. Although this varies significantly per Scrum Team, members must have a shared understanding of what it means for work to be complete, to ensure transparency. This is the "Definition of "Done"" for the Scrum Team and is used to assess when work is complete on the Product Increment.
+
+The same definition guides the Development Team in knowing how many Stories it can select during a Sprint Planning Meeting. The purpose of each Sprint is to deliver increments of potentially shippable functionality that adhere to the Scrum Team's current Definition of "Done".
+
+The following definition of "DONE" applies only to the Scrum teams of this project. We can say that a Story is "DONE" when:
+
+- Code is completed, all technical tasks are closed
+- Code is reviewed based on code review standards (previously defined)
+- Unit tests are created and are passed
+- Test cases are created
+- All tests were executed
+- All sub-tasks associated to  story/Task are closed
+- Demo provided to PO when needed
+
