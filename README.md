@@ -123,10 +123,18 @@ The quality of the application will be assessed through three main testing type
 
     
 # Environments:
-    staging and production
-    tight configuration management for consistency and reproducibility
+    Belowa are the environment proposed for this project 
+    
+    Dev, Test, Stage and Production
+
+    - Dev - All Development activities will be peformed in this environment
+    - Test - All QA activities will be done in the Test environment 
+    - Stage(optional)- All Pre-production test will be performed on the Stage environment e.g. UAT
+    - Production - Live environment
+    
+    Tight configuration management for consistency and reproducibility
     automated creation and deployments
-    integrated and automated pipeline (commit -> test -> deploy)
+    integrated and automated pipeline (commit -> test -> Stage -> deploy)
 
 # Github version control:
     branches used
