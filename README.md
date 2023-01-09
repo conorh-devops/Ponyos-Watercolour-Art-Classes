@@ -38,7 +38,7 @@ Rotating scrum master so that everyone gets to experience the role once.
 
 16/01/2023 - Conor Horan
 
-23/01/2023 - Louise McBride
+23/01/2023 - Louise MacBride
 
 30/01/2023 - Monish Pawar
 
@@ -59,7 +59,7 @@ Conor Horan
 
 Monish Pawar
 
-Louise McBride
+Louise MacBride
 
 # Project Deadline
 Thursday, 23 March 2023 23:59
