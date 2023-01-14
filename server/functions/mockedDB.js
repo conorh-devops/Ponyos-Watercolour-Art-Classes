@@ -1,21 +1,31 @@
 exports.userList = [
   {
-    email: "admin",
+    id: "d747df7c",
+    email: "admin@email.com",
     password: "admin",
     name: "Admin User",
-    admin: true
+    isAdmin: true
   },
   {
+    id: "763ec5f6",
     email: "john@email.com",
     password: "password",
     name: "John Ferrari",
-    className: ""
+    className: "Drawing"
   },
   {
+    id: "9ec0b4eb",
     email: "maria@email.com",
     password: "password",
     name: "Maria Mercedes",
-    className: ""
+    className: "Watercolors"
+  },
+  {
+    id: "764b2cb7",
+    email: "clare@email.com",
+    password: "password",
+    name: "Clare Williams",
+    className: "Watercolors"
   },
 ]
 

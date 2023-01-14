@@ -9,17 +9,17 @@
 
       <template v-if="testApiResult">
 
-        <v-btn v-if="!$root.loggedUser" text outlined @click="$router.push({ name: 'login' })" id="btnBarLogin">
-          <span class="mr-2" >Login</span>
+        <v-btn v-if="!$root.loggedUser" text outlined @click="$router.push({ name: 'login' })" id="btnBarAccount">
+          <span class="mr-2">Account</span>
           <v-icon>mdi-account</v-icon>
         </v-btn>
-        <template v-else >
-          <v-btn text outlined class="mr-2" id="btnBarProfile">
-            <span  v-text="userName"></span>
+        <template v-else>
+          <v-btn text outlined class="mr-2" id="btnBarProfile" @click="$router.push({ name: 'profile' })">
+            <span v-text="userName"></span>
             <v-icon>mdi-account-cog-outline</v-icon>
           </v-btn>
           <v-btn text outlined @click="logout" class="mr-2" id="btnBarLogout">
-            <span >Log out</span>
+            <span>Log out</span>
             <v-icon>mdi-logout</v-icon>
           </v-btn>
         </template>
@@ -43,21 +43,22 @@ export default {
   }),
   computed: {
     userName() {
-      return this.$root.loggedUser.name.split(" ")[0] 
+      return this.$root.loggedUser.name.split(" ")[0]
     }
   },
-  mounted () {
+  mounted() {
     this.testApi()
   },
   methods: {
-    async testApi(){
-      const result = await api("hello") 
+    async testApi() {
+      const result = await api("hello")
       if (result.status === 200)
         this.testApiResult = result.body === "Hello world"
-      
+
       console.log(`App is ${!this.testApiResult ? "NOT" : ""} Connected with backend`)
     },
     logout() {
+      this.$router.push({ name: "home" })
       this.$root.loggedUser = null
     },
   },
@@ -67,8 +68,10 @@ export default {
 <style>
 .main {
   margin: auto;
-  max-width: 800px !important;
+  width: 1200px;
+  max-width: 98vw;
 }
+
 .clickable {
   cursor: pointer;
 }

@@ -1,19 +1,21 @@
 <template>
   <div class="UserDetails">
-    <v-form>
+    <v-form ref="formUserDetails">
 
-      <v-text-field v-model="user.email" type="email" label="E-mail" required id="fldEmail"></v-text-field>
+      <v-text-field v-model="user.email" :disabled="Boolean(editUser)" type="email" label="E-mail" id="fldEmail"
+        ref="fldEmail" :rules="[rules.required, rules.email]" />
 
-      <v-text-field v-if="isSignUp" v-model="user.password" type="password" label="Password" required
-        id="fldPassword"></v-text-field>
+      <v-text-field v-if="isSignUp" v-model="user.password" type="password" label="Password" id="fldPassword"
+        ref="fldPassword" :rules="[rules.required]" />
 
       <v-text-field v-if="isSignUp" v-model="user.passwordConfirmation" type="password" label="Password Confirmation"
-        required id="fldPasswordConfirmation"></v-text-field>
+        id="fldPasswordConfirmation" ref="fldPasswordConfirmation" :rules="[rules.required]" />
 
-      <v-text-field v-model="user.name" type="text" label="Your Name" required id="fldName"></v-text-field>
+      <v-text-field v-model="user.name" type="text" label="Your Name" required id="fldName" ref="fldName"
+        :rules="[rules.required]" />
 
-      <v-select v-model="user.className" class="classNames" label="Available classes" :items="classNames" clearable>
-      </v-select>
+      <v-select v-if="!user.isAdmin" v-model="user.className" id="classNames" ref="classNames" label="Available classes"
+        :items="classNames" :rules="[rules.required]" />
 
       <v-card-actions>
         <v-btn id="btnSave" @click="cancel" v-if="!hideCancel">
@@ -29,6 +31,7 @@
 
 <script>
 import api from "./../service/api.js"
+import rules from "./../rules.js"
 
 export default {
   name: "UserDetails",
@@ -41,6 +44,10 @@ export default {
       type: Boolean,
       default: false
     },
+    editUser: {
+      type: Object,
+      default: null
+    }
   },
   data() {
     return {
@@ -50,11 +57,20 @@ export default {
         password: "",
         passwordConfirmation: "",
         className: "",
+        isAdmin: false
       },
-      classNames: []
+      classNames: [],
+      rules
     }
   },
   async mounted() {
+    if (this.editUser) {
+      this.user.email = this.editUser.email
+      this.user.name = this.editUser.name
+      this.user.className = this.editUser.className
+      this.user.isAdmin = this.editUser.isAdmin
+    }
+
     const result = await api("getClassNames")
     if (result.status !== 200)
       return window.alert("Something went wrong. Code: 4f6513d0.")
@@ -66,7 +82,7 @@ export default {
       this.$emit("save", this.user)
     },
     cancel() {
-      this.$emit("cancel")
+      this.$router.push({ name: "home" })
     }
   },
 }

@@ -1,11 +1,9 @@
-const {userList} = require("./mockedDB")
+const { userList } = require("./mockedDB")
 
 exports.validateCredentials = async (email, password) => {
   const user = userList.find(u => {
     return u.email === email && u.password === password
   })
-  if (user)
-  delete user.password //remove the password
 
   return user
 }
@@ -14,11 +12,25 @@ exports.signup = async (user) => {
   if (!user.email)
     throw new Error("Email is required. Code: 3ce64cbf.")
 
-  const index = userList.findIndex(u => u.email === user.email)
-  if (index > -1)
+  const found = await exports.findUser(user.email)
+  if (found)
     throw new Error("User already registered. Code: 395d3d3b.")
 
+  user.id = (Date.now).toString(36)
   userList.push(user)
+
+  return true
+}
+
+exports.updateProfile = async (user) => {
+  if (!user.email)
+    throw new Error("Email is required. Code: 988e083c.")
+
+  const index = userList.findIndex(u => u.email === user.email)
+  if (index === -1)
+    throw new Error("User already registered. Code: c1b88e3c.")
+
+  userList[index] = user
 
   return true
 }
