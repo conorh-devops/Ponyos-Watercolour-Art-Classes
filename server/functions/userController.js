@@ -1,4 +1,4 @@
-const { userList } = require("./mockedDB")
+const { userList } = require("../mockedDB")
 
 exports.validateCredentials = async (email, password) => {
   const user = userList.find(u => {

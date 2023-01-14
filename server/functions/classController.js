@@ -1,4 +1,4 @@
-const {classList} = require("./mockedDB")
+const { classList } = require("../mockedDB")
 
 exports.getClassNames = async () => {
   return classList
