@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import api from "./../service/api.js"
+
 export default {
   name: "LoginForm",
   data() {
@@ -24,10 +26,15 @@ export default {
     }
   },
   methods: {
-    login() {
-      console.log("AE: ~ login")
+    async login() {
+      const result = await api("login", {email: this.email, password: this.password})
+      if (result.status !== 200)
+        return window.alert("Something went wrong. Code: c1aec1d4.")
+      if (!result.body)
+        return window.alert("Invalid Email or Password.")
+
+      this.$root.loggedUser = JSON.parse(result.body)
       this.$router.push({ name: "home" })
-      this.$root.loggedUser = {}
     },
   },
 }
