@@ -18,3 +18,5 @@ exports.userList = [
     className: ""
   },
 ]
+
+exports.classList = ["Watercolors", "Drawing", "DYI Arts"]

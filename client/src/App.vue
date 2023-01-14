@@ -53,7 +53,7 @@ export default {
     async testApi(){
       const result = await api("hello") 
       if (result.status === 200)
-      this.testApiResult = result.body === "Hello world"
+        this.testApiResult = result.body === "Hello world"
       
       console.log(`App is ${!this.testApiResult ? "NOT" : ""} Connected with backend`)
     },
