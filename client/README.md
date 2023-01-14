@@ -1,5 +1,8 @@
 # art-class
 
+The app has a temporary database. The database will return to the initial stage if the page is refreshed.
+
+
 ## Project setup
 ```
 npm install
@@ -8,16 +11,6 @@ npm install
 ### Compiles and hot-reloads for development
 ```
 npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
 ```
 
 ### Customize configuration
