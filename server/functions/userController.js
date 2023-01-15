@@ -30,7 +30,8 @@ exports.updateProfile = async (user) => {
   if (index === -1)
     throw new Error("User already registered. Code: c1b88e3c.")
 
-  userList[index] = user
+  userList[index].name = user.name
+  userList[index].className = user.className
 
   return true
 }
