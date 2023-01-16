@@ -27,6 +27,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+          cache-dependency-path: client/package-lock.json
       - name: Step 3 - Navigate to client directory and run build
         run: |
           cd client
