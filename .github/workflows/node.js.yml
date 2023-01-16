@@ -20,10 +20,8 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - name: Step 1 - Checkout main branch fom GitHub
     - uses: actions/checkout@v3
-    
-    - name: Step 2 - Set up Node version and build Node.js ${{ matrix.node-version }}
+    - name: Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
