@@ -1,16 +1,24 @@
 <template>
   <div class="LoginView">
-    <LoginForm />
+    <AccountForm />
   </div>
 </template>
 
 <script>
-import LoginForm from "@/components/LoginForm.vue"
+import AccountForm from "@/components/AccountForm.vue"
 
 export default {
   name: "LoginView",
   components: {
-    LoginForm,
+    AccountForm,
   },
 }
 </script>
+
+
+<style lang="scss" scoped>
+.LoginView {
+  width: 600px;
+  margin: auto;
+}
+</style>
