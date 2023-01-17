@@ -42,6 +42,17 @@ Rotating scrum master so that everyone gets to experience the role once.
 
 30/01/2023 - Monish Pawar
 
+06/02/2022 - Alan Staunton
+
+13/02/2023 - Airton Esmerio
+
+20/02/2023 - Mara Lima
+
+27/02/2023 - Conor Horan
+
+06/03/2023 - Louise MacBride
+
+13/03/2023 - Monish Pawar
 
 # Product Owner
 <<List name>> (Permanent)
