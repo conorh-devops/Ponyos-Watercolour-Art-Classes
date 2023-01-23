@@ -14,6 +14,11 @@
           <v-icon>mdi-account</v-icon>
         </v-btn>
         <template v-else>
+          <v-btn v-if="!$root.loggedUser.isAdmin" text outlined class="mr-2" id="btnBarCourses"
+            @click="$router.push({ name: 'courses' })">
+            <span>Courses</span>
+            <v-icon>mdi-account-cog-outline</v-icon>
+          </v-btn>
           <v-btn text outlined class="mr-2" id="btnBarProfile" @click="$router.push({ name: 'profile' })">
             <span v-text="userName"></span>
             <v-icon>mdi-account-cog-outline</v-icon>
@@ -39,15 +44,21 @@ export default {
   name: "App",
 
   data: () => ({
-    testApiResult: null
+    testApiResult: null,
   }),
   computed: {
     userName() {
       return this.$root.loggedUser.name.split(" ")[0]
     }
   },
-  mounted() {
+  async mounted() {
     this.testApi()
+
+    const getCoursesResult = await api("getCourses")
+    if (getCoursesResult.status !== 200)
+      return window.alert("Something went wrong. Code: 11a692e78.")
+
+    this.$root.courses = JSON.parse(getCoursesResult.body)
   },
   methods: {
     async testApi() {
@@ -61,6 +72,7 @@ export default {
       this.$router.push({ name: "home" })
       this.$root.loggedUser = null
     },
+
   },
 }
 </script>
