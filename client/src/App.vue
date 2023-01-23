@@ -17,7 +17,7 @@
           <v-btn v-if="!$root.loggedUser.isAdmin" text outlined class="mr-2" id="btnBarCourses"
             @click="$router.push({ name: 'courses' })">
             <span>Courses</span>
-            <v-icon>mdi-account-cog-outline</v-icon>
+            <v-icon>mdi-list-box-outline</v-icon>
           </v-btn>
           <v-btn text outlined class="mr-2" id="btnBarProfile" @click="$router.push({ name: 'profile' })">
             <span v-text="userName"></span>
