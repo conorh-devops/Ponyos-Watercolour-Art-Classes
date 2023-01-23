@@ -12,7 +12,8 @@ new Vue({
     //Most of these data could be stored on VueX
     return {
       loggedUser: null,
-      studentList: []
+      studentList: [],
+      courses: []
     }
   },
 
