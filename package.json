@@ -2,13 +2,16 @@
   "name": "artclass",
   "version": "1.0.0",
   "description": "",
-  "author": "",
   "scripts": {
     "deploy": "vue-cli-service s3-deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "main": "index.js",
+  "devDependencies": {
+    "@playwright/test": "^1.29.2"
+  },
   "dependencies": {
+    "playwright": "^1.29.2",
     "vue-cli-plugin-s3-deploy": "^4.0.0-rc4"
   },
   "license": "ISC"

@@ -124,7 +124,13 @@ dist
 
 # yarn v2
 .yarn/cache
-.yarn/unplugged
+.yarn/t
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/tests-examples
+node_modules/
+.DS_Store

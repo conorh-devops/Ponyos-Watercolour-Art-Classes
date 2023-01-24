@@ -20,16 +20,17 @@ Estimating Story Points
 Definition of Ready
 Definition of Done
 Preamble
+
 This is the online repository for the DevOps Assignment.
 
-Each team should fill in the blanks <<>> and add additional content that the team agrees on. This is your contract of work. It is an agreement amongst yourselves. Honour it.
+Our product will be delivered using an Agile methodology that embraces the DevOps culture. 
 
-
-<>.
-Our product will be delivered using an Agile methodology that embraces the DevOps culture. Please note that our culture embraces change and these documents are treated as living, breathing artefacts that will be continuously updated.
+Please note that our culture embraces change and these documents are treated as living, breathing artefacts that will be continuously updated.
 
 # Scrum Master
 Rotating scrum master so that everyone gets to experience the role once.
+
+
 19/12/2022 - Alan Staunton
 
 02/01/2023 - Airton Esmerio
@@ -42,9 +43,20 @@ Rotating scrum master so that everyone gets to experience the role once.
 
 30/01/2023 - Monish Pawar
 
+06/02/2022 - Alan Staunton
+
+13/02/2023 - Airton Esmerio
+
+20/02/2023 - Mara Lima
+
+27/02/2023 - Conor Horan
+
+06/03/2023 - Louise MacBride
+
+13/03/2023 - Monish Pawar
 
 # Product Owner
-<<List name>> (Permanent)
+Pauric 
 
 # Rockstars
 Alan Staunton
@@ -64,16 +76,38 @@ Thursday, 23 March 2023 23:59
 
 # Project Specification
 Clean and simple design
+
 User access levels (client, administrator)
+
 Includes at least one self developed api and one webservice
+
 To be run on AWS.
 
 # Frameworks
-We will be using MongoDB for our databasehttps://github.com/conorh-devops/Ponyos-Watercolour-Art-Classes/edit/atu-alans-patch-1/README.md
+We will be using MongoDB for our database
+
+Node.js is used for the frontend.
+
+Project will be hosted on AWS but can also run locally. Instructions are provided below.
+
 Database persistence technology
-Define the buisness Requirements
+
+Define the Business Requirements
+
 Named queries and database triggers for security
+
 Regex for cleansing and validation of data before sending to the database.
+
+# How to install locally
+
+Intellij IDE
+ - Download project from Git.
+ - Import project from downloaded folder. 
+ - You may need to install neo-async -  npm i neo-async
+ - npm install
+ - npm run serve
+ - Click on the link to open the webserver.
+
 
 # Useful Links
  - Project Slack: https://atudevops.slack.com #pgdip_devops_prj_man_group_3
@@ -83,19 +117,33 @@ Regex for cleansing and validation of data before sending to the database.
 For more information visit our other sections
 
 # Section	Description
+** THIS SECTION TO BE FILLED IN
+
 Process	Describes the companies process
+
 Project Log	Log of project activities
+
 Costings	Overview of the project cost
+
 Architecture	Outlines the architecture
+
 Environments	Overview of the environment set-up
+
 DR Plan	Disaster Recovery Plan and procedures
+
 Requirements	Overview of the requirements for the project
+
 SLAs	Service level agreements
+
 Risk Management	How we manage risk
+
 Security	Overview of security
+
 Project Log	Team log for the project
 
 # Risk Register
+** THIS SECTION TO BE FILLED IN
+
 This section will list the Risks associated with the project along with along with its contingency and mitigation plan. The risk will be captured and udpated through out the project and re-aligned on a weekly basis.
 
 Risk                            Contingency                          Mitigation 
@@ -104,9 +152,12 @@ Risk                            Contingency                          Mitigation
 
 
 # Tenants of Design
-The code framework to be used will be <<>>, we will be programming using the IDE << >>
+The code framework to be used will be Node.js, we will be programming using the IDE IntelliJ IDEA.
 
 # Security:
+
+** THIS SECTION TO BE FILLED IN
+
 - << >>: uses static analysis to find bugs in code. 
  
 - <<>>.
@@ -123,92 +174,150 @@ The quality of the application will be assessed through three main testing type
 
     
 # Environments:
-    Belowa are the environment proposed for this project 
+Below are the environment proposed for this project 
     
-    Dev, Test, Stage and Production
+Dev, Test, Stage and Production
 
-    - Dev - All Development activities will be peformed in this environment
-    - Test - All QA activities will be done in the Test environment 
-    - Stage(optional)- All Pre-production test will be performed on the Stage environment e.g. UAT
-    - Production - Live environment
+- Dev - All Development activities will be peformed in this environment
+- Test - All QA activities will be done in the Test environment 
+- Stage(optional)- All Pre-production test will be performed on the Stage environment e.g. UAT
+- Production - Live environment
     
-    Tight configuration management for consistency and reproducibility
-    automated creation and deployments
-    integrated and automated pipeline (commit -> test -> Stage -> deploy)
+Tight configuration management for consistency and reproducibility
+
+Automated creation and deployments
+
+Integrated and automated pipeline (commit -> test -> Stage -> deploy)
 
 # Github version control:
-    branches used
-    version/release management
+Branches used:
+- Main
+
+Version/release management:
 
 # Agile project management methods/principles (jira)
 
+** THIS SECTION TO BE FILLED IN
+
+
 # Social Contract
-    Mobile phones be left on silent during sprint sessions and class time.
-    Be on time for team meetings and class, if you are running late let the group know by sending a message into the Slack channel.
-    Everyone has an equal voice and valuable contribution.
-    When you are assigned a job, take ownership of it and keep it up to date, do not be afraid to ask others for help, always be honest about your work.
-    Do not speak over someone when they are expressing a point, everyone has an equal voice.
-    No blame culture.   
-    Do not be afraid to ask for help, we are all learning.
-    No invisble work.
-    Ask questions to make sure you understand the task given to you.
-    Try have some fun, team work makes the dream work.
-    Use Agile methodoligies in the project at all times.
+Mobile phones be left on silent during sprint sessions and class time.
+
+Be on time for team meetings and class, if you are running late let the group know by sending a message into the Slack channel.
+
+Everyone has an equal voice and valuable contribution.
+
+When you are assigned a job, take ownership of it and keep it up to date, do not be afraid to ask others for help, always be honest about your work.
+
+Do not speak over someone when they are expressing a point, everyone has an equal voice.
+
+No blame culture.   
+
+Do not be afraid to ask for help, we are all learning.
+
+No invisble work.
+
+Ask questions to make sure you understand the task given to you.
+
+Try have some fun, team work makes the dream work.
+
+Use Agile methodoligies in the project at all times.
 
 # Meetings
 Stand-ups will occur on Every Monday @ 18:30, during class and every Thursday @ 18:30. Stands up will occur a minimum of twice weekly.
+
 The order that people give their updates will be random.
+
 Updates will be in the form: What I've done, Impediments, What I plan to do.
+
 Sprint planning will occur at 18:30 every week.
+
 Please add and update items within Jira prior to the sprint planning session.
+
 Jira link is: https://atudevops.atlassian.net/jira/software/projects/PWA/boards/7
+
 Sprint retro will at the end of our sprint on <<Date/Time>> (timebox retro for 15 minutes, to be organised by the scrum master).
+
 The order that people present their sprint retro updates will be based on The Team 1 list in the Assign_BSc_DevOps_2022.pdf file on blackboard of those present at the meeting.
+
 Points raised in the sprint retro will be noted and posted on the slack channel by the Scrum Master. The Scrum Master is rotated per team member every week.
-Backlog refinement will happen on <<date/time>> during our sprint.
-Task estimation will be done using << >>. 
+
+Backlog refinement will happen on Thursdays @ 18.30 during our sprint.
+
+Task estimation will be done using Poker Planner. 
+
 Come prepared to meetings.
+
 Be on time for Stand Ups and meetings.
+
 Mobile phones on silent.
+
 Everyone has equal voice and valuable contribution.
+
 Keep your language and tone professional at all times.
+
 Be honest.
 
 # Communication
 Slack is the preferred method of communication.
-Communication in this order: <<Slack, Microsoft Teams, E-Mail>> *Note that if the lecturers can't see the communications we cannot grade it!
-If a demonstration is required use Zoom, record the session and upload to the Slack channel.
-No Slack communications between 21:00 - 09:00.
+
+Communication in this order: Slack, Teams, Email.
+
+If a demonstration is required use Teams, record the session and upload to the Slack channel.
+
+No Slack or Teams communications between 21:00 - 09:00.
+
 Raise a problem as soon as you see it.
+
 Respect each other and understand differences in knowledge.
+
 All team documents are to be created using Markdown language and shared on GitHub.
+
 There are no silly questions, if you don’t understand, ask.
+
 Share success stories.
+
 Focus on the positives.
+
 Don’t make assumptions.
+
 Don’t interrupt and cut another person off while they are talking.
+
 Listen when someone is talking, don’t interject.
+
 Zero tolerance for bullying.
 
 # Agile way of working.
 If are assigned a job, take ownership of it and keep it up to date.
+
 Stick to your agreed working patterns. Let the team know when you are late or going early.
+
 Keep JIRA board updated at all times.
+
 Update the Scrum Board as you progress the story i.e. don’t update at standup.
+
 Don't be afraid to ask for help.
+
 Don't be afraid to give constructive criticism, as long as it is constructive.
+
 Solve roadblocks within the team. If the impediment can’t be solved within the team then give it to the Scrum Master.
-Other
+
+# Other
 Sprints will start after the stand up that happens at the start of class each week.
-The Scrum Master role rotates each week, the schedule is available on the on the process section
+
+The Scrum Master role rotates each week, the schedule is available on the on the process section.
+
 Poker Planner will be used for task management and planning.
+
 Each member of the team will work approximitely 3 hours per week, unless they are on vacation.
-Our branching stategy will start with gh then the issue number followed by wip
+
+Our branching stategy will start with github then the issue number followed by wip
 
 # Estimating Story Points
+** THIS SECTION TO BE FILLED IN
+
 The teams team's velocity is calculated by <<Team decides>>.
 
-The teams current story point velocity is "N/A".
 
 # Definition of Ready
 

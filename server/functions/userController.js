@@ -31,15 +31,11 @@ exports.updateProfile = async (user) => {
     throw new Error("User already registered. Code: c1b88e3c.")
 
   userList[index].name = user.name
-  userList[index].className = user.className
+  userList[index].courses = user.courses
 
   return true
 }
 
 exports.findUser = async (email) => {
   return userList.find(u => u.email === email)
-}
-
-exports.findUsersByClassName = async (className) => {
-  return userList.filter(u => u.className === className)
 }
