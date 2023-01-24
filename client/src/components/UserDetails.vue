@@ -14,9 +14,6 @@
       <v-text-field v-model="user.name" type="text" label="Your Name" required id="fldName" ref="fldName"
         :rules="[rules.required]" />
 
-      <v-select v-if="!user.isAdmin" v-model="user.className" id="classNames" ref="classNames" label="Available classes"
-        :items="classNames" :rules="[rules.required]" />
-
       <v-card-actions>
         <v-btn id="btnSave" @click="cancel" v-if="!hideCancel">
           <span>Cancel</span>
@@ -30,7 +27,6 @@
 </template>
 
 <script>
-import api from "./../service/api.js"
 import rules from "./../rules.js"
 
 export default {
@@ -56,10 +52,8 @@ export default {
         name: "",
         password: "",
         passwordConfirmation: "",
-        className: "",
         isAdmin: false
       },
-      classNames: [],
       rules
     }
   },
@@ -67,15 +61,9 @@ export default {
     if (this.editUser) {
       this.user.email = this.editUser.email
       this.user.name = this.editUser.name
-      this.user.className = this.editUser.className
+      this.user.courses = this.editUser.courses
       this.user.isAdmin = this.editUser.isAdmin
     }
-
-    const result = await api("getClassNames")
-    if (result.status !== 200)
-      return window.alert("Something went wrong. Code: 4f6513d0.")
-
-    this.classNames = JSON.parse(result.body)
   },
   methods: {
     save() {

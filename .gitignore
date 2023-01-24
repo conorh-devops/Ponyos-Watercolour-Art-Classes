@@ -132,6 +132,5 @@ dist
 /playwright-report/
 /playwright/.cache/
 /tests-examples
-
 node_modules/
-
+.DS_Store

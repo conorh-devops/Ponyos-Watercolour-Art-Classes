@@ -16,7 +16,7 @@
           <v-text-field v-model="password" type="password" label="Password" id="fldPassword"
             :rules="[rules.required]" />
 
-          <v-btn color="error" class="mr-4" @click="login" id="btnLogin">Login</v-btn>
+          <v-btn color="primary" class="mr-4" @click="login" id="btnLogin">Login</v-btn>
           <br />
           <br />
           Don't have an account? <v-btn class="mr-4" text id="btnSignUpForm" @click="tabIndex = 1">Sign up</v-btn>
