@@ -2,13 +2,14 @@
   "name": "artclass",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "author": "",
   "scripts": {
+    "deploy": "vue-cli-service s3-deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "main": "index.js",
   "dependencies": {
     "vue-cli-plugin-s3-deploy": "^4.0.0-rc4"
-  }
+  },
+  "license": "ISC"
 }
