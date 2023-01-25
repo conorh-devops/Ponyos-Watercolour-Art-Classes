@@ -4,13 +4,15 @@
     <br />
     <div class="d-flex">
 
-      <v-card class="mx-auto" max-width="344" v-for="course in Object.keys($root.courses)" :key="course">
+      <v-card class="mx-auto" max-width="344" v-for="course in Object.keys(courses)" :key="course">
         <v-card-text>
           <p class="text-h4 text--primary" v-text="course" />
           <p class="text-h7"
-            v-text="'Duration: ' + $root.courses[course].duration + 'hrs | Price: €' + $root.courses[course].price" />
+            v-text="'Duration: ' + courses[course].duration + 'hrs | Price: €' + courses[course].price" />
           <p class="text-h7">Description</p>
-          <div class="text--primary" v-text="$root.courses[course].desc" />
+          <div class="text--primary" v-text="courses[course].desc" />
+          <v-checkbox v-model="courses[course].extraTutor" :id="'checkExtraTutor' + course" label="Extra tutor"
+            :disabled="Boolean(getEnrolledDate(course))" />
         </v-card-text>
         <v-card-actions>
           <v-btn v-if="Boolean(getEnrolledDate(course))" text outlined color="orange accent-4"
@@ -26,26 +28,6 @@
         </v-card-text>
       </v-card>
     </div>
-
-    <v-dialog v-model="dialog.show" persistent max-width="500">
-      <v-card>
-        <v-card-title class="text-h5">
-          Ponyo’s Watercolour Art Classes
-        </v-card-title>
-        <v-card-text>
-          <span v-html="dialog.content" />
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn text @click="confirmingModal(false)">
-            Cancel
-          </v-btn>
-          <v-btn color="primary" text id="btnConfirm" @click="confirmingModal(true)">
-            Confirm
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
 
     <v-dialog v-model="dialog.show" persistent max-width="500">
       <v-card>
@@ -84,17 +66,27 @@ export default {
         isEnrolled: false,
         isFeedbackMessage: false
       },
+      courses: []
     }
   },
   beforeRouteEnter(_to, _from, next) {
     next((vm) => {
       if (!vm.$root.loggedUser) return vm.$router.push({ name: "home" })
+      vm.courses = vm.$root.courses
+      for (const propCourse of Object.keys(vm.courses)) {
+        vm.courses[propCourse].extraTutor = vm.getEnrolledTutor(propCourse)
+      }
     })
   },
   methods: {
     getEnrolledDate(course) {
-      const date = this.$root?.loggedUser?.courses[course]
-      return date ? `Enrolled at ${(new Date(date).toLocaleString())}` : ""
+      const enrolledCourse = this.$root?.loggedUser?.courses[course]
+      return enrolledCourse ? `Enrolled at ${(new Date(enrolledCourse.enrollDt).toLocaleString())}` : ""
+    },
+    getEnrolledTutor(course) {
+      const enrolledCourse = this.$root?.loggedUser?.courses[course]
+      const result = Boolean(enrolledCourse && enrolledCourse.extraTutor)
+      return Boolean(result)
     },
     async confirmationModal(course) {
       const enrolled = Boolean(this.getEnrolledDate(course))
@@ -109,24 +101,34 @@ export default {
     },
     async confirmingModal(confirmed) {
       this.dialog.show = false
-      if (this.dialog.isFeedbackMessage) return
 
       if (!confirmed) return
+      if (this.dialog.isFeedbackMessage) return
 
+      const extraTutor = this.courses[this.dialog.course].extraTutor
       if (this.dialog.isEnrolled)
         delete this.$root?.loggedUser?.courses[this.dialog.course]
-      else
-        this.$root.loggedUser.courses[this.dialog.course] = (new Date().toISOString())
+      else {
+        this.$root.loggedUser.courses[this.dialog.course] = {
+          enrollDt: (new Date().toISOString()),
+          extraTutor
+        }
+      }
 
       const result = await api("updateProfile", { user: this.$root?.loggedUser })
       if (result.status !== 200)
         return window.alert(`Something went wrong. Code: cd3c2327. Error: ${result.message || JSON.stringify(result)}`)
 
+
+      this.dialog.cancelShow = false
       setTimeout(() => {
-        this.dialog.cancelShow = false
         this.dialog.isFeedbackMessage = true
         this.dialog.content =
           `You've successfully <b id="successAction">${this.dialog.isEnrolled ? "removed" : "enrolled"}</b> the course`
+        if (!this.dialog.isEnrolled)
+          this.dialog.content += " with <b>extra tutor</b>"
+
+        this.dialog.content += "."
         this.dialog.show = true
       }, 500)
 
