@@ -307,7 +307,7 @@ Sprints will start after the stand up that happens at the start of class each we
 
 The Scrum Master role rotates each week, the schedule is available on the on the process section.
 
-Poker Planner will be used for task management and planning.
+Standup Alice will be used for task management and planning.
 
 Each member of the team will work approximitely 3 hours per week, unless they are on vacation.
 
