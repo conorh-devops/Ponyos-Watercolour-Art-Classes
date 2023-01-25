@@ -12,8 +12,14 @@ exports.userList = [
     password: "password",
     name: "John Ferrari",
     courses: {
-      "Drawing": "2023-01-10T19:33:42.825Z",
-      "Watercolors": "2023-01-11T19:33:42.825Z"
+      "Drawing": {
+        enrollDt: "2023-01-10T19:33:42.825Z",
+        extraTutor: false
+      },
+      "Watercolors": {
+        enrollDt: "2023-01-11T19:33:42.825Z",
+        extraTutor: true
+      },
     },
   },
   {
@@ -22,7 +28,10 @@ exports.userList = [
     password: "password",
     name: "Maria Mercedes",
     courses: {
-      "Watercolors": "2023-01-10T19:33:42.825Z"
+      "Watercolors": {
+        enrollDt: "2023-01-10T19:33:42.825Z",
+        extraTutor: false
+      },
     },
   },
   {
@@ -31,8 +40,14 @@ exports.userList = [
     password: "password",
     name: "Clare Williams",
     courses: {
-      "Drawing": "2023-01-05T19:33:42.825Z",
-      "DYI Arts": "2023-01-15T19:33:42.825Z"
+      "Drawing": {
+        enrollDt: "2023-01-05T19:33:42.825Z",
+        extraTutor: false
+      },
+      "DYI Arts": {
+        enrollDt: "2023-01-15T19:33:42.825Z",
+        extraTutor: false
+      },
     },
   },
   {
@@ -41,7 +56,10 @@ exports.userList = [
     password: "password",
     name: "James Ford",
     courses: {
-      "Watercolors": "2023-01-20T19:33:42.825Z"
+      "Watercolors": {
+        enrollDt: "2023-01-15T19:33:42.825Z",
+        extraTutor: false
+      },
     },
   },
   {
@@ -50,7 +68,10 @@ exports.userList = [
     password: "password",
     name: "Rose Benetton",
     courses: {
-      "DYI Arts": "2023-01-23T19:33:42.825Z"
+      "DYI Arts": {
+        enrollDt: "2023-01-23T19:33:42.825Z",
+        extraTutor: false
+      },
     },
   },
 ]
