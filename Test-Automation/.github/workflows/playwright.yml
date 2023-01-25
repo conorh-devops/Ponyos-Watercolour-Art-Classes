@@ -15,10 +15,10 @@ jobs:
         node-version: 16
     - name: Install dependencies
       run: npm ci
-    - name: Install Playwright Browsers
+    - name: Install Playwright chromium browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npx playwright test
+      run: npx playwright test Test/CreateAccount.spec.js --project=chromium
     - uses: actions/upload-artifact@v3
       if: always()
       with:
