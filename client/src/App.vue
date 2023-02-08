@@ -14,23 +14,31 @@
           <v-icon>mdi-account</v-icon>
         </v-btn>
         <template v-else>
-          <v-btn v-if="!$root.loggedUser.isAdmin" text outlined class="mr-2" id="btnBarCourses"
-            @click="$router.push({ name: 'courses' })">
-            <span>Courses</span>
-            <v-icon>mdi-list-box-outline</v-icon>
-          </v-btn>
-          <v-btn v-if="$root.loggedUser.isAdmin" text outlined class="mr-2" id="btnBarCourses"
-            @click="$router.push({ name: 'courses-admin' })">
-            <span>Courses Admin</span>
-            <v-icon>mdi-list-box-outline</v-icon>
-          </v-btn>
+          <template v-if="$root.loggedUser.isAdmin">
+            <v-btn text outlined class="mr-2" id="btnBarCourses" @click="$router.push({ name: 'students' })">
+              <v-icon class="mr-2">mdi-account-group</v-icon>
+              <span>Students</span>
+            </v-btn>
+            <v-btn text outlined class="mr-2" id="btnBarCourses" @click="$router.push({ name: 'courses-admin' })">
+              <v-icon class="mr-2">mdi-list-box-outline</v-icon>
+              <span>Courses Admin</span>
+            </v-btn>
+          </template>
+          <template v-else>
+            <v-btn v-if="!$root.loggedUser.isAdmin" text outlined class="mr-2" id="btnBarCourses"
+              @click="$router.push({ name: 'courses' })">
+              <v-icon class="mr-2">mdi-list-box-outline</v-icon>
+              <span>Courses</span>
+            </v-btn>
+          </template>
+
           <v-btn text outlined class="mr-2" id="btnBarProfile" @click="$router.push({ name: 'profile' })">
+            <v-icon class="mr-2">mdi-account-cog-outline</v-icon>
             <span v-text="userName"></span>
-            <v-icon>mdi-account-cog-outline</v-icon>
           </v-btn>
           <v-btn text outlined @click="logout" class="mr-2" id="btnBarLogout">
+            <v-icon class="mr-2">mdi-logout</v-icon>
             <span>Log out</span>
-            <v-icon>mdi-logout</v-icon>
           </v-btn>
         </template>
       </template>
@@ -53,7 +61,7 @@ export default {
   }),
   watch: {
     "$root.loggedUser"(newUser) {
-      if (newUser.isAdmin) this.fetchStudents()
+      if (newUser?.isAdmin) this.$root.fetchStudents()
     }
   },
   computed: {
@@ -77,16 +85,6 @@ export default {
         this.testApiResult = result.body === "Hello world"
 
       console.log(`App is ${!this.testApiResult ? "NOT" : ""} Connected with backend`)
-    },
-    async fetchStudents() {
-      console.log("AE: ~ fetchStudents")
-      const getStudentsResult = await api("getStudents")
-      if (getStudentsResult.status !== 200)
-        return window.alert("Something went wrong. Code: 619a073b.")
-      console.log("AE: ~ fetchStudents getStudentsResult", getStudentsResult)
-
-      this.$root.students = JSON.parse(getStudentsResult.body)
-      console.log("AE: ~ fetchStudents this.$root.students", this.$root.students)
     },
     logout() {
       this.$router.push({ name: "home" })

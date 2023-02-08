@@ -2,7 +2,7 @@
   <div class="ProfileView">
     <h1 id="adminWelcome">Editing profile</h1>
     <br />
-    <UserDetails ref="userDetails" :editUser="$root.loggedUser" @save="save" />
+    <UserDetails ref="userDetails" :editUser="$root.loggedUser" @save="save" @cancel="cancel" />
   </div>
 </template>
 
@@ -35,6 +35,9 @@ export default {
       this.$root.loggedUser = user
       this.$router.push({ name: "home" })
       window.alert(`Profile updated`)
+    },
+    cancel() {
+      this.$router.push({ name: "home" })
     }
   },
 }
