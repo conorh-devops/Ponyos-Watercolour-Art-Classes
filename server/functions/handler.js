@@ -35,6 +35,7 @@ exports.handler = async (event, _context) => {
     else if (eBody.eName === "updateProfile") body = await userController.updateProfile(eBody.user)
     else if (eBody.eName === "getCourses") body = await classController.getCourses()
     else if (eBody.eName === "getStudents") body = await userController.getStudents()
+    else if (eBody.eName === "updateStudent") body = await userController.updateProfile(eBody.user)
     else throw new Error("Event error. Code: 32453cfb.")
 
   } catch (error) {
