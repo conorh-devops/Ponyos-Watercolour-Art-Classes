@@ -39,3 +39,7 @@ exports.updateProfile = async (user) => {
 exports.findUser = async (email) => {
   return userList.find(u => u.email === email)
 }
+
+exports.getStudents = async () => {
+  return userList.filter(u => !u.isAdmin).sort((a, b) => (a.name < b.name ? -1 : 1));
+}
