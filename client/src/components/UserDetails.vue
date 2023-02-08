@@ -13,15 +13,17 @@
 
       <v-text-field v-model="user.name" type="text" label="Your Name" required id="fldName" :rules="[rules.required]" />
 
-      <br />
-      <p>Courses</p>
-      <v-chip-group class="primary--text" v-if="user.courses">
-        <v-chip v-for="course in Object.keys(user.courses)" :key="course" disabled>
-          {{ course }}
-        </v-chip>
-      </v-chip-group>
+      <template v-if="showCourses">
+        <br />
+        <p>Courses</p>
+        <v-chip-group class="primary--text" v-if="user.courses">
+          <v-chip v-for="course in Object.keys(user.courses)" :key="course" disabled>
+            {{ course }}
+          </v-chip>
+        </v-chip-group>
 
-      <br />
+        <br />
+      </template>
       <br />
       <v-card-actions>
         <v-btn id="btnSave" @click="cancel" v-if="!hideCancel">
