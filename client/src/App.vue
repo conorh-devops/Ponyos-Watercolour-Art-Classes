@@ -19,6 +19,11 @@
             <span>Courses</span>
             <v-icon>mdi-list-box-outline</v-icon>
           </v-btn>
+          <v-btn v-if="$root.loggedUser.isAdmin" text outlined class="mr-2" id="btnBarCourses"
+            @click="$router.push({ name: 'courses-admin' })">
+            <span>Courses Admin</span>
+            <v-icon>mdi-list-box-outline</v-icon>
+          </v-btn>
           <v-btn text outlined class="mr-2" id="btnBarProfile" @click="$router.push({ name: 'profile' })">
             <span v-text="userName"></span>
             <v-icon>mdi-account-cog-outline</v-icon>
@@ -46,6 +51,11 @@ export default {
   data: () => ({
     testApiResult: null,
   }),
+  watch: {
+    "$root.loggedUser"(newUser) {
+      if (newUser.isAdmin) this.fetchStudents()
+    }
+  },
   computed: {
     userName() {
       return this.$root.loggedUser.name.split(" ")[0]
@@ -67,6 +77,16 @@ export default {
         this.testApiResult = result.body === "Hello world"
 
       console.log(`App is ${!this.testApiResult ? "NOT" : ""} Connected with backend`)
+    },
+    async fetchStudents() {
+      console.log("AE: ~ fetchStudents")
+      const getStudentsResult = await api("getStudents")
+      if (getStudentsResult.status !== 200)
+        return window.alert("Something went wrong. Code: 619a073b.")
+      console.log("AE: ~ fetchStudents getStudentsResult", getStudentsResult)
+
+      this.$root.students = JSON.parse(getStudentsResult.body)
+      console.log("AE: ~ fetchStudents this.$root.students", this.$root.students)
     },
     logout() {
       this.$router.push({ name: "home" })
