@@ -13,6 +13,10 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    redirect: { name: 'home' }
+  },
+  {
+    path: '/home',
     name: 'home',
     component: () => import('../views/Home.vue')
   },
@@ -30,11 +34,16 @@ const routes = [
     path: '/courses',
     name: 'courses',
     component: () => import('../views/Courses.vue')
+  },
+  {
+    path: '/courses-admin',
+    name: 'courses-admin',
+    component: () => import('../views/CoursesAdmin.vue')
   }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })
