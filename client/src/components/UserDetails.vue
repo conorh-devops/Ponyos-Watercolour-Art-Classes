@@ -11,9 +11,20 @@
       <v-text-field v-if="isSignUp" v-model="user.passwordConfirmation" type="password" label="Password Confirmation"
         id="fldPasswordConfirmation" ref="fldPasswordConfirmation" :rules="[rules.required]" />
 
-      <v-text-field v-model="user.name" type="text" label="Your Name" required id="fldName" ref="fldName"
-        :rules="[rules.required]" />
+      <v-text-field v-model="user.name" type="text" label="Your Name" required id="fldName" :rules="[rules.required]" />
 
+      <template v-if="showCourses">
+        <br />
+        <p>Courses</p>
+        <v-chip-group class="primary--text" v-if="user.courses">
+          <v-chip v-for="course in Object.keys(user.courses)" :key="course" disabled>
+            {{ course }}
+          </v-chip>
+        </v-chip-group>
+
+        <br />
+      </template>
+      <br />
       <v-card-actions>
         <v-btn id="btnSave" @click="cancel" v-if="!hideCancel">
           <span>Cancel</span>
@@ -43,7 +54,11 @@ export default {
     editUser: {
       type: Object,
       default: null
-    }
+    },
+    showCourses: {
+      type: Boolean,
+      default: false
+    },
   },
   data() {
     return {
@@ -70,7 +85,7 @@ export default {
       this.$emit("save", this.user)
     },
     cancel() {
-      this.$router.push({ name: "home" })
+      this.$emit("cancel")
     }
   },
 }
