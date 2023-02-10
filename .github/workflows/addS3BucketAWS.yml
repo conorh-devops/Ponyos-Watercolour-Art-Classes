@@ -13,16 +13,20 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 # This workflow contains a single job called "build"
+  github-actions-environment-variables-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List of the GitHub Actions environment variables on ubuntu-latest
+        run: env
   deploydev:
     env:
       NAME: 'development' 
+      env_var: 'development'
     runs-on: ubuntu-latest
     environment: 'development'
     steps:
     - uses: actions/checkout@master
-    - name: Write Environment Name
-      env:
-        S3_BUCKET_NAME: aws s3 mb s3://${{ env.UNIQUE_BUCKET_NAME }}
+    - name: Write Bucket Name
       run: echo "${{ env.UNIQUE_BUCKET_NAME }}"
     - name: Upload to S3
       run: |
@@ -40,9 +44,7 @@ jobs:
     environment: 'production'
     steps:
     - uses: actions/checkout@master
-    - name: Write Environment Name
-      env:
-        S3_BUCKET_NAME: aws s3 mb s3://${{ env.UNIQUE_BUCKET_NAME }}
+    - name: Write Bucket Name
       run: echo "${{ env.UNIQUE_BUCKET_NAME }}"
     - name: Upload to S3
       run: |
