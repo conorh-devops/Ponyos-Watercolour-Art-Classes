@@ -15,11 +15,8 @@ jobs:
 # This workflow contains a single job called "build"
 
   deploydev:
-    env:
-      NAME: 'development' 
-      env_var: 'development'
     runs-on: ubuntu-latest
-    environment: 'development'
+    environment: development
     steps:
     - uses: actions/checkout@master
     - name: Write Bucket Name
@@ -34,10 +31,8 @@ jobs:
 
 # This workflow contains a single job called "build"
   deployprod:
-    env:
-      NAME: 'production' 
     runs-on: ubuntu-latest
-    environment: 'production'
+    environment: production
     steps:
     - uses: actions/checkout@master
     - name: Write Bucket Name
