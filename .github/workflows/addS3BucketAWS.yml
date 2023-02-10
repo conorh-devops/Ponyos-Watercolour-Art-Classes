@@ -19,11 +19,11 @@ jobs:
     - uses: actions/checkout@master
     - name: Dump GitHub context
       env:
-        S3_BUCKET_NAME: aws s3 mb s3://$UNIQUE_BUCKET_NAME
-      run: echo "$S3_BUCKET_NAME"
+        S3_BUCKET_NAME: aws s3 mb s3://${{ env.UNIQUE_BUCKET_NAME }}
+      run: echo "${{ env.UNIQUE_BUCKET_NAME }}"
     - name: Upload to S3
       run: |
-        aws s3 mb s3://$UNIQUE_BUCKET_NAME
+        aws s3 mb s3://${{ env.UNIQUE_BUCKET_NAME }}
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
