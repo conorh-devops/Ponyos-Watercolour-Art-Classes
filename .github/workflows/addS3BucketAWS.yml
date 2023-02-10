@@ -17,9 +17,10 @@ jobs:
     env:
       NAME: 'development' 
     runs-on: ubuntu-latest
+    environment: 'development'
     steps:
     - uses: actions/checkout@master
-    - name: Dump GitHub context
+    - name: Write Environment Name
       env:
         S3_BUCKET_NAME: aws s3 mb s3://${{ env.UNIQUE_BUCKET_NAME }}
       run: echo "${{ env.UNIQUE_BUCKET_NAME }}"
@@ -36,9 +37,10 @@ jobs:
     env:
       NAME: 'production' 
     runs-on: ubuntu-latest
+    environment: 'production'
     steps:
     - uses: actions/checkout@master
-    - name: Dump GitHub context
+    - name: Write Environment Name
       env:
         S3_BUCKET_NAME: aws s3 mb s3://${{ env.UNIQUE_BUCKET_NAME }}
       run: echo "${{ env.UNIQUE_BUCKET_NAME }}"
