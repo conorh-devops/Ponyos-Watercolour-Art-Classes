@@ -17,16 +17,25 @@
         <h2>Ponyos Watercolour Art Class</h2>
       </v-card>
       <br />
+      <v-card class="justify-center text-center mb-6" flat>
       <p>
-        Est proident aliquip eu occaecat anim. Lorem culpa dolor laborum id cillum. Laborum anim dolore irure anim
-        laboris laboris ex minim eu irure aliquip. Enim laborum sunt non in
-        nulla culpa ex et proident Lorem qui do. Culpa exercitation id esse id. Commodo nostrud amet sit ex esse
-        consectetur occaecat quis. Culpa nisi nostrud officia consectetur do
-        exercitation cupidatat veniam tempor ullamco officia mollit.
+        Welcome to Ponyos Watercolour Art Class, where creativity and passion come together.
+      </p>
+      <p>
+        Our dedicated team of artists and educators is committed to providing a supportive
+        and inspiring environment for students of all levels to grow and develop their artistic abilities.
+      </p>
+      <p>
+        Whether you're just starting out on your artistic journey or looking to take your skills to the next level,
+        we have a variety of programs and courses available to help you reach your goals.
       </p>
 
-      <p>Nulla non exercitation qui dolore. Nisi sit commodo magna cupidatat officia qui amet sint. Nostrud id eu do
-        occaecat.</p>
+      <p>So, come join us and unleash your inner artist!</p>
+      <v-btn v-if="!$root.loggedUser" text outlined @click="$router.push({ name: 'login' })" id="btnBarAccount">
+        <span class="mr-2">Log In</span>
+        <v-icon>mdi-account</v-icon>
+      </v-btn>
+      </v-card>
     </template>
 
   </div>

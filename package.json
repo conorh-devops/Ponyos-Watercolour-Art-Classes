@@ -10,6 +10,7 @@
     "@playwright/test": "^1.29.2"
   },
   "dependencies": {
-    "playwright": "^1.29.2"
+    "playwright": "^1.29.2",
+    "yarn": "^1.22.19"
   }
 }

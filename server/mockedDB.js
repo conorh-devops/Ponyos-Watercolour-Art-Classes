@@ -7,6 +7,13 @@ exports.userList = [
     isAdmin: true
   },
   {
+    id: "d7479d6t",
+    email: "lily@gmail.com",
+    password: "admin",
+    name: "Lily Admin",
+    isAdmin: true
+  },
+  {
     id: "763ec5f6",
     email: "john@email.com",
     password: "password",
@@ -72,6 +79,15 @@ exports.userList = [
         enrollDt: "2023-01-23T19:33:42.825Z",
         extraTutor: false
       },
+    },
+  },
+
+  {
+    id: "763ed0aq",
+    email: "mindy@gmail.com",
+    password: "password",
+    name: "Mindy User",
+    courses: {
     },
   },
 ]

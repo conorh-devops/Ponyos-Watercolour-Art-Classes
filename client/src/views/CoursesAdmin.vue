@@ -1,6 +1,8 @@
 <template>
   <div class="CoursesAdminView">
     <h1>All Courses - Admin</h1>
+    <br>
+    <h2 id="adminWelcome">Below is a list of all courses and their assigned students</h2>
     <br />
     <div class="d-flex">
 
