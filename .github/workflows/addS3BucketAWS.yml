@@ -20,7 +20,7 @@ jobs:
     - name: Dump GitHub context
       env:
         S3_BUCKET_NAME: aws s3 mb s3://$UNIQUE_BUCKET_NAME
-      run: echo "$S3_BUCKET_NAME
+      run: echo "$S3_BUCKET_NAME"
     - name: Upload to S3
       run: |
         aws s3 mb s3://$UNIQUE_BUCKET_NAME
