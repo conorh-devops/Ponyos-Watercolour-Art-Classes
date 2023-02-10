@@ -142,13 +142,23 @@ Security	Overview of security
 Project Log	Team log for the project
 
 # Risk Register
-** THIS SECTION TO BE FILLED IN
+This repository contains the project's risk register. 
 
-This section will list the Risks associated with the project along with along with its contingency and mitigation plan. The risk will be captured and udpated through out the project and re-aligned on a weekly basis.
+A risk register is a document that lists potential risks and threats to a project, along with plans to mitigate or manage those risks. 
+
+The purpose of the risk register is to ensure that potential risks are identified, evaluated, and addressed in a proactive manner, so that the project can be completed on time, within budget, and to the desired quality.
+
+The risk register is updated regularly and reviewed by the project team and stakeholders to ensure that it remains accurate and relevant. 
+
+If you have any questions or concerns about the risks listed in this repository, please do not hesitate to reach out to the project team. 
+
+Together, we can work to minimize the impact of risks and ensure the success of the project.
 
 Risk                            Contingency                          Mitigation 
+Deadlines being missed          Attend 2 standups per week           If there are any questions, we can contact each other via Teams or Slack
 
-
+Risk                            Contingency                          Mitigation 
+One person being overworked      That person must speak up            Discuss as a group the options available to reduce the workload.
 
 
 # Tenants of Design
@@ -180,8 +190,8 @@ Dev, Test, Stage and Production
 
 - Dev - All Development activities will be peformed in this environment
 - Test - All QA activities will be done in the Test environment 
-- Stage(optional)- All Pre-production test will be performed on the Stage environment e.g. UAT
-- Production - Live environment
+- Stage - All Pre-production test will be performed on the Stage environment.
+- Production - Live environment. No development activities can be performed in this environment without prior approval.
     
 Tight configuration management for consistency and reproducibility
 
@@ -191,13 +201,33 @@ Integrated and automated pipeline (commit -> test -> Stage -> deploy)
 
 # Github version control:
 Branches used:
-- Main
+- Main - This is the main branch where all users must merge their branches into.
+
+Any merge to be implemented, must be approved by at least one other person.
 
 Version/release management:
 
-# Agile project management methods/principles (jira)
+# Agile project management methods/principles 
 
-** THIS SECTION TO BE FILLED IN
+Jira
+
+GitHub
+
+Confluence
+
+Individuals and Interactions: Prioritizing the value of individuals and their interactions over processes and tools.
+
+Working Software: Focusing on delivering working software over comprehensive documentation.
+
+Customer Collaboration: Encouraging collaboration with customers to ensure that the project is aligned with their needs and expectations.
+
+Responding to Change: Embracing change and adapting to it quickly, rather than following a rigid plan.
+
+Iterative Development: Breaking down the project into smaller, manageable iterations and regularly delivering working software.
+
+Sustainability: Ensuring a sustainable pace of work to prevent burnout and maintain productivity.
+
+Technical Excellence: Promoting technical excellence and good design to ensure that the project can be maintained and scaled over time.
 
 
 # Social Contract
@@ -314,9 +344,23 @@ Each member of the team will work approximitely 3 hours per week, unless they ar
 Our branching stategy will start with github then the issue number followed by wip
 
 # Estimating Story Points
-** THIS SECTION TO BE FILLED IN
+Story points are a unit of measurement used in agile project management to estimate the relative size and complexity of tasks or user stories. 
 
-The teams team's velocity is calculated by <<Team decides>>.
+Story points are subjective and help teams to determine how much effort a particular task or story will require, compared to other tasks or stories in the project. 
+
+Here are the steps to estimate story points in a project:
+
+Define the estimation scale: Determine the unit of measurement to be used for story points, such as Fibonacci numbers (1, 2, 3, 5, 8, 13, etc.) or a modified Fibonacci scale.
+
+Gather the team: Involve the team members who will be working on the tasks or stories in the estimation process. This helps to ensure that the estimates are based on a collective understanding of the work.
+
+Review the user stories: Review each user story or task and have a discussion about its complexity and the effort required to complete it.
+
+Assign story points: Based on the discussion, each team member assigns a story point value to the task or story.
+
+Compare and refine estimates: Compare the estimates assigned by each team member and refine them if necessary. The goal is to reach a consensus on the final story point estimate for each task or story.
+
+Refine the process: Regularly review and refine the estimation process to ensure that it remains accurate and effective over time.
 
 
 # Definition of Ready
