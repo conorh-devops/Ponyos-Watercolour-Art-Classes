@@ -12,16 +12,11 @@ on:
       - 'feature/DeploymentTesting'
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-# This workflow contains a single job called "build"
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [14.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
       - name: Step 1 - Checkout main branch fom GitHub
         uses: actions/checkout@v3
@@ -70,15 +65,10 @@ jobs:
       with:
         name: pwa-${{ github.run_number }}
         path: dist
-  
-    - name: List directory
-      run: |
-       ls
 
     - name: Deploy static site to S3 bucket
       run: aws s3 sync dist s3://${{ vars.UNIQUE_BUCKET_NAME }} --delete
 
-# This workflow contains a single job called "build"
   deployprod:
     needs: deploydev
     runs-on: ubuntu-latest
