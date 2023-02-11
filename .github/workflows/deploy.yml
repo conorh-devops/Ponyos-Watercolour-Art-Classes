@@ -42,7 +42,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with: 
           name: pwa-${{vars.GITHUB_RUN_ID}}
-          path: dist/
+          path: client/dist/
 
   deploydev:
     needs: build
