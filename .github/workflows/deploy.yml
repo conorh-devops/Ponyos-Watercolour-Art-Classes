@@ -60,6 +60,9 @@ jobs:
       run: |
         aws s3 website s3://${{ vars.UNIQUE_BUCKET_NAME }} --index-document index.html
     
+    - name: Change directory
+      run: cd client
+
     - name: Check directory
       run: ls
       
@@ -88,5 +91,8 @@ jobs:
       run: |
         aws s3 website s3://${{ vars.UNIQUE_BUCKET_NAME }} --index-document index.html
     
+    - name: Change directory
+      run: cd client
+
     - name: Deploy static site to S3 bucket
       run: aws s3 sync client/dist s3://${{ vars.UNIQUE_BUCKET_NAME }} --delete
