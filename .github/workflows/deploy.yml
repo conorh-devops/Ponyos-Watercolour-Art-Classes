@@ -75,16 +75,6 @@ jobs:
       run: |
        ls
 
-    - name: Unzip Artifact
-      run: |
-       unzip pwa-${{ github.run_number }} -d dist
-
-    - name: Change directory
-      run: |
-       ls
-       cd client
-       ls
-
     - name: Deploy static site to S3 bucket
       run: aws s3 sync dist s3://${{ vars.UNIQUE_BUCKET_NAME }} --delete
 
@@ -115,16 +105,6 @@ jobs:
       with:
         name: pwa-${{ github.run_number }}
         path: dist
-    
-    - name: Unzip Artifact
-      run: |
-       unzip pwa-${{ github.run_number }} -d dist
-
-    - name: Change directory
-      run: |
-       ls
-       cd client
-       ls
 
     - name: Deploy static site to S3 bucket
       run: aws s3 sync dist s3://${{ vars.UNIQUE_BUCKET_NAME }} --delete
