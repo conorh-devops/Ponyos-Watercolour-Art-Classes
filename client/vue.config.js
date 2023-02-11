@@ -10,7 +10,7 @@ module.exports = defineConfig({
       awsProfile: 'default',
       overrideEndpoint: false,
       region: 'eu-north-1',
-      bucket: 'ponyos-artclass-dev',
+      bucket: 'ponyos-watercolour-art-classes-dev',
       createBucket: true,
       staticHosting: true,
       staticIndexPage: 'index.html',

@@ -16,38 +16,42 @@ jobs:
 
   deploydev:
     runs-on: ubuntu-latest
-    environment: development
+    environment: development      
+    env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: 'eu-west-1'
     steps:
     - uses: actions/checkout@master
     # Output name of bucket from Environment Variable in Github
     - name: Write Bucket Name
       run: echo "${{ vars.UNIQUE_BUCKET_NAME }}"
     # Create S3 Bucket if it does not exist
-    - name: Upload to S3
+    - name: Create S3 Bucket
       run: |
         aws s3api get-bucket-location --bucket ${{ vars.UNIQUE_BUCKET_NAME }} || aws s3 mb s3://${{ vars.UNIQUE_BUCKET_NAME }}
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: 'eu-west-1'
-      
-
+    - name: Set Static Hosting
+      run: |
+        aws s3 website s3://${{ vars.UNIQUE_BUCKET_NAME }} --index-document index.html
 
 # This workflow contains a single job called "build"
   deployprod:
     needs: deploydev
     runs-on: ubuntu-latest
     environment: production
+    env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: 'eu-west-1'
     steps:
     - uses: actions/checkout@master
     # Output name of bucket from Environment Variable in Github
     - name: Write Bucket Name
       run: echo "${{ vars.UNIQUE_BUCKET_NAME }}"
     # Create S3 Bucket if it does not exist
-    - name: Upload to S3
+    - name: Create S3 Bucket
       run: |
         aws s3api get-bucket-location --bucket ${{ vars.UNIQUE_BUCKET_NAME }} || aws s3 mb s3://${{ vars.UNIQUE_BUCKET_NAME }}
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: 'eu-west-1'
+    - name: Set Static Hosting
+      run: |
+        aws s3 website s3://${{ vars.UNIQUE_BUCKET_NAME }} --index-document index.html
