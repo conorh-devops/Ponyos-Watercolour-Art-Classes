@@ -48,7 +48,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: 'eu-west-1'
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v3
     # Output name of bucket from Environment Variable in Github
     - name: Write Bucket Name
       run: echo "${{ vars.UNIQUE_BUCKET_NAME }}"
@@ -78,7 +78,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: 'eu-west-1'
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v3
     # Output name of bucket from Environment Variable in Github
     - name: Write Bucket Name
       run: echo "${{ vars.UNIQUE_BUCKET_NAME }}"
