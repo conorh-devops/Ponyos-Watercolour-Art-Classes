@@ -38,6 +38,11 @@ jobs:
           npm run build --if-present
           npm run lint
           ls
+      - name: Step 4 - Upload Artifact GitHub Action
+        uses: actions/upload-artifact@v2
+        with: 
+          name: pwa-${{vars.GITHUB_RUN_ID}}
+          path: dist
 
   deploydev:
     needs: build
@@ -59,7 +64,23 @@ jobs:
     - name: Set Static Hosting
       run: |
         aws s3 website s3://${{ vars.UNIQUE_BUCKET_NAME }} --index-document index.html
-    
+  
+    - name: Download artifact
+      id: download-artifact
+      uses: dawidd6/action-download-artifact@v2
+      with:
+        name: pwa-${{vars.GITHUB_RUN_ID}}
+        # Optional, a directory where to extract artifact(s), defaults to the current directory
+        path: dist
+        # Optional, choose to skip unpacking the downloaded artifact(s)
+        # default false
+        skip_unpack: false
+        # Optional, choose how to exit the action if no artifact is found
+        # can be one of:
+        #  "fail", "warn", "ignore"
+        # default fail
+        if_no_artifact_found: fail
+
     - name: Change directory
       run: |
        cd client
@@ -89,11 +110,27 @@ jobs:
     - name: Set Static Hosting
       run: |
         aws s3 website s3://${{ vars.UNIQUE_BUCKET_NAME }} --index-document index.html
-    
+
+    - name: Download artifact
+      id: download-artifact
+      uses: dawidd6/action-download-artifact@v2
+      with:
+        name: pwa-${{vars.GITHUB_RUN_ID}}
+        # Optional, a directory where to extract artifact(s), defaults to the current directory
+        path: dist
+        # Optional, choose to skip unpacking the downloaded artifact(s)
+        # default false
+        skip_unpack: false
+        # Optional, choose how to exit the action if no artifact is found
+        # can be one of:
+        #  "fail", "warn", "ignore"
+        # default fail
+        if_no_artifact_found: fail
+
     - name: Change directory
       run: |
        cd client
        ls
-       
+
     - name: Deploy static site to S3 bucket
       run: aws s3 sync dist s3://${{ vars.UNIQUE_BUCKET_NAME }} --delete
