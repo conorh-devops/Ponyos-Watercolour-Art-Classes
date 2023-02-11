@@ -41,7 +41,7 @@ jobs:
       - name: Step 4 - Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
         with: 
-          name: pwa-${{vars.GITHUB_RUN_ID}}
+          name: pwa-${{ github.run_number }}
           path: client/dist/
 
   deploydev:
@@ -68,15 +68,20 @@ jobs:
     - name: Download artifact
       uses: actions/download-artifact@v3
       with:
-        name: pwa-${{vars.GITHUB_RUN_ID}}
+        name: pwa-${{ github.run_number }}
+
+    - uses: montudor/action-zip@v1
+      with:
+        args: unzip -qq pwa-${{ github.run_number }} -d client
 
     - name: Change directory
       run: |
        ls
        cd client
        ls
+
     - name: Deploy static site to S3 bucket
-      run: aws s3 sync dist s3://${{ vars.UNIQUE_BUCKET_NAME }} --delete
+      run: aws s3 sync pwa-${{ github.run_number }} s3://${{ vars.UNIQUE_BUCKET_NAME }} --delete
 
 # This workflow contains a single job called "build"
   deployprod:
@@ -103,13 +108,17 @@ jobs:
     - name: Download artifact
       uses: actions/download-artifact@v3
       with:
-        name: pwa-${{vars.GITHUB_RUN_ID}}
+        name: pwa-${{ github.run_number }}
+
+    - uses: montudor/action-zip@v1
+      with:
+        args: unzip -qq pwa-${{ github.run_number }} -d client
 
     - name: Change directory
       run: |
        ls
        cd client
        ls
-
+       
     - name: Deploy static site to S3 bucket
-      run: aws s3 sync dist s3://${{ vars.UNIQUE_BUCKET_NAME }} --delete
+      run: aws s3 sync pwa-${{ github.run_number }} s3://${{ vars.UNIQUE_BUCKET_NAME }} --delete
