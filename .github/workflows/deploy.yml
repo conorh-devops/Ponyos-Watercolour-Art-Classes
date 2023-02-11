@@ -60,8 +60,11 @@ jobs:
       run: |
         aws s3 website s3://${{ vars.UNIQUE_BUCKET_NAME }} --index-document index.html
     
+    - name: Check directory
+      run: ls
+      
     - name: Deploy static site to S3 bucket
-      run: aws s3 sync ./dist s3://${{ vars.UNIQUE_BUCKET_NAME }} --delete
+      run: aws s3 sync dist s3://${{ vars.UNIQUE_BUCKET_NAME }} --delete
 
 # This workflow contains a single job called "build"
   deployprod:
