@@ -69,7 +69,11 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: pwa-${{ github.run_number }}
-    
+  
+    - name: List directory
+      run: |
+       ls
+
     - name: Unzip Artifact
       run: |
        unzip pwa-${{ github.run_number }} -d dist
