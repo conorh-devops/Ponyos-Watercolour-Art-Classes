@@ -1,0 +1,100 @@
+# This is a basic workflow to help you get started with Actions.
+name: CICD
+# Controls when the action will run. 
+on:
+# Triggers the workflow on push or pull request events but only for the main branch
+# push:
+#  branches: [ main ]
+# Allows you to run this workflow manually from the Actions tab 
+  workflow_dispatch: {}
+  push:
+    branches:
+      - 'feature/DeploymentTesting'
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - name: Step 1 - Checkout main branch fom GitHub
+        uses: actions/checkout@v3
+      - name: Step 2 - Choose Node.js version ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+      - name: Step 3 - Navigate to client directory and run build
+        run: |
+          cd client
+          npm install
+          npm run build --if-present
+          npm run lint
+          ls
+      - name: Step 4 - Upload Artifact GitHub Action
+        uses: actions/upload-artifact@v2
+        with: 
+          name: pwa-${{ github.run_number }}
+          path: client/dist/
+
+  deploydev:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: development      
+    env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: 'eu-west-1'
+    steps:
+    - uses: actions/checkout@v3
+    # Output name of bucket from Environment Variable in Github
+    - name: Write Bucket Name
+      run: echo "${{ vars.UNIQUE_BUCKET_NAME }}"
+    # Create S3 Bucket if it does not exist
+    - name: Create S3 Bucket
+      run: |
+        aws s3api get-bucket-location --bucket ${{ vars.UNIQUE_BUCKET_NAME }} || aws s3 mb s3://${{ vars.UNIQUE_BUCKET_NAME }}
+    - name: Set Static Hosting
+      run: |
+        aws s3 website s3://${{ vars.UNIQUE_BUCKET_NAME }} --index-document index.html
+
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: pwa-${{ github.run_number }}
+        path: dist
+
+    - name: Deploy static site to S3 bucket
+      run: aws s3 sync dist s3://${{ vars.UNIQUE_BUCKET_NAME }} --delete --acl public-read
+
+  deployprod:
+    needs: deploydev
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: 'eu-west-1'
+    steps:
+    - uses: actions/checkout@v3
+    # Output name of bucket from Environment Variable in Github
+    - name: Write Bucket Name
+      run: echo "${{ vars.UNIQUE_BUCKET_NAME }}"
+    # Create S3 Bucket if it does not exist
+    - name: Create S3 Bucket
+      run: |
+        aws s3api get-bucket-location --bucket ${{ vars.UNIQUE_BUCKET_NAME }} || aws s3 mb s3://${{ vars.UNIQUE_BUCKET_NAME }}
+    - name: Set Static Hosting
+      run: |
+        aws s3 website s3://${{ vars.UNIQUE_BUCKET_NAME }} --index-document index.html
+
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: pwa-${{ github.run_number }}
+        path: dist
+
+    - name: Deploy static site to S3 bucket
+      run: aws s3 sync dist s3://${{ vars.UNIQUE_BUCKET_NAME }} --delete --acl public-read
