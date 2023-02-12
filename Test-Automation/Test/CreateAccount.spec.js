@@ -14,4 +14,47 @@ test('Register user account', async ({ page }) => {
     await page.getByLabel('Password Confirmation').press('Tab');
     await page.getByLabel('Your Name').fill('atuDevOps');
     await page.getByRole('button', { name: 'Sign up' }).click();
+    // await page.goto('https://ponyos-watercolour-artclasses-bucket.s3.eu-north-1.amazonaws.com/index.html#/courses')
+    // await page.waitForTimeout(3000)
+
+})
+
+test('Verify student can Enroll in the specific course', async ({ page }) => {
+    await page.goto('https://ponyos-watercolour-artclasses-bucket.s3.eu-north-1.amazonaws.com/index.html')
+    await page.getByRole('button', { name: 'Account' }).click();
+    await page.getByLabel('E-mail').click();
+    await page.getByLabel('E-mail').click();
+    await page.getByLabel('E-mail').fill('john@email.com');
+    await page.getByLabel('Password').click();
+    await page.getByLabel('Password').fill('password');
+    await page.getByRole('button', { name: 'Login' }).click();
+    await page.getByRole('button', { name: 'Courses' }).click();
+    await page.getByRole('button', { name: 'Enroll' }).click();
+    await page.getByRole('button', { name: 'Cancel' }).click();
+    await page.getByRole('button', { name: 'Enroll' }).click();
+    await page.getByRole('button', { name: 'Confirm' }).click();
+    await page.getByRole('button', { name: 'Confirm' }).click();
 });
+
+test('Verify user student can unenroll from the specific course', async ({ page }) => {
+
+    await page.goto('https://ponyos-watercolour-artclasses-bucket.s3.eu-north-1.amazonaws.com/index.html')
+    await page.getByRole('button', { name: 'Account' }).click();
+    await page.getByLabel('E-mail').click();
+    await page.getByLabel('E-mail').click();
+    await page.getByLabel('E-mail').fill('john@email.com');
+    await page.getByLabel('Password').click();
+    await page.getByLabel('Password').fill('password');
+    await page.getByRole('button', { name: 'Login' }).click();
+    await page.getByRole('button', { name: 'Courses' }).click();
+    await page.waitForTimeout(6000);
+    await page.locator('#btnRemove_Drawing').click();
+    await page.getByRole('button', { name: 'Cancel' }).click();
+    await page.locator('#btnRemove_Drawing').click();
+    await page.getByRole('button', { name: 'Confirm' }).click();
+    await page.getByRole('button', { name: 'Confirm' }).click();
+
+});
+
+
+
