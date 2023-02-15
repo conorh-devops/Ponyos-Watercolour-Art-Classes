@@ -37,7 +37,6 @@ export default {
       Object.keys(vm.courses).forEach(courseName => {
         vm.courses[courseName].students = vm.$root.students.filter(student => student.courses[courseName])
       })
-      console.log("AE: ~ vm.courses[courseName].", vm.courses)
     })
   },
 }

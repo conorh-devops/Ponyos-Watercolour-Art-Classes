@@ -43,7 +43,7 @@
             Cancel
           </v-btn>
           <v-btn color="primary" text id="btnConfirm" @click="confirmingModal(true)">
-            Confirm
+            <span v-text="dialog.btnConfirmText"/>
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -64,7 +64,8 @@ export default {
         show: false,
         content: "",
         isEnrolled: false,
-        isFeedbackMessage: false
+        isFeedbackMessage: false,
+        btnConfirmText: "Confirm"
       },
       courses: []
     }
@@ -94,6 +95,7 @@ export default {
       this.dialog.isEnrolled = enrolled
       this.dialog.cancelShow = true
       this.dialog.isFeedbackMessage = false
+      this.dialog.btnConfirmText = "Confirm"
       this.dialog.content = this.dialog.isEnrolled ?
         `Are you sure you want to <b>remove</b> "${this.dialog.course}" form your Enrolloed list?` :
         `Are you sure you want to <b>enroll</b> "${this.dialog.course}"?`
@@ -129,6 +131,7 @@ export default {
           this.dialog.content += " with <b>extra tutor</b>"
 
         this.dialog.content += "."
+        this.dialog.btnConfirmText = "Ok"
         this.dialog.show = true
       }, 500)
 
