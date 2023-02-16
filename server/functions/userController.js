@@ -16,10 +16,11 @@ exports.signup = async (user) => {
   if (found)
     throw new Error("User already registered. Code: 395d3d3b.")
 
-  user.id = (Date.now).toString(36)
+  user.id = (Date.now()).toString(36)
+  user.courses = {}
   userList.push(user)
 
-  return true
+  return user
 }
 
 exports.updateProfile = async (user) => {

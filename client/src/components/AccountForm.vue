@@ -73,8 +73,8 @@ export default {
       const result = await api("signup", { user })
       if (result.status !== 200)
         return window.alert(`Something went wrong. Code: cd3c2327. Error: ${result.message || JSON.stringify(result)}`)
-
-      this.loggedUserSet(user)
+      
+        this.loggedUserSet(JSON.parse(result.body))
     },
     loggedUserSet(user) {
       this.$root.loggedUser = user
