@@ -1,0 +1,24 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - npm i npm@latest -g
+      - pip install --upgrade pip
+      - pip install --upgrade awscli
+  pre_build:
+    commands:
+      - cd client
+      - npm run preinstall
+      - npm install
+      - npm run lint
+      - npm run test:unit
+  build:
+    commands:
+      - npm run build
+  post_build:
+    commands:
+      - |
+        if [ $CODEBUILD_BUILD_SUCCEEDING = 1 ]; then
+          aws s3 sync ./dist s3://ponyos-class-dev
+        fi
