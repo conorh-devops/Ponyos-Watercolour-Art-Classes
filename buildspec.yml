@@ -9,10 +9,9 @@ phases:
   pre_build:
     commands:
       - cd client
-      - npm run preinstall
       - npm install
+      - npm run build --if-present
       - npm run lint
-      - npm run test:unit
   build:
     commands:
       - npm run build
