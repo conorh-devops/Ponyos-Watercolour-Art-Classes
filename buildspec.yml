@@ -9,15 +9,14 @@ phases:
   pre_build:
     commands:
       - cd client
-      - npm install
-      - npm run build --if-present
+      - npm install      
       - npm run lint
   build:
     commands:
-      - npm run build
+      - npm run build --if-present
   post_build:
     commands:
       - |
-        if [ $CODEBUILD_BUILD_SUCCEEDING = 1 ]; then
-          aws s3 sync ./dist s3://ponyos-class-dev
+        if [ $CODEBUILD_BUILD_SUCCEEDING = 1 ]; then          
+          aws s3 sync dist s3://ponyos-class-dev --delete --acl public-read
         fi
