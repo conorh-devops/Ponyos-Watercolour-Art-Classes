@@ -18,5 +18,5 @@ phases:
     commands:
       - |
         if [ $CODEBUILD_BUILD_SUCCEEDING = 1 ]; then          
-          aws s3 sync dist s3://ponyos-class-dev --delete --acl public-read
+          aws s3 sync dist s3://ponyos-watercolour-art-classes-dev --delete --acl public-read
         fi
