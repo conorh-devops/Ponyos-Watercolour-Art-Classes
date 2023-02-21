@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "unitTest": "mocha ./server/test"
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.29.2"
   },
   "dependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
     "playwright": "^1.29.2"
   }
 }
