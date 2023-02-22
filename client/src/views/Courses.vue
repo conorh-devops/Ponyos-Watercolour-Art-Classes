@@ -1,7 +1,14 @@
 <template>
   <div class="CoursesView">
-    <h1>All Courses</h1>
+    <h1 id="studentWelcome" v-text="'Welcome to the courses page ' + $root.loggedUser.name"></h1>
+    <p>
+      <br>
+      You may enroll or un-enroll from any course.
+      <br>
+      You may also choose to add an extra tutor if required.
+    </p>
     <br />
+
     <div class="d-flex">
 
       <v-card class="mx-auto" max-width="344" v-for="course in Object.keys(courses)" :key="course">
