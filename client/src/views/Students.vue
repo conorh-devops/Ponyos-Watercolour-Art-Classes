@@ -1,6 +1,8 @@
 <template>
   <div class="StudentsView">
-    <h1>Students</h1>
+    <h1>All Students - Admin</h1>
+    <br>
+    <h2 id="adminWelcome">Below is a list of all students and their assigned courses</h2>
     <br />
 
     <v-data-table :headers="headers" :items="students" :items-per-page="10" @click:row="clickRow" />

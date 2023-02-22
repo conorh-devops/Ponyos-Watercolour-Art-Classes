@@ -1,24 +1,30 @@
 <template>
   <div class="HomeStudent">
-    <h1 id="studentWelcome" v-text="'Student: ' + $root.loggedUser.name"></h1>
+    <h1 id="studentWelcome" v-text="'Welcome to the Student Portal ' + $root.loggedUser.name"></h1>
     <br />
     <p>
-      Labore duis et labore officia sit cupidatat cillum. Aliqua nisi adipisicing non excepteur duis aliqua culpa culpa
-      et. Minim enim sunt
+      In the student portal you can access all of your important school information.
     </p>
-
     <p>
-      Nostrud non et Lorem ut culpa reprehenderit consectetur id esse cillum proident elit eu. Lorem tempor cillum amet
-      voluptate sint id consequat ea consequat ad pariatur commodo magna. Quis dolore eu anim fugiat nulla aute fugiat
-      quis velit culpa veniam consequat Lorem. Non excepteur velit qui Lorem laboris esse in enim tempor velit dolor
-      tempor. Est pariatur labore aliqua enim excepteur ipsum commodo ad reprehenderit magna consectetur incididunt.
-      Excepteur nisi Lorem esse esse nulla ut cupidatat non cupidatat.
+      Here are some quick tips to help you get started:
+      <br>
+      <br>
+      <b>Courses:</b> Click the "Courses" button to view available courses. You may enroll or unenroll from courses if you wish.
+      <br>
+      You may also choose to add an extra tutor if required.
+      <br>
+      <br>
+      <b>Profile:</b> Click your name above to edit your profile information.
+      <br>
+      <br>
+      <b>Log Out:</b> Don't forget to click the "Log Out" button when you are finished.
     </p>
-
     <p>
-      Incididunt ut ex fugiat sit labore sunt fugiat deserunt ad. Et sit laborum aliqua adipisicing magna sint. Officia
-      cillum laboris cupidatat et proident laboris esse aliquip exercitation tempor id ea. Minim sint sit reprehenderit
-      adipisicing veniam.
+      We hope you find everything you need here to succeed in your academic journey.
+      <br>
+      If you have any questions or need help with anything, please don't hesitate to reach out to us.
+      <br>
+      Good luck with your studies!
     </p>
 
   </div>

@@ -1,6 +1,7 @@
 <template>
   <div class="ProfileView">
-    <h1 id="adminWelcome">Editing profile</h1>
+    <h1 id="studentWelcome" v-text="'Hi ' + $root.loggedUser.name"></h1>
+    <h2 id="adminWelcome">Edit your profile here</h2>
     <br />
     <UserDetails ref="userDetails" :editUser="$root.loggedUser" @save="save" @cancel="cancel" />
   </div>
