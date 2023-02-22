@@ -13,8 +13,7 @@
           <v-text-field v-model="email" type="email" label="E-mail" id="fldEmail"
             :rules="[rules.required, rules.email]" />
 
-          <v-text-field v-model="password" type="password" label="Password" id="fldPassword"
-            :rules="[rules.required]" />
+          <v-text-field v-model="password" type="password" label="Password" id="fldPassword" :rules="[rules.required]" />
 
           <v-btn color="primary" class="mr-4" @click="login" id="btnLogin">Login</v-btn>
           <br />
@@ -32,6 +31,24 @@
 
     </v-tabs-items>
 
+    <v-dialog v-model="dialog.show" persistent max-width="500">
+      <v-card>
+        <v-card-title class="text-h5">
+          Ponyo’s Watercolour Art Classes
+        </v-card-title>
+        <v-card-text>
+          Congratulations, {{ dialog.user?.name }}!!!<br />
+          You have successfully signed up.
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" text id="btnGoToHome" @click="loggedUserSet(dialog.user)">
+            Go to Home
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
   </div>
 </template>
 
@@ -46,7 +63,11 @@ export default {
       email: "",
       password: "",
       tabIndex: 0,
-      rules
+      rules,
+      dialog: {
+        show: false,
+        user: null
+      },
     }
   },
   components: {
@@ -74,16 +95,17 @@ export default {
       if (result.status !== 200)
         return window.alert(`Something went wrong. Code: cd3c2327. Error: ${result.message || JSON.stringify(result)}`)
 
-      this.loggedUserSet(user)
+      this.dialog.user = JSON.parse(result.body)
+      this.dialog.show = true
+
     },
     loggedUserSet(user) {
+      this.dialog.show = false
       this.$root.loggedUser = user
       this.$router.push({ name: "home" })
-    }
+    },
   },
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

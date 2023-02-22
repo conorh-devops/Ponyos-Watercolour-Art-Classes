@@ -21,7 +21,7 @@ exports.userList = [
     courses: {
       "Drawing": {
         enrollDt: "2023-01-10T19:33:42.825Z",
-        extraTutor: false
+        extraTutor: true
       },
       "Watercolors": {
         enrollDt: "2023-01-11T19:33:42.825Z",
@@ -65,7 +65,7 @@ exports.userList = [
     courses: {
       "Watercolors": {
         enrollDt: "2023-01-15T19:33:42.825Z",
-        extraTutor: false
+        extraTutor: true
       },
     },
   },
