@@ -40,29 +40,6 @@ jobs:
         with: 
           name: pwa-${{ github.run_number }}
           path: client/dist/
-  
-  test:
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 16
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: |
-          cd Test-Automation
-          npx playwright test Test/CreateAccount.spec.js --project=chromium
-    - uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
 
   deploydev:
     needs: build
@@ -94,8 +71,32 @@ jobs:
     - name: Deploy static site to S3 bucket
       run: aws s3 sync dist s3://${{ vars.UNIQUE_BUCKET_NAME }} --delete --acl public-read
 
-  deployprod:
+  test:
     needs: deploydev
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+    - name: Install dependencies
+      run: npm ci
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+    - name: Run Playwright tests
+      run: |
+          cd Test-Automation
+          npx playwright test Test/CreateAccount.spec.js --project=chromium
+    - uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
+
+  deployprod:
+    needs: test
     runs-on: ubuntu-latest
     environment: production
     env:

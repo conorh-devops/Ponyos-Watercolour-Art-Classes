@@ -3,7 +3,7 @@ const { test, expect } = require("@playwright/test");
 test('Register user account', async ({ page }) => {
     await page.goto('http://ponyos-watercolour-art-classes-dev.s3-website-eu-west-1.amazonaws.com/#/home');
     await expect(page).toHaveTitle('art-class');
-    await page.getByRole('button', { name: 'Account' }).click();
+    await page.getByRole('button', { name: 'Log In' }).click();
     await page.getByRole('button', { name: 'Sign up' }).click();
     await page.locator('form').filter({ hasText: 'E-mailPasswordPassword ConfirmationYour NameSign up' }).locator('#fldEmail').click();
     await page.locator('form').filter({ hasText: 'E-mailPasswordPassword ConfirmationYour NameSign up' }).locator('#fldEmail').fill('atu@atu.ie');
@@ -21,7 +21,7 @@ test('Register user account', async ({ page }) => {
 
 test('Verify student can Enroll in the specific course', async ({ page }) => {
     await page.goto('http://ponyos-watercolour-art-classes-dev.s3-website-eu-west-1.amazonaws.com/#/home')
-    await page.getByRole('button', { name: 'Account' }).click();
+    await page.getByRole('button', { name: 'Log In' }).click();
     await page.getByLabel('E-mail').click();
     await page.getByLabel('E-mail').click();
     await page.getByLabel('E-mail').fill('john@email.com');
@@ -39,7 +39,7 @@ test('Verify student can Enroll in the specific course', async ({ page }) => {
 test('Verify user student can unenroll from the specific course', async ({ page }) => {
 
     await page.goto('http://ponyos-watercolour-art-classes-dev.s3-website-eu-west-1.amazonaws.com/#/home')
-    await page.getByRole('button', { name: 'Account' }).click();
+    await page.getByRole('button', { name: 'Log In' }).click();
     await page.getByLabel('E-mail').click();
     await page.getByLabel('E-mail').click();
     await page.getByLabel('E-mail').fill('john@email.com');
