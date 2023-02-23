@@ -10,7 +10,7 @@
       <template v-if="testApiResult">
 
         <v-btn v-if="!$root.loggedUser" text outlined @click="$router.push({ name: 'login' })" id="btnBarAccount">
-          <span class="mr-2">Log In/Sign Up</span>
+          <span class="mr-2">Log In</span>
           <v-icon>mdi-account</v-icon>
         </v-btn>
         <template v-else>
