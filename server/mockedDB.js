@@ -19,11 +19,11 @@ exports.userList = [
     password: "password",
     name: "John Ferrari",
     courses: {
-      "Drawing": {
+      "Fujimoto": {
         enrollDt: "2023-01-10T19:33:42.825Z",
         extraTutor: true
       },
-      "Watercolors": {
+      "Gran Mamare": {
         enrollDt: "2023-01-11T19:33:42.825Z",
         extraTutor: true
       },
@@ -35,7 +35,7 @@ exports.userList = [
     password: "password",
     name: "Maria Mercedes",
     courses: {
-      "Watercolors": {
+      "Gran Mamare": {
         enrollDt: "2023-01-10T19:33:42.825Z",
         extraTutor: false
       },
@@ -47,11 +47,11 @@ exports.userList = [
     password: "password",
     name: "Clare Williams",
     courses: {
-      "Drawing": {
+      "Fujimoto": {
         enrollDt: "2023-01-05T19:33:42.825Z",
         extraTutor: false
       },
-      "DYI Arts": {
+      "Sosuke": {
         enrollDt: "2023-01-15T19:33:42.825Z",
         extraTutor: false
       },
@@ -63,7 +63,7 @@ exports.userList = [
     password: "password",
     name: "James Ford",
     courses: {
-      "Watercolors": {
+      "Gran Mamare": {
         enrollDt: "2023-01-15T19:33:42.825Z",
         extraTutor: true
       },
@@ -75,7 +75,7 @@ exports.userList = [
     password: "password",
     name: "Rose Benetton",
     courses: {
-      "DYI Arts": {
+      "Sosuke": {
         enrollDt: "2023-01-23T19:33:42.825Z",
         extraTutor: false
       },
@@ -93,19 +93,19 @@ exports.userList = [
 ]
 
 exports.courses = {
-  "Watercolors":
-  {
-    desc: "Working with watercolors allows you to express your artistic sensibilities. Playful and unconventional techniques!",
-    duration: "20",
-    price: "29",
-  },
-  "Drawing": {
-    desc: "Learn little knowledge in drawing to creating advanced art and having a deep understanding of drawing fundamentals.",
+  "Gran Mamare":
+      {
+        desc: "Welcome to Gran Mamare, our watercolour sea life class where we dive into the deep blue sea to explore the incredible world of marine creatures.  Our class is designed to help you master the art of watercolour painting while discovering the intricacies and beauty of sea life. From stunning coral reefs to fascinating marine animals, we'll guide you through the process of creating artwork that captures the essence of the ocean. Join us on this journey of creativity and wonder, and let your imagination swim with Gran Mamare!",
+        duration: "20",
+        price: "29",
+      },
+  "Fujimoto": {
+    desc: "Welcome to Fujimoto, our watercolour nature class where we celebrate the beauty of the natural world through art. Our class is designed to help you master the techniques of watercolour painting, while discovering the intricate details and nuances of nature. From breathtaking landscapes to delicate flora and fauna, we'll guide you through the process of creating stunning artwork that captures the essence of the outdoors. Join us on this journey of creativity and exploration, and unleash your inner artist with Fujimoto!",
     duration: "8",
     price: "12",
   },
-  "DYI Arts": {
-    desc: "Plenty of art and craft classes that can help you learn DIY arts and crafts and master it in a step by step way.",
+  "Sosuke": {
+    desc: "Welcome to Sosuke, our watercolour air class where we explore the beauty and wonder of the sky and clouds. Our class is designed to help you develop your skills in watercolour painting, while capturing the essence of the ever-changing elements of the air. From brilliant sunsets to dramatic thunderstorms, we'll guide you through the process of creating breathtaking artwork that captures the majesty of the skies. Join us on this journey of creativity and inspiration, and let your imagination soar with Sosuke!",
     duration: "16",
     price: "22",
   }
