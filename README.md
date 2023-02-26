@@ -55,33 +55,40 @@ Rotating scrum master so that everyone gets to experience the role once.
 
 13/03/2023 - Monish Pawar
 
+20/03/2023 - Alan Staunton
+
 # Product Owner
-Pauric 
+Pauric Dawson
 
 # Rockstars
-Alan Staunton
  
 Airton Esmerio
 
+Conor Horan
+
 Mara Lima
 
-Conor Horan
+Louise MacBride
 
 Monish Pawar
 
-Louise MacBride
+Alan Staunton
+
 
 # Project Deadline
 Thursday, 23 March 2023 23:59
 
 # Project Specification
-Clean and simple design
 
-User access levels (client, administrator)
-
-Includes at least one self developed api and one webservice
-
-To be run on AWS.
+ - The system should be clean and simple.
+ - The team has been tasked with creating the pipeline for the SDLC. 
+ - The team has been asked to provide a simple prototype page(s) to test the pipeline. 
+ - The system needs to take into account the usual security requirements. 
+ - The administrator of the end system (Ghibli Studios) should be able to access detailed information and edit as appropriate.
+ - Once the client enters details it should not be able to be changed by the class attendees.
+ - User access levels should include both client and administrator.
+ - The project should include at least one self developed api and one webservice.
+ - The project should be run on AWS.
 
 # Frameworks
 We will be using MongoDB for our database
@@ -90,31 +97,22 @@ Node.js is used for the frontend.
 
 Project will be hosted on AWS but can also run locally. Instructions are provided below.
 
-Database persistence technology
-
-Define the Business Requirements
-
-Named queries and database triggers for security
-
-Regex for cleansing and validation of data before sending to the database.
 
 # How to install locally
 
 Intellij IDE
  - Download project from Git.
  - Import project from downloaded folder. 
- - You may need to install neo-async -  npm i neo-async
+ - You may need to install neo-async and yarn
  - npm install
  - npm run serve
  - Click on the link to open the webserver.
 
-
 # Useful Links
  - Project Slack: https://atudevops.slack.com #pgdip_devops_prj_man_group_3
  - GitHub: https://github.com/conorh-devops/Ponyos-Watercolour-Art-Classes.git
-
-# More Information
-For more information visit our other sections
+ - Development Server: http://ponyos-watercolour-art-classes-dev.s3-website-eu-west-1.amazonaws.com/#/home
+ - Production Server: http://ponyos-watercolour-art-classes-prd.s3-website-eu-west-1.amazonaws.com 
 
 # Section	Description
 ** THIS SECTION TO BE FILLED IN
@@ -154,12 +152,137 @@ If you have any questions or concerns about the risks listed in this repository,
 
 Together, we can work to minimize the impact of risks and ensure the success of the project.
 
-Risk                            Contingency                          Mitigation 
-Deadlines being missed          Attend 2 standups per week           If there are any questions, we can contact each other via Teams or Slack
+___Risk___
 
-Risk                            Contingency                          Mitigation 
-One person being overworked      That person must speak up            Discuss as a group the options available to reduce the workload.
+Deadlines being missed
 
+___Contingency___
+
+Attend 2 standups per week 
+
+___Mitigation___
+
+If there are any questions, we can contact each other via Teams or Slack
+
+___Risk___
+
+One person being overworked  
+
+___Contingency___
+
+That person must speak up 
+
+___Mitigation___
+
+Discuss as a group the options available to reduce the workload.
+
+___Risk___
+
+Security vulnerabilities
+
+___Contingency___
+
+Conduct regular security audits and penetration testing; implement multi-factor authentication and other security measures
+
+___Mitigation___
+
+Follow secure coding practices, perform regular security reviews, and stay up-to-date on the latest security threats and best practices
+
+___Risk___
+
+Compatibility issues
+
+___Contingency___
+
+Conduct extensive testing on various web browsers and operating systems; develop a responsive design
+
+___Mitigation___
+
+Use widely-supported web technologies, conduct thorough testing, and provide clear documentation on supported configurations
+
+___Risk___
+
+Technical Challenges
+
+___Contingency___
+
+Conduct thorough research and prototyping before committing to a technology stack; stay up-to-date on the latest developments in relevant technologies
+
+___Mitigation___
+
+Allocate time and resources for research and prototyping, engage with developer communities, and seek expert advice if necessary
+
+___Risk___
+
+Integration issues
+
+___Contingency___
+
+Conduct extensive testing and develop clear documentation on how to integrate with other systems
+
+___Mitigation___
+
+Use well-documented and widely-used APIs, conduct thorough testing, and involve stakeholders in the integration process
+
+___Risk___
+
+User adoption
+
+___Contingency___
+
+Conduct extensive user testing and gather feedback throughout the development process; provide clear documentation and support
+
+___Mitigation___
+
+Use user-centered design methodologies, conduct extensive user testing, and engage with users to understand their needs and preferences
+
+___Risk___
+
+Communication breakdown
+
+___Contingency___
+
+Establish clear communication channels and protocols; provide regular updates and documentation
+
+___Mitigation___
+
+Use project management tools, establish clear communication channels and protocols, and conduct regular stakeholder meetings
+
+___Risk___
+
+Resource constraints
+
+___Contingency___
+
+Prioritise features and requirements; seek external funding or additional resources if necessary
+
+___Mitigation___
+
+Use agile development methodologies, prioritize requirements, and seek external funding or additional resources if necessary
+
+___Risk___
+
+Project management issues
+
+___Contingency___
+
+Use established project management methodologies and tools; track progress and communicate regularly with stakeholders
+
+___Mitigation___
+
+Use established project management methodologies and tools, prioritize stakeholder engagement, and identify and address issues early
+
+___Risk___
+
+Legal or regulatory issues
+
+___Contingency___
+
+Stay up-to-date on relevant laws and regulations; work with legal and regulatory experts if necessary
+
+___Mitigation___
+
+Conduct regular legal and regulatory reviews, engage with legal and regulatory experts, and follow best practices for compliance
 
 # Tenants of Design
 The code framework to be used will be Node.js, we will be programming using the IDE IntelliJ IDEA.
