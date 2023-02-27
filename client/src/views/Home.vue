@@ -18,23 +18,19 @@
       </v-card>
       <br />
       <v-card class="justify-center text-center mb-6" flat>
-      <p>
-        Welcome to Ponyos Watercolour Art Class, where creativity and passion come together.
-      </p>
-      <p>
-        Our dedicated team of artists and educators is committed to providing a supportive
-        and inspiring environment for students of all levels to grow and develop their artistic abilities.
-      </p>
-      <p>
-        Whether you're just starting out on your artistic journey or looking to take your skills to the next level,
-        we have a variety of programs and courses available to help you reach your goals.
-      </p>
+        <p>
+          Welcome to Ponyos Watercolour Art Class, where creativity and passion come together.
+        </p>
+        <p>
+          Our dedicated team of artists and educators is committed to providing a supportive
+          and inspiring environment for students of all levels to grow and develop their artistic abilities.
+        </p>
+        <p>
+          Whether you're just starting out on your artistic journey or looking to take your skills to the next level,
+          we have a variety of programs and courses available to help you reach your goals.
+        </p>
 
-      <p>So, come join us and unleash your inner artist!</p>
-      <v-btn v-if="!$root.loggedUser" text outlined @click="$router.push({ name: 'login' })" id="btnBarAccount">
-        <span class="mr-2">Log In</span>
-        <v-icon>mdi-account</v-icon>
-      </v-btn>
+        <p>So, come join us and unleash your inner artist!</p>
       </v-card>
     </template>
 
