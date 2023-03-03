@@ -1,0 +1,74 @@
+service: ponyo
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: eu-west-1
+
+package:
+  individually: true
+  exclude:
+    - node_modules/**
+
+resources:
+  Resources:
+    appUserPool:
+      Type: AWS::Cognito::UserPool
+      Properties:
+        UserPoolName: ${self:provider.stage}-appUserPool
+        AutoVerifiedAttributes:
+          - email
+        Schema:
+          - Name: email
+            Required: true
+            AttributeDataType: String
+          - Name: name
+            Required: true
+            AttributeDataType: String
+        Policies:
+          PasswordPolicy:
+            MinimumLength: 6
+            RequireLowercase: true
+            RequireUppercase: true
+            RequireNumbers: true
+            RequireSymbols: true
+    appUserPoolClient:
+      Type: AWS::Cognito::UserPoolClient
+      Properties:
+        ClientName: ${self:provider.stage}-appUserPool-client
+        GenerateSecret: false
+        UserPoolId:
+          Ref: appUserPool
+    appAuthorizer:
+      Type: AWS::ApiGateway::Authorizer
+      Properties:
+        Name: ${self:provider.stage}-appCognitoAuthorizer
+        Type: COGNITO_USER_POOLS
+        IdentitySource: method.request.header.Authorization
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        ProviderARNs:
+          - Fn::GetAtt:
+            - appUserPool
+            - Arn
+
+functions:
+  hello:
+    handler: functions/handler.hello
+    events:
+      - http: 
+          method: GET 
+          path: hello
+          cors: true 
+  helloAuthorizer:
+    handler: functions/handler.handler
+    events:
+      - http: 
+          method: POST 
+          path: handler
+          cors: true 
+          authorizer:
+            type: COGNITO_USER_POOLS
+            authorizerId:
+              Ref: appAuthorizer

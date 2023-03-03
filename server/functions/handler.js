@@ -4,10 +4,11 @@ const classController = require("./classController")
 exports.createResponse = ({ status = 200, body }) => {
 
   const response = {
-    status,
+    statusCode: status,
     headers: {
       "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Allow-Origin": "*"
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
     },
     body: ""
   }
@@ -43,6 +44,13 @@ exports.handler = async (event, _context) => {
     body = error.message
     status = 500
   }
+
+  return exports.createResponse({ status, body })
+}
+
+exports.hello = async (_event, _context) => {
+  const body = "Hello World"
+  const status = 200
 
   return exports.createResponse({ status, body })
 }

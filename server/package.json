@@ -1,0 +1,11 @@
+{
+  "name": "ponyo-server",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "deploy": "sls deploy"
+  },
+  "dependencies": {
+    "serverless": "^3.28.1"
+  }
+}
