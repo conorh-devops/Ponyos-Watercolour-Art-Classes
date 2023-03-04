@@ -15,7 +15,7 @@
         <h2>Login</h2>
         <v-form ref="formCredentials">
           <v-text-field
-            v-model="email"
+            v-model="uEmail"
             type="email"
             label="E-mail"
             id="fldEmail"
@@ -23,7 +23,7 @@
           />
 
           <v-text-field
-            v-model="password"
+            v-model="uPassword"
             type="password"
             label="Password"
             id="fldPassword"
@@ -64,7 +64,7 @@
           Ponyo’s Watercolour Art Classes
         </v-card-title>
         <v-card-text>
-          Congratulations, {{ dialog.user?.name }}!!!<br />
+          Congratulations, {{ dialog.user?.uName }}!!!<br />
           You have successfully signed up.
         </v-card-text>
         <v-card-actions>
@@ -91,8 +91,8 @@ export default {
   name: "AccountForm",
   data() {
     return {
-      email: "",
-      password: "",
+      uEmail: "",
+      uPassword: "",
       tabIndex: 0,
       rules,
       dialog: {
@@ -127,13 +127,13 @@ export default {
     async signUp(user) {
       if (!this.$refs.userDetails.$refs.formUserDetails.validate()) return
 
-      if (user.password !== user.passwordConfirmation)
+      if (user.uPassword !== user.uPasswordConfirmation)
         return window.alert("Password not matching.")
 
       try {
         const result = await api.open("signup", { user })
         if (result.status !== 200) throw result
-        this.dialog.user = result.user
+        this.dialog.user = user
         this.dialog.show = true
       } catch (error) {
         return window.alert(

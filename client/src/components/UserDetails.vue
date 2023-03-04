@@ -1,23 +1,54 @@
 <template>
   <div class="UserDetails">
     <v-form ref="formUserDetails">
+      <v-text-field
+        v-model="user.uEmail"
+        :disabled="Boolean(editUser)"
+        type="email"
+        label="E-mail"
+        id="fldEmail"
+        ref="fldEmail"
+        :rules="[rules.required, rules.email]"
+      />
 
-      <v-text-field v-model="user.email" :disabled="Boolean(editUser)" type="email" label="E-mail" id="fldEmail"
-        ref="fldEmail" :rules="[rules.required, rules.email]" />
+      <v-text-field
+        v-if="isSignUp"
+        v-model="user.uPassword"
+        type="password"
+        label="Password"
+        id="fldPassword"
+        ref="fldPassword"
+        :rules="[rules.required]"
+      />
 
-      <v-text-field v-if="isSignUp" v-model="user.password" type="password" label="Password" id="fldPassword"
-        ref="fldPassword" :rules="[rules.required]" />
+      <v-text-field
+        v-if="isSignUp"
+        v-model="user.uPasswordConfirmation"
+        type="password"
+        label="Password Confirmation"
+        id="fldPasswordConfirmation"
+        ref="fldPasswordConfirmation"
+        :rules="[rules.required]"
+      />
 
-      <v-text-field v-if="isSignUp" v-model="user.passwordConfirmation" type="password" label="Password Confirmation"
-        id="fldPasswordConfirmation" ref="fldPasswordConfirmation" :rules="[rules.required]" />
-
-      <v-text-field v-model="user.name" type="text" label="Your Name" required id="fldName" :rules="[rules.required]" />
+      <v-text-field
+        v-model="user.uName"
+        type="text"
+        label="Your Name"
+        required
+        id="fldName"
+        :rules="[rules.required]"
+      />
 
       <template v-if="showCourses">
         <br />
         <p>Courses</p>
         <v-chip-group class="primary--text" v-if="user.courses">
-          <v-chip v-for="course in Object.keys(user.courses)" :key="course" disabled>
+          <v-chip
+            v-for="course in Object.keys(user.uCourses)"
+            :key="course"
+            disabled
+          >
             {{ course }}
           </v-chip>
         </v-chip-group>
@@ -45,39 +76,39 @@ export default {
   props: {
     isSignUp: {
       type: Boolean,
-      default: false
+      default: false,
     },
     hideCancel: {
       type: Boolean,
-      default: false
+      default: false,
     },
     editUser: {
       type: Object,
-      default: null
+      default: null,
     },
     showCourses: {
       type: Boolean,
-      default: false
+      default: false,
     },
   },
   data() {
     return {
       user: {
-        email: "",
-        name: "",
-        password: "",
-        passwordConfirmation: "",
-        isAdmin: false
+        uEmail: "",
+        uName: "",
+        uPassword: "",
+        uPasswordConfirmation: "",
+        uIsAdmin: false,
       },
-      rules
+      rules,
     }
   },
   async mounted() {
     if (this.editUser) {
-      this.user.email = this.editUser.email
-      this.user.name = this.editUser.name
-      this.user.courses = this.editUser.courses
-      this.user.isAdmin = this.editUser.isAdmin
+      this.user.uEmail = this.editUser.uEmail
+      this.user.uName = this.editUser.uName
+      this.user.uCourses = this.editUser.uCourses
+      this.user.uIsAdmin = this.editUser.uIsAdmin
     }
   },
   methods: {
@@ -86,11 +117,10 @@ export default {
     },
     cancel() {
       this.$emit("cancel")
-    }
+    },
   },
 }
 </script>
 
 <style scoped>
-
 </style>

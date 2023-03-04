@@ -1,21 +1,22 @@
 const { userList } = require("../mockedDB")
 const AWS = require("aws-sdk")
 const cognito = new AWS.CognitoIdentityServiceProvider({ region: process.env.REGION })
+const dynamoDB = new AWS.DynamoDB.DocumentClient({ region: process.env.REGION })
 
 exports.validateCredentials = async (email, password) => {
-  return userList.find(u => u.email === email && u.password === password)
+  return userList.find(u => u.uEmail === email && u.uPassword === password)
 }
 
 async function cognitoCreateUser(user) {
   try {
     return await cognito.adminCreateUser({
       UserPoolId: process.env.COGNITO_USER_POOL_ID,
-      Username: user.email,
-      TemporaryPassword: user.password,
+      Username: user.uEmail,
+      TemporaryPassword: user.uPassword,
       MessageAction: "SUPPRESS",
       UserAttributes: [
         { Name: "email_verified", Value: "true" },
-        { Name: "email", Value: user.email },
+        { Name: "email", Value: user.uEmail },
       ]
     }).promise()
   } catch (error) {
@@ -29,8 +30,8 @@ async function cognitoAdminSetUserPassword(user) {
 
     return await cognito.adminSetUserPassword({
       UserPoolId: process.env.COGNITO_USER_POOL_ID,
-      Username: user.email,
-      Password: user.password,
+      Username: user.uEmail,
+      Password: user.uPassword,
       Permanent: true
     }).promise()
 
@@ -38,21 +39,26 @@ async function cognitoAdminSetUserPassword(user) {
     console.log("cognitoAdminSetUserPassword: error", error)
     throw error
   }
+
 }
 
 exports.signup = async user => {
-  if (!user.email)
+  if (!user.uEmail)
     throw new Error("Email is required. Code: 3ce64cbf.")
 
-  user.email = user.email.toLowerCase()
+  user.uEmail = user.uEmail.toLowerCase()
   try {
     await cognitoCreateUser(user)
     await cognitoAdminSetUserPassword(user)
 
-    user.id = (Date.now()).toString(36)
-    user.courses = {}
-    //save on DynamoDB
-    // userList.push(user)
+    user.uId = (Date.now()).toString(36)
+    user.uCourses = {}
+
+    await dynamoDB.put({
+      TableName: process.env.TB_USER,
+      Item: { uId: user.uId, uEmail: user.uEmail, uName: user.uName, uCourses: {} }
+    }).promise()
+
     return user
   } catch (error) {
     console.log("signup: error:", error)
@@ -62,10 +68,10 @@ exports.signup = async user => {
 }
 
 exports.updateProfile = async (user) => {
-  if (!user.email)
+  if (!user.uEmail)
     throw new Error("Email is required. Code: 988e083c.")
 
-  const index = userList.findIndex(u => u.email === user.email)
+  const index = userList.findIndex(u => u.uEmail === user.uEmail)
   if (index === -1)
     throw new Error("User already registered. Code: c1b88e3c.")
 
@@ -76,7 +82,7 @@ exports.updateProfile = async (user) => {
 }
 
 exports.findUser = async (email) => {
-  return userList.find(u => u.email === email)
+  return userList.find(u => u.uEmail === email)
 }
 
 exports.getStudents = async () => {

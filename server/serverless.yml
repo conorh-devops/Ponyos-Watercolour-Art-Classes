@@ -9,29 +9,32 @@ provider:
     REGION: ${self:provider.region}
     COGNITO_USER_POOL_ID: ${file(./server.config.json):${self:provider.stage}_COGNITO_USER_POOL_ID}
     COGNITO_APP_CLIENT_ID: ${file(./server.config.json):${self:provider.stage}_COGNITO_APP_CLIENT_ID}
-  iamRoleStatements:
-    - Effect: Allow #Allow lambda access to cognito user pools
-      Action:
-        - cognito-idp:AdminUpdateUserAttributes
-        - cognito-idp:AdminGetUser
-        - cognito-idp:AdminCreateUser
-        - cognito-idp:AdminDeleteUser
-        - cognito-idp:AdminSetUserPassword
-        - cognito-idp:ListUsers
-      Resource: "*"
-    - Effect: Allow #Allow Lambdas
-      Action:
-        - dynamodb:Query
-        - dynamodb:PutItem
-        - dynamodb:DeleteItem
-        - dynamodb:UpdateItem
-        - dynamodb:GetItem
-      Resource: "*"
+    TB_USER: ${self:provider.stage}-tbUser
+  iam:
+    role:
+      statements:
+        - Effect: Allow 
+          Action:
+            - cognito-idp:AdminUpdateUserAttributes
+            - cognito-idp:AdminGetUser
+            - cognito-idp:AdminCreateUser
+            - cognito-idp:AdminDeleteUser
+            - cognito-idp:AdminSetUserPassword
+            - cognito-idp:ListUsers
+          Resource: "*"
+        - Effect: Allow 
+          Action:
+            - dynamodb:Query
+            - dynamodb:PutItem
+            - dynamodb:DeleteItem
+            - dynamodb:UpdateItem
+            - dynamodb:GetItem
+          Resource: "*"
 
 package:
   individually: true
-  exclude:
-    - node_modules/**
+  patterns:
+    - '!node_modules/**'
 
 resources:
   Resources:
@@ -77,16 +80,16 @@ resources:
     tbUser:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ${self:provider.stage}-tbUser
+        TableName: ${self:provider.environment.TB_USER}
         AttributeDefinitions:
-        - AttributeName: userId
+        - AttributeName: uId
           AttributeType: S
-        - AttributeName: userEmail
+        - AttributeName: uEmail
           AttributeType: S
         KeySchema:
-        - AttributeName: userId
+        - AttributeName: uId
           KeyType: HASH
-        - AttributeName: userEmail
+        - AttributeName: uEmail
           KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
 
