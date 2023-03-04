@@ -1,26 +1,64 @@
 const { userList } = require("../mockedDB")
+const AWS = require("aws-sdk")
+const cognito = new AWS.CognitoIdentityServiceProvider({ region: process.env.REGION })
 
 exports.validateCredentials = async (email, password) => {
-  const user = userList.find(u => {
-    return u.email === email && u.password === password
-  })
-
-  return user
+  return userList.find(u => u.email === email && u.password === password)
 }
 
-exports.signup = async (user) => {
+async function cognitoCreateUser(user) {
+  try {
+    return await cognito.adminCreateUser({
+      UserPoolId: process.env.COGNITO_USER_POOL_ID,
+      Username: user.email,
+      TemporaryPassword: user.password,
+      MessageAction: "SUPPRESS",
+      UserAttributes: [
+        { Name: "email_verified", Value: "true" },
+        { Name: "email", Value: user.email },
+      ]
+    }).promise()
+  } catch (error) {
+    console.log("cognitoCreateUser: ~ signup error:", error)
+    throw error
+  }
+}
+
+async function cognitoAdminSetUserPassword(user) {
+  try {
+
+    return await cognito.adminSetUserPassword({
+      UserPoolId: process.env.COGNITO_USER_POOL_ID,
+      Username: user.email,
+      Password: user.password,
+      Permanent: true
+    }).promise()
+
+  } catch (error) {
+    console.log("cognitoAdminSetUserPassword: error", error)
+    throw error
+  }
+}
+
+exports.signup = async user => {
   if (!user.email)
     throw new Error("Email is required. Code: 3ce64cbf.")
 
-  const found = await exports.findUser(user.email)
-  if (found)
-    throw new Error("User already registered. Code: 395d3d3b.")
+  user.email = user.email.toLowerCase()
+  try {
+    await cognitoCreateUser(user)
+    await cognitoAdminSetUserPassword(user)
 
-  user.id = (Date.now()).toString(36)
-  user.courses = {}
-  userList.push(user)
+    user.id = (Date.now()).toString(36)
+    user.courses = {}
+    //save on DynamoDB
+    // userList.push(user)
+    return user
+  } catch (error) {
+    console.log("signup: error:", error)
+    throw error
+  }
 
-  return user
 }
 
 exports.updateProfile = async (user) => {

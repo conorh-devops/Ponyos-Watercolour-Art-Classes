@@ -6,6 +6,7 @@
     "deploy": "sls deploy"
   },
   "dependencies": {
+    "aws-sdk": "^2.1328.0",
     "serverless": "^3.28.1"
   }
 }

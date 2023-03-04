@@ -5,6 +5,28 @@ provider:
   runtime: nodejs14.x
   stage: dev
   region: eu-west-1
+  environment: 
+    REGION: ${self:provider.region}
+    COGNITO_USER_POOL_ID: ${file(./server.config.json):${self:provider.stage}_COGNITO_USER_POOL_ID}
+    COGNITO_APP_CLIENT_ID: ${file(./server.config.json):${self:provider.stage}_COGNITO_APP_CLIENT_ID}
+  iamRoleStatements:
+    - Effect: Allow #Allow lambda access to cognito user pools
+      Action:
+        - cognito-idp:AdminUpdateUserAttributes
+        - cognito-idp:AdminGetUser
+        - cognito-idp:AdminCreateUser
+        - cognito-idp:AdminDeleteUser
+        - cognito-idp:AdminSetUserPassword
+        - cognito-idp:ListUsers
+      Resource: "*"
+    - Effect: Allow #Allow Lambdas
+      Action:
+        - dynamodb:Query
+        - dynamodb:PutItem
+        - dynamodb:DeleteItem
+        - dynamodb:UpdateItem
+        - dynamodb:GetItem
+      Resource: "*"
 
 package:
   individually: true
@@ -29,10 +51,10 @@ resources:
         Policies:
           PasswordPolicy:
             MinimumLength: 6
-            RequireLowercase: true
-            RequireUppercase: true
-            RequireNumbers: true
-            RequireSymbols: true
+            RequireLowercase: false
+            RequireUppercase: false
+            RequireNumbers: false
+            RequireSymbols: false
     appUserPoolClient:
       Type: AWS::Cognito::UserPoolClient
       Properties:
@@ -52,21 +74,36 @@ resources:
           - Fn::GetAtt:
             - appUserPool
             - Arn
+    tbUser:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.stage}-tbUser
+        AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: userEmail
+          AttributeType: S
+        KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+        - AttributeName: userEmail
+          KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
 
 functions:
-  hello:
-    handler: functions/handler.hello
-    events:
-      - http: 
-          method: GET 
-          path: hello
-          cors: true 
-  helloAuthorizer:
-    handler: functions/handler.handler
+  handlerOpen:
+    handler: functions/handler.handlerOpen
     events:
       - http: 
           method: POST 
-          path: handler
+          path: open
+          cors: true 
+  handlerAuth:
+    handler: functions/handler.handlerAuth
+    events:
+      - http: 
+          method: POST 
+          path: auth
           cors: true 
           authorizer:
             type: COGNITO_USER_POOLS

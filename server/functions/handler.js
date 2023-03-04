@@ -1,10 +1,13 @@
 const userController = require("./userController")
 const classController = require("./classController")
 
-exports.createResponse = ({ status = 200, body }) => {
+const statusCodeOk = 200
+const statusCodeError = 203
+
+exports.createResponse = ({ statusCode = statusCodeOk, body }) => {
 
   const response = {
-    statusCode: status,
+    statusCode,
     headers: {
       "Access-Control-Allow-Headers": "Content-Type",
       "Access-Control-Allow-Origin": "*",
@@ -14,25 +17,23 @@ exports.createResponse = ({ status = 200, body }) => {
   }
 
   if (body) {
-    if (typeof body === "object") body = JSON.stringify(body)
-    response.body = body
+    if (typeof body === "string") body = { message: body }
+    response.body = JSON.stringify(body)
   }
 
   return response
 }
 
-exports.handler = async (event, _context) => {
-
+exports.handlerAuth = async (event, _context) => {
   const eBody = JSON.parse(event.body)
-  console.log("handler: eBody", JSON.stringify(eBody))
+  console.log("handlerAuth: eBody", JSON.stringify(eBody))
 
   let body = ""
-  let status = 200
+  let statusCode = statusCodeOk
   try {
 
-    if (eBody.eName === "hello") body = "Hello world"
+    if (eBody.eName === "hello") body = "Hello from Auth API"
     else if (eBody.eName === "login") body = await userController.validateCredentials(eBody.email, eBody.password)
-    else if (eBody.eName === "signup") body = await userController.signup(eBody.user)
     else if (eBody.eName === "updateProfile") body = await userController.updateProfile(eBody.user)
     else if (eBody.eName === "getCourses") body = await classController.getCourses()
     else if (eBody.eName === "getStudents") body = await userController.getStudents()
@@ -40,17 +41,35 @@ exports.handler = async (event, _context) => {
     else throw new Error("Event error. Code: 32453cfb.")
 
   } catch (error) {
-    console.log("handler: error", error)
-    body = error.message
-    status = 500
+    console.log("handlerAuth: error", error)
+    body = error.message || error
+    statusCode = statusCodeError
   }
 
-  return exports.createResponse({ status, body })
+  const response = exports.createResponse({ statusCode, body })
+  console.log("handlerAuth: ~ response:", response)
+  return response
 }
 
-exports.hello = async (_event, _context) => {
-  const body = "Hello World"
-  const status = 200
+exports.handlerOpen = async (event, _context) => {
+  const eBody = JSON.parse(event.body)
+  console.log("handlerOpen: eBody", JSON.stringify(eBody))
 
-  return exports.createResponse({ status, body })
+  let body = ""
+  let statusCode = statusCodeOk
+  try {
+
+    if (eBody.eName === "hello") body = "Hello from open API"
+    else if (eBody.eName === "signup") body = await userController.signup(eBody.user)
+    else throw new Error("Event error. Code: dff0b4cc.")
+
+  } catch (error) {
+    console.log("handlerOpen: error", error)
+    body = error.message || error
+    statusCode = statusCodeError
+  }
+
+  const response = exports.createResponse({ statusCode, body })
+  console.log("handlerOpen: ~ response:", response)
+  return response
 }

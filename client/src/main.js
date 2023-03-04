@@ -19,7 +19,7 @@ new Vue({
   },
   methods: {
     async fetchStudents() {
-      const getStudentsResult = await api("getStudents")
+      const getStudentsResult = await api.auth("getStudents")
       if (getStudentsResult.status !== 200)
         return window.alert("Something went wrong. Code: 619a073b.")
 
