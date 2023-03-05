@@ -37,8 +37,7 @@
             :id="course + '-student-' + student.id + '-count'"
             :key="student.id"
             v-text="
-              student.name +
-              (student.courseList[course]?.extraTutor ? ' *' : '')
+              student.uName + (student.uCourses[course]?.extraTutor ? ' *' : '')
             "
           />
         </v-card-text>
@@ -66,7 +65,7 @@ export default {
       vm.courseList = JSON.parse(JSON.stringify(vm.$root.courseList))
       Object.keys(vm.courseList).forEach((courseName) => {
         vm.courseList[courseName].students = vm.$root.studentList.filter(
-          (student) => student.courseList[courseName],
+          (student) => student.uCourses[courseName],
         )
       })
     })
@@ -74,7 +73,7 @@ export default {
   methods: {
     enrolledWithExtraTutorCount(course) {
       return this.courseList[course].students.filter(
-        (s) => s.courseList[course]?.extraTutor,
+        (s) => s.uCourses[course]?.extraTutor,
       ).length
     },
   },

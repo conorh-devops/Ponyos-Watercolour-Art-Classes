@@ -37,7 +37,6 @@ exports.handlerAuth = async (event, _context) => {
   try {
 
     if (eBody.eName === "hello") body = "Hello from Auth API"
-    else if (eBody.eName === "login") body = await userController.validateCredentials(eBody.email, eBody.password)
     else if (eBody.eName === "getProfile") body = await userController.getProfile(uEmail)
     else if (eBody.eName === "updateProfile") body = await userController.updateProfile({ reqByUser, user: eBody.user })
     else if (eBody.eName === "getCourses") body = await classController.getCourses()
