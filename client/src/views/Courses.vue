@@ -2,7 +2,7 @@
   <div class="CoursesView">
     <h1
       id="studentWelcome"
-      v-text="'Welcome to the courses page ' + $root.loggedUser.name"
+      v-text="'Welcome to the courses page ' + $root.loggedUser.uName"
     ></h1>
     <p>
       <br />
@@ -128,13 +128,13 @@ export default {
   },
   methods: {
     getEnrolledDate(course) {
-      const enrolledCourse = this.$root?.loggedUser?.courses[course]
+      const enrolledCourse = this.$root?.loggedUser?.uCourses[course]
       return enrolledCourse
         ? `Enrolled at ${new Date(enrolledCourse.enrollDt).toLocaleString()}`
         : ""
     },
     getEnrolledTutor(course) {
-      const enrolledCourse = this.$root?.loggedUser?.courses[course]
+      const enrolledCourse = this.$root?.loggedUser?.uCourses[course]
       const result = Boolean(enrolledCourse && enrolledCourse.extraTutor)
       return Boolean(result)
     },
@@ -158,9 +158,9 @@ export default {
 
       const extraTutor = this.courses[this.dialog.course].extraTutor
       if (this.dialog.isEnrolled)
-        delete this.$root?.loggedUser?.courses[this.dialog.course]
+        delete this.$root?.loggedUser?.uCourses[this.dialog.course]
       else {
-        this.$root.loggedUser.courses[this.dialog.course] = {
+        this.$root.loggedUser.uCourses[this.dialog.course] = {
           enrollDt: new Date().toISOString(),
           extraTutor,
         }
@@ -169,7 +169,7 @@ export default {
         const result = await api.auth("updateProfile", {
           user: this.$root?.loggedUser,
         })
-        if (result.status !== 200) throw result
+        if (!result.ok) throw result
         this.dialog.cancelShow = false
       } catch (error) {
         window.alert(

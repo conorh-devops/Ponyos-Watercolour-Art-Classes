@@ -51,7 +51,7 @@ exports.signup = async user => {
     await cognitoCreateUser(user)
     await cognitoAdminSetUserPassword(user)
 
-    user.uId = (Date.now()).toString(36)
+    user.uId = (Math.round(Date.now() * Math.random())).toString(36)
     user.uCourses = {}
 
     await dynamoDB.put({
@@ -81,10 +81,19 @@ exports.updateProfile = async (user) => {
   return true
 }
 
-exports.findUser = async (email) => {
-  return userList.find(u => u.uEmail === email)
+exports.getProfile = async (uEmail) => {
+
+  const result = await dynamoDB.query({
+    TableName: process.env.TB_USER,
+    IndexName: "userByEmail",
+    KeyConditionExpression: "uEmail = :uEmail",
+    ExpressionAttributeValues: { ":uEmail": uEmail },
+    Limit: 1,
+  }).promise()
+
+  return result.Count > 0 ? result.Items[0] : null
 }
 
 exports.getStudents = async () => {
-  return userList.filter(u => !u.isAdmin).sort((a, b) => (a.name < b.name ? -1 : 1));
+  return userList.filter(u => !u.uIsAdmin).sort((a, b) => (a.name < b.name ? -1 : 1));
 }

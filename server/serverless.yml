@@ -92,6 +92,15 @@ resources:
         - AttributeName: uEmail
           KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
+        GlobalSecondaryIndexes:
+          - IndexName: userByEmail
+            KeySchema:
+              - AttributeName: uEmail
+                KeyType: HASH
+              - AttributeName: uId
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
 
 functions:
   handlerOpen:

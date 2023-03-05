@@ -8,6 +8,7 @@
         label="E-mail"
         id="fldEmail"
         ref="fldEmail"
+        autocomplete="email"
         :rules="[rules.required, rules.email]"
       />
 
@@ -18,6 +19,7 @@
         label="Password"
         id="fldPassword"
         ref="fldPassword"
+        autocomplete="new-password"
         :rules="[rules.required]"
       />
 
@@ -28,6 +30,7 @@
         label="Password Confirmation"
         id="fldPasswordConfirmation"
         ref="fldPasswordConfirmation"
+        autocomplete="new-password"
         :rules="[rules.required]"
       />
 

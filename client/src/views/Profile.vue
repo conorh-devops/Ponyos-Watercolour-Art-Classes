@@ -1,6 +1,6 @@
 <template>
   <div class="ProfileView">
-    <h1 id="studentWelcome" v-text="'Hi ' + $root.loggedUser.name"></h1>
+    <h1 id="studentWelcome" v-text="'Hi ' + $root.loggedUser.uName"></h1>
     <h2 id="adminWelcome">Edit your profile here</h2>
     <br />
     <UserDetails
@@ -36,7 +36,7 @@ export default {
 
       try {
         const result = await api.auth("updateProfile", { user })
-        if (result.status !== 200) throw result
+        if (!result.ok) throw result
 
         this.$root.loggedUser = user
         this.$router.push({ name: "home" })

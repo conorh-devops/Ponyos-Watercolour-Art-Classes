@@ -34,7 +34,7 @@ export default {
   },
   beforeRouteEnter(to, _from, next) {
     next((vm) => {
-      if (!vm.$root.loggedUser || !vm.$root.loggedUser.isAdmin)
+      if (!vm.$root.loggedUser || !vm.$root.loggedUser.uIsAdmin)
         return vm.$router.push({ name: "home" })
       vm.student = vm.$root.students.find(
         (student) => student.id === to.params.id,
@@ -46,7 +46,7 @@ export default {
       if (!this.$refs.userDetails.$refs.formUserDetails.validate()) return
       try {
         const result = await api.auth("updateStudent", { user })
-        if (result.status !== 200) throw result
+        if (!result.ok) throw result
 
         window.alert(`Studant updated`)
         this.$root.fetchStudents()

@@ -20,7 +20,7 @@ new Vue({
   methods: {
     async fetchStudents() {
       const getStudentsResult = await api.auth("getStudents")
-      if (getStudentsResult.status !== 200)
+      if (!getStudentsResult.ok)
         return window.alert("Something went wrong. Code: 619a073b.")
 
       this.students = JSON.parse(getStudentsResult.body)

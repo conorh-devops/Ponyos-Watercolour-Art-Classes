@@ -19,6 +19,7 @@
             type="email"
             label="E-mail"
             id="fldEmail"
+            autocomplete="username"
             :rules="[rules.required, rules.email]"
           />
 
@@ -27,6 +28,7 @@
             type="password"
             label="Password"
             id="fldPassword"
+            autocomplete="current-password"
             :rules="[rules.required]"
           />
 
@@ -69,12 +71,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn
-            color="primary"
-            text
-            id="btnGoToHome"
-            @click="loggedUserSet(dialog.user)"
-          >
+          <v-btn color="primary" text id="btnGoToHome" @click="login">
             Go to Home
           </v-btn>
         </v-card-actions>
@@ -86,6 +83,15 @@
 <script>
 import api from "../service/api.js"
 import rules from "../rules.js"
+import {
+  CognitoUser,
+  CognitoUserPool,
+  AuthenticationDetails,
+} from "amazon-cognito-identity-js"
+import serverConfigJs from "../../../server/server.config.json"
+const stage = process.env.NODE_ENV === "production" ? "prod" : "dev"
+const COGNITO_USER_POOL_ID = serverConfigJs[`${stage}_COGNITO_USER_POOL_ID`]
+const COGNITO_APP_CLIENT_ID = serverConfigJs[`${stage}_COGNITO_APP_CLIENT_ID`]
 
 export default {
   name: "AccountForm",
@@ -107,22 +113,41 @@ export default {
   methods: {
     async login() {
       if (!this.$refs.formCredentials.validate()) return
-      try {
-        const result = await api.auth("login", {
-          email: this.email,
-          password: this.password,
-        })
-        if (result.status !== 200) throw result
-        if (!result.body) return window.alert("Invalid Email or Password.")
 
-        this.loggedUserSet(JSON.parse(result.body))
-      } catch (error) {
-        return window.alert(
+      const authenticationDetails = new AuthenticationDetails({
+        Username: this.uEmail,
+        Password: this.uPassword,
+      })
+
+      const cognutoUserPool = new CognitoUserPool({
+        UserPoolId: COGNITO_USER_POOL_ID,
+        ClientId: COGNITO_APP_CLIENT_ID,
+      })
+
+      const cognitoUser = new CognitoUser({
+        Username: this.uEmail,
+        Pool: cognutoUserPool,
+      })
+
+      const onSuccess = () => {
+        this.loggedUserSet(cognitoUser)
+      }
+
+      const onFailure = (err) => {
+        window.alert(
           `Something went wrong. Code: c1aec1d4. Error: ${
-            error.message || JSON.stringify(error)
+            err.message || JSON.stringify(err)
           }`,
         )
       }
+
+      const newPasswordRequired = () => {}
+
+      cognitoUser.authenticateUser(authenticationDetails, {
+        onSuccess,
+        onFailure,
+        newPasswordRequired,
+      })
     },
     async signUp(user) {
       if (!this.$refs.userDetails.$refs.formUserDetails.validate()) return
@@ -132,9 +157,11 @@ export default {
 
       try {
         const result = await api.open("signup", { user })
-        if (result.status !== 200) throw result
+        if (!result.ok) throw result
         this.dialog.user = user
         this.dialog.show = true
+        this.uEmail = user.uEmail
+        this.uPassword = user.uPassword
       } catch (error) {
         return window.alert(
           `Something went wrong. Code: cd3c2327. Error: ${
@@ -143,10 +170,22 @@ export default {
         )
       }
     },
-    loggedUserSet(user) {
+    async loggedUserSet(cognitoUser) {
       this.dialog.show = false
-      this.$root.loggedUser = user
-      this.$router.push({ name: "home" })
+      try {
+        api.token = cognitoUser.signInUserSession.idToken.jwtToken
+        const result = await api.auth("getProfile")
+        if (!result.ok) throw result
+        console.log("AE: ~ result:", result.data)
+        this.$root.loggedUser = result.data
+        this.$router.push({ name: "home" })
+      } catch (error) {
+        window.alert(
+          `Something went wrong. Code: f1e1d00e. Error: ${
+            error.message || JSON.stringify(error)
+          }`,
+        )
+      }
     },
   },
 }

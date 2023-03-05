@@ -21,7 +21,7 @@
           <v-icon>mdi-account</v-icon>
         </v-btn>
         <template v-else>
-          <template v-if="$root.loggedUser.isAdmin">
+          <template v-if="$root.loggedUser.uIsAdmin">
             <v-btn
               text
               outlined
@@ -45,7 +45,7 @@
           </template>
           <template v-else>
             <v-btn
-              v-if="!$root.loggedUser.isAdmin"
+              v-if="!$root.loggedUser.uIsAdmin"
               text
               outlined
               class="mr-2"
@@ -94,7 +94,7 @@ export default {
   },
   watch: {
     "$root.loggedUser"(newUser) {
-      if (newUser?.isAdmin) this.$root.fetchStudents()
+      if (newUser?.uIsAdmin) this.$root.fetchStudents()
 
       // try {
       // const getCoursesResult = await api.auth("getCourses")
@@ -112,7 +112,7 @@ export default {
   },
   computed: {
     userName() {
-      return this.$root.loggedUser.name.split(" ")[0]
+      return this.$root.loggedUser.uName.split(" ")[0]
     },
   },
   async mounted() {
@@ -121,7 +121,7 @@ export default {
   methods: {
     async testAPIConnection() {
       const result = await api.open("hello")
-      this.apiConnected = result?.message.includes("Hello")
+      this.apiConnected = result?.data.message.includes("Hello")
       console.log(`API ${this.apiConnected ? "" : "NOT "}Connected`)
     },
     logout() {
