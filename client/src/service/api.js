@@ -1,5 +1,5 @@
-
-const apiURL = process.env.APIURL || "https://cy6c45vdm5.execute-api.eu-west-1.amazonaws.com/dev/"
+const stage = (process.env.NODE_ENV || "").includes("prod") ? "prod" : "dev"
+const apiURL = process.env[`VUE_APP_${stage}_APIURL`]
 console.log("apiURL:", apiURL)
 
 const fetchExec = async (url, eName, params, token) => {

@@ -1,6 +1,0 @@
-{
-  "prod_COGNITO_USER_POOL_ID": "",
-  "prod_COGNITO_APP_CLIENT_ID": "",
-  "dev_COGNITO_USER_POOL_ID": "eu-west-1_GSojgABr2",
-  "dev_COGNITO_APP_CLIENT_ID": "5fa1tg8en0t0qktsp347hteuoa"
-}

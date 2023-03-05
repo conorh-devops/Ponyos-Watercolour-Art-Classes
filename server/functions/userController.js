@@ -1,11 +1,6 @@
-const { userList } = require("../mockedDB")
 const AWS = require("aws-sdk")
 const cognito = new AWS.CognitoIdentityServiceProvider({ region: process.env.REGION })
 const dynamoDB = new AWS.DynamoDB.DocumentClient({ region: process.env.REGION })
-
-exports.validateCredentials = async (email, password) => {
-  return userList.find(u => u.uEmail === email && u.uPassword === password)
-}
 
 async function cognitoCreateUser(user) {
   try {

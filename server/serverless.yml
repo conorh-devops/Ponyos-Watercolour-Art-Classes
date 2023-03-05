@@ -6,10 +6,11 @@ provider:
   stage: dev
   region: eu-west-1
   environment: 
+    NODE_ENV: ${self:provider.stage}
     REGION: ${self:provider.region}
-    COGNITO_USER_POOL_ID: ${file(./server.config.json):${self:provider.stage}_COGNITO_USER_POOL_ID}
-    COGNITO_APP_CLIENT_ID: ${file(./server.config.json):${self:provider.stage}_COGNITO_APP_CLIENT_ID}
     TB_USER: ${self:provider.stage}-tbUser
+    COGNITO_USER_POOL_ID: ${env:${self:provider.stage}_COGNITO_USER_POOL_ID}
+    COGNITO_APP_CLIENT_ID: ${env:${self:provider.stage}_COGNITO_APP_CLIENT_ID}
   iam:
     role:
       statements:

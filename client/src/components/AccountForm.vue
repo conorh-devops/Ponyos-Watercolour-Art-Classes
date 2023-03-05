@@ -88,10 +88,7 @@ import {
   CognitoUserPool,
   AuthenticationDetails,
 } from "amazon-cognito-identity-js"
-import serverConfigJs from "../../../server/server.config.json"
-const stage = process.env.NODE_ENV === "production" ? "prod" : "dev"
-const COGNITO_USER_POOL_ID = serverConfigJs[`${stage}_COGNITO_USER_POOL_ID`]
-const COGNITO_APP_CLIENT_ID = serverConfigJs[`${stage}_COGNITO_APP_CLIENT_ID`]
+const stage = (process.env.NODE_ENV || "").includes("prod") ? "prod" : "dev"
 
 export default {
   name: "AccountForm",
@@ -120,8 +117,8 @@ export default {
       })
 
       const cognutoUserPool = new CognitoUserPool({
-        UserPoolId: COGNITO_USER_POOL_ID,
-        ClientId: COGNITO_APP_CLIENT_ID,
+        UserPoolId: process.env[`VUE_APP_${stage}_COGNITO_USER_POOL_ID`],
+        ClientId: process.env[`VUE_APP_${stage}_COGNITO_APP_CLIENT_ID`],
       })
 
       const cognitoUser = new CognitoUser({
