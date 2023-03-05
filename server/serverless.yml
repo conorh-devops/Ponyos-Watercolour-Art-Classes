@@ -6,8 +6,8 @@ provider:
   stage: dev
   region: eu-west-1
   environment: 
-    NODE_ENV: ${self:provider.stage}
     REGION: ${self:provider.region}
+    BUCKET_URL: ${env:${self:provider.stage}_BUCKET_URL}
     TB_USER: ${self:provider.stage}-tbUser
     COGNITO_USER_POOL_ID: ${env:${self:provider.stage}_COGNITO_USER_POOL_ID}
     COGNITO_APP_CLIENT_ID: ${env:${self:provider.stage}_COGNITO_APP_CLIENT_ID}

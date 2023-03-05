@@ -10,7 +10,7 @@ exports.createResponse = ({ statusCode = statusCodeOk, body }) => {
     statusCode,
     headers: {
       "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Origin": `https://${process.env.BUCKET_URL}`, //"*"
       "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
     },
     body: ""
