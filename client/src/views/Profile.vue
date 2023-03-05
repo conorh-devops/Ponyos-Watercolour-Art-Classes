@@ -1,6 +1,6 @@
 <template>
   <div class="ProfileView">
-    <h1 id="studentWelcome" v-text="'Hi ' + $root.loggedUser.uName"></h1>
+    <h1 id="studentWelcome" v-text="studentWelcomeText"></h1>
     <h2 id="adminWelcome">Edit your profile here</h2>
     <br />
     <UserDetails
@@ -26,6 +26,11 @@ export default {
     next((vm) => {
       if (!vm.$root.loggedUser) return vm.$router.push({ name: "home" })
     })
+  },
+  computed: {
+    studentWelcomeText() {
+      return "Hi " + this.$root.loggedUser?.uName
+    },
   },
   components: {
     UserDetails: () => import("@/components/UserDetails.vue"),

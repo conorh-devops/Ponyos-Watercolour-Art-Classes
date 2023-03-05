@@ -16,7 +16,7 @@
       <v-card
         class="mx-auto"
         max-width="344"
-        v-for="course in Object.keys(courses)"
+        v-for="course in Object.keys(courseList)"
         :key="course"
       >
         <v-card-text>
@@ -25,15 +25,15 @@
             class="text-h7"
             v-text="
               'Duration: ' +
-              courses[course].duration +
+              courseList[course].duration +
               'hrs | Price: €' +
-              courses[course].price
+              courseList[course].price
             "
           />
           <p class="text-h7">Description</p>
-          <div class="text--primary" v-text="courses[course].desc" />
+          <div class="text--primary" v-text="courseList[course].desc" />
           <v-checkbox
-            v-model="courses[course].extraTutor"
+            v-model="courseList[course].extraTutor"
             :id="'checkExtraTutor' + course"
             label="Extra tutor"
             :disabled="Boolean(getEnrolledDate(course))"
@@ -114,15 +114,15 @@ export default {
         isFeedbackMessage: false,
         btnConfirmText: "Confirm",
       },
-      courses: [],
+      courseList: [],
     }
   },
   beforeRouteEnter(_to, _from, next) {
     next((vm) => {
       if (!vm.$root.loggedUser) return vm.$router.push({ name: "home" })
-      vm.courses = vm.$root.courses
-      for (const propCourse of Object.keys(vm.courses)) {
-        vm.courses[propCourse].extraTutor = vm.getEnrolledTutor(propCourse)
+      vm.courseList = vm.$root.courseList
+      for (const propCourse of Object.keys(vm.courseList)) {
+        vm.courseList[propCourse].extraTutor = vm.getEnrolledTutor(propCourse)
       }
     })
   },
@@ -156,7 +156,7 @@ export default {
       if (!confirmed) return
       if (this.dialog.isFeedbackMessage) return
 
-      const extraTutor = this.courses[this.dialog.course].extraTutor
+      const extraTutor = this.courseList[this.dialog.course].extraTutor
       if (this.dialog.isEnrolled)
         delete this.$root?.loggedUser?.uCourses[this.dialog.course]
       else {

@@ -69,7 +69,7 @@ exports.signup = async user => {
 
 exports.updateProfile = async ({ reqByUser, user }) => {
 
-  if (reqByUser.uIsAdmin || reqByUser.uEmail !== user.uEmail)
+  if (!reqByUser.uIsAdmin && reqByUser.uEmail !== user.uEmail)
     throw new Error("You don't have permission to access this user. Code: 988e083c.")
 
   const profile = await exports.getProfile(user.uEmail)
@@ -77,7 +77,7 @@ exports.updateProfile = async ({ reqByUser, user }) => {
   profile.uName = user.uName
   profile.uCourses = user.uCourses
 
-  await dynamoDB.update({
+  await dynamoDB.put({
     TableName: process.env.TB_USER,
     Item: profile
   }).promise()
@@ -98,6 +98,15 @@ exports.getProfile = async (uEmail) => {
   return result.Count > 0 ? result.Items[0] : null
 }
 
-exports.getStudents = async () => {
-  return userList.filter(u => !u.uIsAdmin).sort((a, b) => (a.name < b.name ? -1 : 1));
+exports.getStudents = async (reqByUser) => {
+
+  if (!reqByUser.uIsAdmin)
+    throw new Error("You don't have permission to access this user. Code: f8f3fe98.")
+
+  const result = await dynamoDB.scan({
+    TableName: process.env.TB_USER,
+    FilterExpression: "attribute_not_exists(uIsAdmin)"
+  }).promise()
+
+  return (result.Items || []).filter(user => !user.uIsAdmin)
 }

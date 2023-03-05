@@ -10,7 +10,7 @@
       <v-card
         class="mx-auto"
         width="350"
-        v-for="course in Object.keys(courses)"
+        v-for="course in Object.keys(courseList)"
         :key="course"
       >
         <v-card-text>
@@ -19,7 +19,7 @@
             class="text-h7"
             :id="course + '-count'"
             v-text="
-              'Enrolled by ' + courses[course].students.length + ' students'
+              'Enrolled by ' + courseList[course].students.length + ' students'
             "
           />
           <p
@@ -33,11 +33,12 @@
           />
           <p
             class="text--primary"
-            v-for="student in courses[course].students"
+            v-for="student in courseList[course].students"
             :id="course + '-student-' + student.id + '-count'"
             :key="student.id"
             v-text="
-              student.name + (student.courses[course]?.extraTutor ? ' *' : '')
+              student.name +
+              (student.courseList[course]?.extraTutor ? ' *' : '')
             "
           />
         </v-card-text>
@@ -54,26 +55,26 @@ export default {
   name: "CoursesAdminView",
   data() {
     return {
-      courses: [],
-      students: [],
+      courseList: [],
     }
   },
   beforeRouteEnter(_to, _from, next) {
     next((vm) => {
       if (!vm.$root.loggedUser || !vm.$root.loggedUser.uIsAdmin)
         return vm.$router.push({ name: "home" })
-      vm.courses = JSON.parse(JSON.stringify(vm.$root.courses))
-      Object.keys(vm.courses).forEach((courseName) => {
-        vm.courses[courseName].students = vm.$root.students.filter(
-          (student) => student.courses[courseName],
+
+      vm.courseList = JSON.parse(JSON.stringify(vm.$root.courseList))
+      Object.keys(vm.courseList).forEach((courseName) => {
+        vm.courseList[courseName].students = vm.$root.studentList.filter(
+          (student) => student.courseList[courseName],
         )
       })
     })
   },
   methods: {
     enrolledWithExtraTutorCount(course) {
-      return this.courses[course].students.filter(
-        (s) => s.courses[course]?.extraTutor,
+      return this.courseList[course].students.filter(
+        (s) => s.courseList[course]?.extraTutor,
       ).length
     },
   },

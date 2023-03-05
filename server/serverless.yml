@@ -29,6 +29,7 @@ provider:
             - dynamodb:DeleteItem
             - dynamodb:UpdateItem
             - dynamodb:GetItem
+            - dynamodb:Scan
           Resource: "*"
 
 package:

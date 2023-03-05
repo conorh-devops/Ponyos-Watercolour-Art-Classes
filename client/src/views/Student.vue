@@ -36,7 +36,7 @@ export default {
     next((vm) => {
       if (!vm.$root.loggedUser || !vm.$root.loggedUser.uIsAdmin)
         return vm.$router.push({ name: "home" })
-      vm.student = vm.$root.students.find(
+      vm.student = vm.$root.studentList.find(
         (student) => student.id === to.params.id,
       )
     })
@@ -45,7 +45,7 @@ export default {
     async save(user) {
       if (!this.$refs.userDetails.$refs.formUserDetails.validate()) return
       try {
-        const result = await api.auth("updateStudent", { user })
+        const result = await api.auth("updateProfile", { user })
         if (!result.ok) throw result
 
         window.alert(`Studant updated`)

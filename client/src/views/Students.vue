@@ -9,7 +9,7 @@
 
     <v-data-table
       :headers="headers"
-      :items="students"
+      :items="studentList"
       :items-per-page="10"
       @click:row="clickRow"
     />
@@ -21,17 +21,17 @@ export default {
   name: "StudentsView",
   data() {
     return {
-      students: [],
+      studentList: [],
       headers: [
         {
           text: "Id",
           align: "start",
-          value: "id",
+          value: "uId",
         },
         {
           text: "Name",
           align: "start",
-          value: "name",
+          value: "uName",
         },
         {
           text: "Enrolled",
@@ -46,10 +46,7 @@ export default {
       if (!vm.$root.loggedUser || !vm.$root.loggedUser.uIsAdmin)
         return vm.$router.push({ name: "home" })
       setTimeout(() => {
-        vm.students = vm.$root.students.map((student) => ({
-          ...student,
-          enrolled: Object.keys(student.courses).join(", "),
-        }))
+        vm.fetchStudents()
       }, 200)
     })
   },
@@ -59,6 +56,13 @@ export default {
         name: "student",
         params: { id: student.id },
       })
+    },
+    async fetchStudents() {
+      const studentList = await this.$root.fetchStudents()
+      this.studentList = studentList.map((student) => ({
+        ...student,
+        enrolled: Object.keys(student.uCourses).join(", "),
+      }))
     },
   },
 }

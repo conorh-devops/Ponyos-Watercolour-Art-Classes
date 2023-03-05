@@ -46,7 +46,7 @@
       <template v-if="showCourses">
         <br />
         <p>Courses</p>
-        <v-chip-group class="primary--text" v-if="user.courses">
+        <v-chip-group class="primary--text" v-if="user.uCourses">
           <v-chip
             v-for="course in Object.keys(user.uCourses)"
             :key="course"

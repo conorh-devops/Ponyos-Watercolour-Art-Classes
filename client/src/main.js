@@ -14,7 +14,7 @@ new Vue({
     return {
       loggedUser: null,
       studentList: [],
-      courses: []
+      courseList: []
     }
   },
   methods: {
@@ -22,7 +22,9 @@ new Vue({
       try {
         const result = await api.auth("getStudents")
         if (!result.ok) throw result
-        this.students = result.data
+        this.studentList = result.data
+
+        return this.studentList
       } catch (error) {
         this.alertError("619a073b", error)
       }
@@ -31,7 +33,7 @@ new Vue({
       try {
         const result = await api.auth("getCourses")
         if (!result.ok) throw result
-        this.courses = result.data
+        this.courseList = result.data
       } catch (error) {
         this.alertError("c1aec1d4", error)
       }
