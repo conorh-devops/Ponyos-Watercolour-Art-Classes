@@ -67,16 +67,20 @@ exports.signup = async user => {
 
 }
 
-exports.updateProfile = async (user) => {
-  if (!user.uEmail)
-    throw new Error("Email is required. Code: 988e083c.")
+exports.updateProfile = async ({ reqByUser, user }) => {
 
-  const index = userList.findIndex(u => u.uEmail === user.uEmail)
-  if (index === -1)
-    throw new Error("User already registered. Code: c1b88e3c.")
+  if (reqByUser.uIsAdmin || reqByUser.uEmail !== user.uEmail)
+    throw new Error("You don't have permission to access this user. Code: 988e083c.")
 
-  userList[index].name = user.name
-  userList[index].courses = user.courses
+  const profile = await exports.getProfile(user.uEmail)
+
+  profile.uName = user.uName
+  profile.uCourses = user.uCourses
+
+  await dynamoDB.update({
+    TableName: process.env.TB_USER,
+    Item: profile
+  }).promise()
 
   return true
 }

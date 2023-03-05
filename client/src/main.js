@@ -19,12 +19,29 @@ new Vue({
   },
   methods: {
     async fetchStudents() {
-      const getStudentsResult = await api.auth("getStudents")
-      if (!getStudentsResult.ok)
-        return window.alert("Something went wrong. Code: 619a073b.")
-
-      this.students = JSON.parse(getStudentsResult.body)
+      try {
+        const result = await api.auth("getStudents")
+        if (!result.ok) throw result
+        this.students = result.data
+      } catch (error) {
+        this.alertError("619a073b", error)
+      }
     },
+    async fetchCourses() {
+      try {
+        const result = await api.auth("getCourses")
+        if (!result.ok) throw result
+        this.courses = result.data
+      } catch (error) {
+        this.alertError("c1aec1d4", error)
+      }
+    },
+    alertError(code, error) {
+      window.alert(
+        `Something went wrong. Code: ${code}. Error: ${error.message || error?.data?.message || JSON.stringify(error)
+        }`,
+      )
+    }
   },
 
   render: h => h(App)

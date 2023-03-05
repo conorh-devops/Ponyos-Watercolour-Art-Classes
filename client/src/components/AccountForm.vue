@@ -133,12 +133,8 @@ export default {
         this.loggedUserSet(cognitoUser)
       }
 
-      const onFailure = (err) => {
-        window.alert(
-          `Something went wrong. Code: c1aec1d4. Error: ${
-            err.message || JSON.stringify(err)
-          }`,
-        )
+      const onFailure = (error) => {
+        this.$root.alertError("c1aec1d4", error)
       }
 
       const newPasswordRequired = () => {}
@@ -163,11 +159,7 @@ export default {
         this.uEmail = user.uEmail
         this.uPassword = user.uPassword
       } catch (error) {
-        return window.alert(
-          `Something went wrong. Code: cd3c2327. Error: ${
-            error.message || JSON.stringify(error)
-          }`,
-        )
+        this.$root.alertError("cd3c2327", error)
       }
     },
     async loggedUserSet(cognitoUser) {
@@ -176,15 +168,10 @@ export default {
         api.token = cognitoUser.signInUserSession.idToken.jwtToken
         const result = await api.auth("getProfile")
         if (!result.ok) throw result
-        console.log("AE: ~ result:", result.data)
         this.$root.loggedUser = result.data
         this.$router.push({ name: "home" })
       } catch (error) {
-        window.alert(
-          `Something went wrong. Code: f1e1d00e. Error: ${
-            error.message || JSON.stringify(error)
-          }`,
-        )
+        this.$root.alertError("f1e1d00e", error)
       }
     },
   },

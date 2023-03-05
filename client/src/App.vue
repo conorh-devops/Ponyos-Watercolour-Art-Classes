@@ -94,20 +94,8 @@ export default {
   },
   watch: {
     "$root.loggedUser"(newUser) {
+      this.$root.fetchCourses()
       if (newUser?.uIsAdmin) this.$root.fetchStudents()
-
-      // try {
-      // const getCoursesResult = await api.auth("getCourses")
-      // if (getCoursesResult.status !== 200)
-      //   throw new Error("Something went wrong. Code: 11a692e78. Error Message: getCoursesResult.message")
-      // this.$root.courses = JSON.parse(getCoursesResult.body)
-      // } catch (error) {
-      // window.alert(
-      //   `Something went wrong. Code: c1aec1d4. Error: ${
-      //     error.message || JSON.stringify(error)
-      //   }`,
-      // )
-      // }
     },
   },
   computed: {

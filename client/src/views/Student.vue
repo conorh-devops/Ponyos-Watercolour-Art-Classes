@@ -52,11 +52,7 @@ export default {
         this.$root.fetchStudents()
         this.$router.push({ name: "students" })
       } catch (error) {
-        return window.alert(
-          `Something went wrong. Code: fc706ebb. Error: ${
-            error.message || JSON.stringify(error)
-          }`,
-        )
+        this.$root.alertError("fc706ebb", error)
       }
     },
     cancel() {

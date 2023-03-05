@@ -28,7 +28,9 @@ exports.handlerAuth = async (event, _context) => {
   const eBody = JSON.parse(event.body)
   console.log("handlerAuth: eBody", JSON.stringify(eBody))
   const uEmail = event?.requestContext?.authorizer?.claims["email"]
-  console.log("handlerAuth: ~ auth.uEmail:", uEmail)
+  console.log("handlerAuth: ~ auth.uEmail", uEmail)
+  const reqByUser = await userController.getProfile(uEmail)
+  console.log("handlerAuth: ~ reqByUser", reqByUser)
 
   let body = ""
   let statusCode = statusCodeOk
@@ -37,7 +39,7 @@ exports.handlerAuth = async (event, _context) => {
     if (eBody.eName === "hello") body = "Hello from Auth API"
     else if (eBody.eName === "login") body = await userController.validateCredentials(eBody.email, eBody.password)
     else if (eBody.eName === "getProfile") body = await userController.getProfile(uEmail)
-    else if (eBody.eName === "updateProfile") body = await userController.updateProfile(eBody.user)
+    else if (eBody.eName === "updateProfile") body = await userController.updateProfile({ reqByUser, user: eBody.user })
     else if (eBody.eName === "getCourses") body = await classController.getCourses()
     else if (eBody.eName === "getStudents") body = await userController.getStudents()
     else if (eBody.eName === "updateStudent") body = await userController.updateProfile(eBody.user)

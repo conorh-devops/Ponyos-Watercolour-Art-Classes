@@ -42,11 +42,7 @@ export default {
         this.$router.push({ name: "home" })
         window.alert(`Profile updated`)
       } catch (error) {
-        return window.alert(
-          `Something went wrong. Code: beba5d64. Error: ${
-            error.message || JSON.stringify(error)
-          }`,
-        )
+        this.$root.alertError("beba5d64", error)
       }
     },
     cancel() {

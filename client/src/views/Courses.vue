@@ -172,11 +172,7 @@ export default {
         if (!result.ok) throw result
         this.dialog.cancelShow = false
       } catch (error) {
-        window.alert(
-          `Something went wrong. Code: 3beedf9c. Error: ${
-            error.message || JSON.stringify(error)
-          }`,
-        )
+        this.$root.alertError("3beedf9c", error)
       }
 
       setTimeout(() => {
