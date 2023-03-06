@@ -48,9 +48,9 @@ test('Verify user student can unenroll from the specific course', async ({ page 
     await page.getByRole('button', { name: 'Login' }).click();
     await page.getByRole('button', { name: 'Courses' }).click();
     await page.waitForTimeout(6000);
-    await page.locator('#btnRemove_Sosuke').click();
+    await page.locator('#btnRemove_Fujimoto').click();
     await page.getByRole('button', { name: 'Cancel' }).click();
-    await page.locator('#btnRemove_Sosuke').click();
+    await page.locator('#btnRemove_Fujimoto').click();
     await page.getByRole('button', { name: 'Confirm' }).click();
     await page.getByRole('button', { name: 'Confirm' }).click();
 
