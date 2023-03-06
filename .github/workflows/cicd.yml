@@ -79,6 +79,7 @@ jobs:
       - name: Deploy Serverless App
         run: |
           cd server
+          npm install
           npm run deploy
 
   test:
@@ -138,4 +139,5 @@ jobs:
       - name: Deploy Serverless App
         run: |
           cd server
+          npm install
           npm run deploy
