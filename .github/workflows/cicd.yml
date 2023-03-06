@@ -39,6 +39,7 @@ jobs:
           cd ..
           npm install
           npm run unitTest
+          npm run test
       - name: Step 4 - Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
         with:

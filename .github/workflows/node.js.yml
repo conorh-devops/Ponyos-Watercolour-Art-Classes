@@ -38,3 +38,4 @@ jobs:
           cd ..
           npm install
           npm run unitTest
+          npm run test

@@ -4,14 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "unitTest": "mocha ./server/test",
-    "test": "nyc mocha ./server/test"
+    "unitTest": "mocha ./server/test"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.29.2",
-    "nyc": "^15.1.0"
+    "@playwright/test": "^1.29.2"
   },
   "dependencies": {
     "chai": "^4.3.7",
