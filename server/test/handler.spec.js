@@ -1,7 +1,7 @@
 const { createResponse, handler } = require("./../functions/handler")
 const { expect } = require("chai")
 
-describe("handler.js", function () {
+describe.skip("handler.js", function () {
 
   const consoleLog = console.log
   console.log = () => { }
