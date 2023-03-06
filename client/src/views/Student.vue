@@ -3,8 +3,14 @@
     <h1 v-text="title" />
     <br />
 
-    <UserDetails v-if="student" ref="userDetails" :editUser="student" @save="save" @cancel="cancel" showCourses />
-
+    <UserDetails
+      v-if="student"
+      ref="userDetails"
+      :editUser="student"
+      @save="save"
+      @cancel="cancel"
+      showCourses
+    />
   </div>
 </template>
 
@@ -23,30 +29,35 @@ export default {
   },
   computed: {
     title() {
-      return 'Student: ' + (this.student?.name || "")
-    }
+      return "Student: " + (this.student?.name || "")
+    },
   },
   beforeRouteEnter(to, _from, next) {
     next((vm) => {
-      if (!vm.$root.loggedUser || !vm.$root.loggedUser.isAdmin) return vm.$router.push({ name: "home" })
-      vm.student = vm.$root.students.find(student => student.id === to.params.id)
+      if (!vm.$root.loggedUser || !vm.$root.loggedUser.uIsAdmin)
+        return vm.$router.push({ name: "home" })
+      vm.student = vm.$root.studentList.find(
+        (student) => student.id === to.params.id,
+      )
     })
   },
   methods: {
     async save(user) {
       if (!this.$refs.userDetails.$refs.formUserDetails.validate()) return
+      try {
+        const result = await api.auth("updateProfile", { user })
+        if (!result.ok) throw result
 
-      const result = await api("updateStudent", { user })
-      if (result.status !== 200)
-        return window.alert(`Something went wrong. Code: cd3c2327. Error: ${result.message || JSON.stringify(result)}`)
-
-      window.alert(`Studant updated`)
-      this.$root.fetchStudents()
-      this.$router.push({ name: "students" })
+        window.alert(`Studant updated`)
+        this.$root.fetchStudents()
+        this.$router.push({ name: "students" })
+      } catch (error) {
+        this.$root.alertError("fc706ebb", error)
+      }
     },
     cancel() {
       this.$router.push({ name: "students" })
-    }
+    },
   },
 }
 </script>

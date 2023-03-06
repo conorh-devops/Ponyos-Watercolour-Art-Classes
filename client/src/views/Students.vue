@@ -1,46 +1,52 @@
 <template>
   <div class="StudentsView">
     <h1>All Students - Admin</h1>
-    <br>
-    <h2 id="adminWelcome">Below is a list of all students and their assigned courses</h2>
+    <br />
+    <h2 id="adminWelcome">
+      Below is a list of all students and their assigned courses
+    </h2>
     <br />
 
-    <v-data-table :headers="headers" :items="students" :items-per-page="10" @click:row="clickRow" />
-
+    <v-data-table
+      :headers="headers"
+      :items="studentList"
+      :items-per-page="10"
+      @click:row="clickRow"
+    />
   </div>
 </template>
 
 <script>
-
 export default {
   name: "StudentsView",
   data() {
     return {
-      students: [],
+      studentList: [],
       headers: [
         {
-          text: 'Id',
-          align: 'start',
-          value: 'id',
+          text: "Id",
+          align: "start",
+          value: "uId",
         },
         {
-          text: 'Name',
-          align: 'start',
-          value: 'name',
+          text: "Name",
+          align: "start",
+          value: "uName",
         },
         {
-          text: 'Enrolled',
-          align: 'start',
-          value: 'enrolled',
+          text: "Enrolled",
+          align: "start",
+          value: "enrolled",
         },
       ],
     }
   },
   beforeRouteEnter(_to, _from, next) {
     next((vm) => {
-      if (!vm.$root.loggedUser || !vm.$root.loggedUser.isAdmin) return vm.$router.push({ name: "home" })
+      if (!vm.$root.loggedUser || !vm.$root.loggedUser.uIsAdmin)
+        return vm.$router.push({ name: "home" })
       setTimeout(() => {
-        vm.students = vm.$root.students.map(student => ({ ...student, enrolled: Object.keys(student.courses).join(", ") }))
+        vm.fetchStudents()
       }, 200)
     })
   },
@@ -50,7 +56,14 @@ export default {
         name: "student",
         params: { id: student.id },
       })
-    }
+    },
+    async fetchStudents() {
+      const studentList = await this.$root.fetchStudents()
+      this.studentList = studentList.map((student) => ({
+        ...student,
+        enrolled: Object.keys(student.uCourses).join(", "),
+      }))
+    },
   },
 }
 </script>

@@ -14,17 +14,36 @@ new Vue({
     return {
       loggedUser: null,
       studentList: [],
-      courses: []
+      courseList: []
     }
   },
   methods: {
     async fetchStudents() {
-      const getStudentsResult = await api("getStudents")
-      if (getStudentsResult.status !== 200)
-        return window.alert("Something went wrong. Code: 619a073b.")
+      try {
+        const result = await api.auth("getStudents")
+        if (!result.ok) throw result
+        this.studentList = result.data
 
-      this.students = JSON.parse(getStudentsResult.body)
+        return this.studentList
+      } catch (error) {
+        this.alertError("619a073b", error)
+      }
     },
+    async fetchCourses() {
+      try {
+        const result = await api.auth("getCourses")
+        if (!result.ok) throw result
+        this.courseList = result.data
+      } catch (error) {
+        this.alertError("c1aec1d4", error)
+      }
+    },
+    alertError(code, error) {
+      window.alert(
+        `Something went wrong. Code: ${code}. Error: ${error.message || error?.data?.message || JSON.stringify(error)
+        }`,
+      )
+    }
   },
 
   render: h => h(App)

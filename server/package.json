@@ -1,0 +1,12 @@
+{
+  "name": "ponyo-server",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "deploy": "sls deploy"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1328.0",
+    "serverless": "^3.28.1"
+  }
+}

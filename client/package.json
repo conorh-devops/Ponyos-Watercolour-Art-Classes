@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "export NODE_ENV=development && vue-cli-service serve",
+    "build": "export NODE_ENV=production && vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -14,6 +14,7 @@
     "vuetify": "^2.6.14"
   },
   "devDependencies": {
+    "amazon-cognito-identity-js": "^6.1.2",
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
     "@vue/cli-plugin-babel": "~5.0.0",

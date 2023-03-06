@@ -1,0 +1,125 @@
+service: ponyo
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: eu-west-1
+  environment: 
+    REGION: ${self:provider.region}
+    BUCKET_URL: ${env:${self:provider.stage}_BUCKET_URL}
+    TB_USER: ${self:provider.stage}-tbUser
+    COGNITO_USER_POOL_ID: ${env:${self:provider.stage}_COGNITO_USER_POOL_ID}
+    COGNITO_APP_CLIENT_ID: ${env:${self:provider.stage}_COGNITO_APP_CLIENT_ID}
+  iam:
+    role:
+      statements:
+        - Effect: Allow 
+          Action:
+            - cognito-idp:AdminUpdateUserAttributes
+            - cognito-idp:AdminGetUser
+            - cognito-idp:AdminCreateUser
+            - cognito-idp:AdminDeleteUser
+            - cognito-idp:AdminSetUserPassword
+            - cognito-idp:ListUsers
+          Resource: "*"
+        - Effect: Allow 
+          Action:
+            - dynamodb:Query
+            - dynamodb:PutItem
+            - dynamodb:DeleteItem
+            - dynamodb:UpdateItem
+            - dynamodb:GetItem
+            - dynamodb:Scan
+          Resource: "*"
+
+package:
+  individually: true
+  patterns:
+    - '!node_modules/**'
+
+resources:
+  Resources:
+    appUserPool:
+      Type: AWS::Cognito::UserPool
+      Properties:
+        UserPoolName: ${self:provider.stage}-appUserPool
+        AutoVerifiedAttributes:
+          - email
+        Schema:
+          - Name: email
+            Required: true
+            AttributeDataType: String
+          - Name: name
+            Required: true
+            AttributeDataType: String
+        Policies:
+          PasswordPolicy:
+            MinimumLength: 6
+            RequireLowercase: false
+            RequireUppercase: false
+            RequireNumbers: false
+            RequireSymbols: false
+    appUserPoolClient:
+      Type: AWS::Cognito::UserPoolClient
+      Properties:
+        ClientName: ${self:provider.stage}-appUserPool-client
+        GenerateSecret: false
+        UserPoolId:
+          Ref: appUserPool
+    appAuthorizer:
+      Type: AWS::ApiGateway::Authorizer
+      Properties:
+        Name: ${self:provider.stage}-appCognitoAuthorizer
+        Type: COGNITO_USER_POOLS
+        IdentitySource: method.request.header.Authorization
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        ProviderARNs:
+          - Fn::GetAtt:
+            - appUserPool
+            - Arn
+    tbUser:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.TB_USER}
+        AttributeDefinitions:
+        - AttributeName: uId
+          AttributeType: S
+        - AttributeName: uEmail
+          AttributeType: S
+        KeySchema:
+        - AttributeName: uId
+          KeyType: HASH
+        - AttributeName: uEmail
+          KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+        GlobalSecondaryIndexes:
+          - IndexName: userByEmail
+            KeySchema:
+              - AttributeName: uEmail
+                KeyType: HASH
+              - AttributeName: uId
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+
+functions:
+  handlerOpen:
+    handler: functions/handler.handlerOpen
+    events:
+      - http: 
+          method: POST 
+          path: open
+          cors: true 
+  handlerAuth:
+    handler: functions/handler.handlerAuth
+    events:
+      - http: 
+          method: POST 
+          path: auth
+          cors: true 
+          authorizer:
+            type: COGNITO_USER_POOLS
+            authorizerId:
+              Ref: appAuthorizer
