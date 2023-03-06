@@ -36,4 +36,5 @@ jobs:
           cd ../server
           npm install
           cd ..
+          npm install
           npm run unitTest
