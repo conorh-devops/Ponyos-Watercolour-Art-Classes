@@ -12,13 +12,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [14.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    env:
+      VUE_APP_dev_APIURL: ${{ vars.DEV_APIURL }}
+      VUE_APP_dev_COGNITO_USER_POOL_ID: ${{ vars.DEV_COGNITO_USER_POOL_ID }}
+      VUE_APP_dev_COGNITO_APP_CLIENT_ID: ${{ vars.DEV_COGNITO_APP_CLIENT_ID }}
 
     steps:
+      - name: Write POOL ID
+        run: echo "${{ vars.DEV_COGNITO_USER_POOL_ID  }}"
       - name: Step 1 - Checkout main branch fom GitHub
         uses: actions/checkout@v3
       - name: Step 2 - Choose Node.js version ${{ matrix.node-version }}
@@ -29,6 +34,7 @@ jobs:
           cache-dependency-path: client/package-lock.json
       - name: Step 3 - Navigate to client directory and run build
         run: |
+
           cd client
           npm install
           npm run build --if-present
