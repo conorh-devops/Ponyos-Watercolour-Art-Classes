@@ -88,7 +88,6 @@ import {
   CognitoUserPool,
   AuthenticationDetails,
 } from "amazon-cognito-identity-js"
-const stage = (process.env.NODE_ENV || "").includes("prod") ? "prod" : "dev"
 
 export default {
   name: "AccountForm",
@@ -117,8 +116,8 @@ export default {
       })
 
       const cognutoUserPool = new CognitoUserPool({
-        UserPoolId: process.env[`VUE_APP_${stage}_COGNITO_USER_POOL_ID`],
-        ClientId: process.env[`VUE_APP_${stage}_COGNITO_APP_CLIENT_ID`],
+        UserPoolId: process.env[`VUE_APP_COGNITO_USER_POOL_ID`],
+        ClientId: process.env[`VUE_APP_COGNITO_APP_CLIENT_ID`],
       })
 
       const cognitoUser = new CognitoUser({
