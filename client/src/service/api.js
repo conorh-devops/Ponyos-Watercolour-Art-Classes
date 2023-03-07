@@ -1,3 +1,4 @@
+console.log("AE: ~ process.env:", process.env)
 const stage = (process.env.NODE_ENV || "").includes("prod") ? "prod" : "dev"
 const apiURL = process.env[`VUE_APP_${stage}_APIURL`]
 console.log("apiURL:", apiURL)
