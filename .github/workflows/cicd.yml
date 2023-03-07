@@ -21,7 +21,7 @@ jobs:
       matrix:
         node-version: [14.x]
     env:
-      VUE_APP_dev_APIURL: ${{ vars.DEV_APIURL }}
+      VUE_APP_dev_APIURL: ${{ vars.VUE_APP_DEV_APIURL }}
       VUE_APP_dev_COGNITO_USER_POOL_ID: ${{ vars.DEV_COGNITO_USER_POOL_ID }}
       VUE_APP_dev_COGNITO_APP_CLIENT_ID: ${{ vars.DEV_COGNITO_APP_CLIENT_ID }}
     steps:
