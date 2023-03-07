@@ -19,6 +19,10 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x]
+    env:
+      VUE_APP_dev_APIURL: ${{ vars.DEV_APIURL }}
+      VUE_APP_dev_COGNITO_USER_POOL_ID: ${{ vars.DEV_COGNITO_USER_POOL_ID }}
+      VUE_APP_dev_COGNITO_APP_CLIENT_ID: ${{ vars.DEV_COGNITO_APP_CLIENT_ID }}
     steps:
       - name: Step 1 - Checkout main branch fom GitHub
         uses: actions/checkout@v3
@@ -87,6 +91,9 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_DEFAULT_REGION: "eu-west-1"
+      dev_BUCKET_URL: ${{ vars.DEV_BUCKET_URL }}
+      dev_COGNITO_USER_POOL_ID: ${{ vars.DEV_COGNITO_USER_POOL_ID }}
+      dev_COGNITO_APP_CLIENT_ID: ${{ vars.DEV_COGNITO_APP_CLIENT_ID }}
     steps:
       - uses: actions/checkout@v3
       # Output name of bucket from Environment Variable in Github
