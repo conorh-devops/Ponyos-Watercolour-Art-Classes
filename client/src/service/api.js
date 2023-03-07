@@ -2,6 +2,7 @@ console.log("AE: ~ process.env:", process.env)
 const stage = (process.env.NODE_ENV || "").includes("prod") ? "prod" : "dev"
 const apiURL = process.env[`VUE_APP_APIURL`]
 console.log("apiURL:", apiURL)
+console.log("Stage:", stage)
 
 const fetchExec = async (url, eName, params, token) => {
 
