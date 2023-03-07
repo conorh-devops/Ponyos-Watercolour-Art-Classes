@@ -7,10 +7,10 @@ provider:
   region: eu-west-1
   environment: 
     REGION: ${self:provider.region}
-    BUCKET_URL: ${env:${self:provider.stage}_BUCKET_URL}
+    BUCKET_URL: ${S3_BUCKET_URL}
     TB_USER: ${self:provider.stage}-tbUser
-    COGNITO_USER_POOL_ID: ${env:${self:provider.stage}_COGNITO_USER_POOL_ID}
-    COGNITO_APP_CLIENT_ID: ${env:${self:provider.stage}_COGNITO_APP_CLIENT_ID}
+    COGNITO_USER_POOL_ID: ${COGNITO_USER_POOL_ID}
+    COGNITO_APP_CLIENT_ID: ${COGNITO_APP_CLIENT_ID}
   iam:
     role:
       statements:
