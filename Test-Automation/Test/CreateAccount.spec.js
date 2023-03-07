@@ -24,7 +24,7 @@ test('Verify student can Enroll in the specific course', async ({ page }) => {
     await page.getByRole('button', { name: 'Log In' }).click();
     await page.getByLabel('E-mail').click();
     await page.getByLabel('E-mail').click();
-    await page.getByLabel('E-mail').fill('john@email.com');
+    await page.getByLabel('E-mail').fill('atu@atu.ie');
     await page.getByLabel('Password').click();
     await page.getByLabel('Password').fill('password');
     await page.getByRole('button', { name: 'Login' }).click();
@@ -42,7 +42,7 @@ test('Verify user student can unenroll from the specific course', async ({ page 
     await page.getByRole('button', { name: 'Log In' }).click();
     await page.getByLabel('E-mail').click();
     await page.getByLabel('E-mail').click();
-    await page.getByLabel('E-mail').fill('john@email.com');
+    await page.getByLabel('E-mail').fill('atu@atu.ie');
     await page.getByLabel('Password').click();
     await page.getByLabel('Password').fill('password');
     await page.getByRole('button', { name: 'Login' }).click();
