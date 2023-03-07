@@ -1,7 +1,7 @@
-const { createResponse, handler } = require("./../functions/handler")
+const { createResponse, handlerOpen } = require("./../functions/handler")
 const { expect } = require("chai")
 
-describe.skip("handler.js", function () {
+describe("handler.js", function () {
 
   const consoleLog = console.log
   console.log = () => { }
@@ -14,15 +14,15 @@ describe.skip("handler.js", function () {
 
     it("success - default values", () => {
       const result = createResponse({})
-      expect(result.status).to.be.eq(200)
+      expect(result.statusCode).to.be.eq(200)
       expect(result.body).to.be.empty
     })
 
     it("success - custom values", () => {
-      const status = 500
+      const statusCode = 500
       const body = { name: "ABC" }
-      const result = createResponse({ status, body })
-      expect(result.status).to.be.eq(status)
+      const result = createResponse({ statusCode, body })
+      expect(result.statusCode).to.be.eq(statusCode)
       expect(result.body).to.be.eql(JSON.stringify(body))
     })
 
@@ -32,16 +32,16 @@ describe.skip("handler.js", function () {
 
     it("eName - invalid", async () => {
       const event = { body: JSON.stringify({ eName: "anyUnrecognizedName" }) }
-      const result = await handler(event)
-      expect(result.status).to.be.eq(500)
-      expect(result.body).to.includes("32453cfb")
+      const result = await handlerOpen(event)
+      expect(result.statusCode).to.be.eq(203)
+      expect(result.body).to.includes("dff0b4cc")
     })
 
     it("eName - hello", async () => {
       const event = { body: JSON.stringify({ eName: "hello" }) }
-      const result = await handler(event)
-      expect(result.status).to.be.eq(200)
-      expect(result.body).to.be.eq("Hello world")
+      const result = await handlerOpen(event)
+      expect(result.statusCode).to.be.eq(200)
+      expect(JSON.parse(result.body).message).to.be.eq("Hello from open API")
     })
 
   })
