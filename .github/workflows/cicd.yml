@@ -14,7 +14,7 @@ on:
 #      - 'feature/DeploymentTesting'
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
+  buildDev:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -28,11 +28,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
           cache-dependency-path: client/package-lock.json
-      - name: Step 3 - Navigate to client directory and run build
+      - name: Step 3 - Build for development
         run: |
           cd client
           npm install
-          npm run build --if-present
+          npm run buildDevMode
           npm run lint
           cd ../server
           npm install
@@ -40,14 +40,47 @@ jobs:
           npm install
           npm run unitTest
           npm run test
-      - name: Step 4 - Upload Artifact GitHub Action
+      - name: Step 4 - Upload Developement Artifact GitHub Action
         uses: actions/upload-artifact@v2
         with:
-          name: pwa-${{ github.run_number }}
+          name: pwa-dev-${{ github.run_number }}
+          path: client/dist/      
+
+  buildProd:
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - name: Step 1 - Checkout main branch fom GitHub
+        uses: actions/checkout@v3
+      - name: Step 2 - Choose Node.js version ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: client/package-lock.json
+      - name: Step 3 - Build for production
+        run: |
+          cd client
+          npm install
+          npm run build
+          npm run lint
+          cd ../server
+          npm install
+          cd ..
+          npm install
+          npm run unitTest
+          npm run test
+      - name: Step 4 - Upload Production Artifact GitHub Action
+        uses: actions/upload-artifact@v2
+        with:
+          name: pwa-prd-${{ github.run_number }}
           path: client/dist/
 
   deploydev:
-    needs: build
+    needs: buildProd
     runs-on: ubuntu-latest
     environment: development
     env:
@@ -70,7 +103,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: pwa-${{ github.run_number }}
+          name: pwa-dev-${{ github.run_number }}
           path: dist
 
       - name: Deploy static site to S3 bucket
@@ -130,7 +163,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: pwa-${{ github.run_number }}
+          name: pwa-prd-${{ github.run_number }}
           path: dist
 
       - name: Deploy static site to S3 bucket
