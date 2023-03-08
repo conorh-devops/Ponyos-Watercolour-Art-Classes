@@ -22,8 +22,8 @@ jobs:
         node-version: [14.x]
     env:
       VUE_APP_APIURL: ${{ secrets.VUE_APP_APIURL }}
-      VUE_APP_COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID }}
-      VUE_APP_COGNITO_APP_CLIENT_ID: ${{ secrets.COGNITO_APP_CLIENT_ID }}
+      VUE_APP_COGNITO_USER_POOL_ID: ${{ secrets.VUE_APP_COGNITO_USER_POOL_ID }}
+      VUE_APP_COGNITO_APP_CLIENT_ID: ${{ secrets.VUE_APP_COGNITO_APP_CLIENT_ID }}
     steps:
       - name: Step 1 - Checkout main branch fom GitHub
         uses: actions/checkout@v3
@@ -60,8 +60,8 @@ jobs:
         node-version: [14.x]
     env:
       VUE_APP_APIURL: ${{ secrets.VUE_APP_APIURL }}
-      VUE_APP_COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID }}
-      VUE_APP_COGNITO_APP_CLIENT_ID: ${{ secrets.COGNITO_APP_CLIENT_ID }}
+      VUE_APP_COGNITO_USER_POOL_ID: ${{ secrets.VUE_APP_COGNITO_USER_POOL_ID }}
+      VUE_APP_COGNITO_APP_CLIENT_ID: ${{ secrets.VUE_APP_COGNITO_APP_CLIENT_ID }}
     steps:
       - name: Step 1 - Checkout main branch fom GitHub
         uses: actions/checkout@v3
