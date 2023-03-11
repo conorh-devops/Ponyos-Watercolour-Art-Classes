@@ -2,24 +2,32 @@
 BScDevOps Assign - Team Marvel
 
 # Table of Contents
-Preamble
-Product Owner
-Rockstars
-Project Deadline
-Project Specification
-Useful Links
-More Information
-Risk Register
-Tenants of Design
-Social Contract
-Meetings
-Communication
-Other
-Branching Strategy
-Estimating Story Points
-Definition of Ready
-Definition of Done
-Preamble
+
+1. [Scrum Master](#scrum-master)
+2. [Product Owner](#product-owner)
+3. [Rockstars](#rockstars)
+4. [Project Deadline](#project-deadline)
+5. [Project Specification](#project-specification)
+6. [Frameworks](#frameworks)
+7. [How To Install Locally](#how-to-install-locally)
+8. [Useful Links](#useful-links)
+10. [Risk Register](#risk-register)
+11. [Tenants of Design](#tenants-of-design)
+12. [Security](#security)
+13. [Testing](#testing)
+14. [Environments](#environments)
+15. [Github Version Control](#github-version-control)
+16. [Agile Methods](#agile-methods)
+17. [Social Contract](#social-contract)
+18. [Meetings](#meetings)
+19. [Communication](#communication)
+20. [Agile Way of Working](#agile-way-of-working)
+21. [Other](#other)
+23. [Estimating Story Points](#estimating-story-points)
+24. [Definistion of Ready](#definition-of-ready)
+25. [Definition of Done](#definition-of-done)
+
+
 
 This is the online repository for the DevOps Assignment.
 
@@ -58,6 +66,7 @@ Rotating scrum master so that everyone gets to experience the role once.
 20/03/2023 - Alan Staunton
 
 # Product Owner
+
 Pauric Dawson
 
 # Rockstars
@@ -76,6 +85,7 @@ Alan Staunton
 
 
 # Project Deadline
+
 Thursday, 23 March 2023 23:59
 
 # Project Specification
@@ -114,30 +124,6 @@ Intellij IDE
  - Development Server: http://ponyos-watercolour-art-classes-dev.s3-website-eu-west-1.amazonaws.com/#/home
  - Production Server: http://ponyos-watercolour-art-classes-prd.s3-website-eu-west-1.amazonaws.com 
 
-# Section	Description
-** THIS SECTION TO BE FILLED IN
-
-Process	Describes the companies process
-
-Project Log	Log of project activities
-
-Costings	Overview of the project cost
-
-Architecture	Outlines the architecture
-
-Environments	Overview of the environment set-up
-
-DR Plan	Disaster Recovery Plan and procedures
-
-Requirements	Overview of the requirements for the project
-
-SLAs	Service level agreements
-
-Risk Management	How we manage risk
-
-Security	Overview of security
-
-Project Log	Team log for the project
 
 # Risk Register
 This repository contains the project's risk register. 
@@ -285,9 +271,10 @@ ___Mitigation___
 Conduct regular legal and regulatory reviews, engage with legal and regulatory experts, and follow best practices for compliance
 
 # Tenants of Design
+
 The code framework to be used will be Node.js, we will be programming using the IDE IntelliJ IDEA.
 
-# Security:
+# Security
 
 ** THIS SECTION TO BE FILLED IN
 
@@ -295,7 +282,7 @@ The code framework to be used will be Node.js, we will be programming using the 
  
 - <<>>.
 
-# Testing:
+# Testing
 
 The quality of the application will be assessed through three main testing types as defined below.
 
@@ -306,7 +293,8 @@ The quality of the application will be assessed through three main testing type
 - Exploratory Test: Along with UI and API tests, the tester will perform an Exploratory test to make sure the non-functional aspects of the application like responsiveness, usability, etc
 
     
-# Environments:
+# Environments
+
 Below are the environment proposed for this project 
     
 Dev, Test, Stage and Production
@@ -322,15 +310,14 @@ Automated creation and deployments
 
 Integrated and automated pipeline (commit -> test -> Stage -> deploy)
 
-# Github version control:
+# Github version control
+
 Branches used:
 - Main - This is the main branch where all users must merge their branches into.
 
 Any merge to be implemented, must be approved by at least one other person.
 
-Version/release management:
-
-# Agile project management methods/principles 
+# Agile Methods
 
 Jira
 
@@ -354,6 +341,7 @@ Technical Excellence: Promoting technical excellence and good design to ensure t
 
 
 # Social Contract
+
 Mobile phones be left on silent during sprint sessions and class time.
 
 Be on time for team meetings and class, if you are running late let the group know by sending a message into the Slack channel.
@@ -377,6 +365,7 @@ Try have some fun, team work makes the dream work.
 Use Agile methodoligies in the project at all times.
 
 # Meetings
+
 Stand-ups will occur on Every Monday @ 18:30, during class and every Thursday @ 18:30. Stands up will occur a minimum of twice weekly.
 
 The order that people give their updates will be random.
@@ -412,6 +401,7 @@ Keep your language and tone professional at all times.
 Be honest.
 
 # Communication
+
 Slack is the preferred method of communication.
 
 Communication in this order: Slack, Teams, Email.
@@ -440,7 +430,8 @@ Listen when someone is talking, don’t interject.
 
 Zero tolerance for bullying.
 
-# Agile way of working.
+# Agile way of working
+
 If are assigned a job, take ownership of it and keep it up to date.
 
 Stick to your agreed working patterns. Let the team know when you are late or going early.
@@ -456,6 +447,7 @@ Don't be afraid to give constructive criticism, as long as it is constructive.
 Solve roadblocks within the team. If the impediment can’t be solved within the team then give it to the Scrum Master.
 
 # Other
+
 Sprints will start after the stand up that happens at the start of class each week.
 
 The Scrum Master role rotates each week, the schedule is available on the on the process section.
@@ -467,6 +459,7 @@ Each member of the team will work approximitely 3 hours per week, unless they ar
 Our branching stategy will start with github then the issue number followed by wip
 
 # Estimating Story Points
+
 Story points are a unit of measurement used in agile project management to estimate the relative size and complexity of tasks or user stories. 
 
 Story points are subjective and help teams to determine how much effort a particular task or story will require, compared to other tasks or stories in the project. 
@@ -502,6 +495,7 @@ The following checks should be marked as done before declaring a Story ready to 
 
 
 # Definition of Done
+
 When the Story is described as "Done", everyone must understand what "Done" means. Although this varies significantly per Scrum Team, members must have a shared understanding of what it means for work to be complete, to ensure transparency. This is the "Definition of "Done"" for the Scrum Team and is used to assess when work is complete on the Product Increment.
 
 The same definition guides the Development Team in knowing how many Stories it can select during a Sprint Planning Meeting. The purpose of each Sprint is to deliver increments of potentially shippable functionality that adhere to the Scrum Team's current Definition of "Done".
