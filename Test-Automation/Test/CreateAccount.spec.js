@@ -56,6 +56,7 @@ test('Verify student can Enroll in the specific course', async () => {
     await page.locator('#btnEnroll_Sosuke').click();
     await page.getByRole('button', { name: 'Confirm' }).click();
     await page.getByRole('button', { name: 'ok' }).click();
+    await page.getByRole('button', { name: 'Log Out' }).click();
 });
 
 test('Verify user student can unenroll from the specific course', async () => {
@@ -68,6 +69,7 @@ test('Verify user student can unenroll from the specific course', async () => {
     await page.getByLabel('Password').click();
     await page.getByLabel('Password').fill('password');
     await page.getByRole('button', { name: 'Login' }).click();
+    await page.waitForTimeout(2000);
     await page.getByRole('button', { name: 'Courses' }).click();
     await page.waitForTimeout(2000);
     // await page.getByRole('button', { name: 'Remove' }).click();
@@ -76,5 +78,5 @@ test('Verify user student can unenroll from the specific course', async () => {
     await page.locator('#btnRemove_Sosuke').click();
     await page.getByRole('button', { name: 'Confirm' }).click();
     await page.getByRole('button', { name: 'Ok' }).click();
-
+    await page.getByRole('button', { name: 'Log Out' }).click();
 });
