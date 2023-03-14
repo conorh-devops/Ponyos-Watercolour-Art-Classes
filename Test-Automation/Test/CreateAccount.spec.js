@@ -1,7 +1,7 @@
 const { test, expect } = require("@playwright/test");
 
 {
-
+    test.describe.configure({ mode: 'serial' });
     let rand1 = (Math.random() + 1).toString(36).substring(7);
     var email = (rand1 + "@atu.ie");
     console.log(email);
