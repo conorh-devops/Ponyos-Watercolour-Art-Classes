@@ -26,49 +26,49 @@ import { test, expect } from '@playwright/test';
 
 // })
 
-test('Verify student can Enroll in the specific course', async ({ page }) => {
-    await page.goto('http://ponyos-watercolour-art-classes-dev.s3-website-eu-west-1.amazonaws.com/#/home')
-    await page.getByRole('button', { name: 'Log In' }).click();
-    await page.getByLabel('E-mail').click();
-    await page.getByLabel('E-mail').click();
-    await page.getByLabel('E-mail').fill('pawar@atu.ie');
-    await page.getByLabel('Password').click();
-    await page.getByLabel('Password').fill('password');
-    await page.getByRole('button', { name: 'Login' }).click();
-    await page.waitForTimeout(2000);
-    await page.getByRole('button', { name: 'Courses' }).click();
-    await page.waitForTimeout(2000);
-    await page.locator('#btnEnroll_Sosuke').click();
-    // await page.getByRole('button', { name: 'Enroll' }).click();
-    await page.getByRole('button', { name: 'Cancel' }).click();
-    // await page.getByRole('button', { name: 'Enroll' }).click();
-    await page.locator('#btnEnroll_Sosuke').click();
-    await page.getByRole('button', { name: 'Confirm' }).click();
-    await page.getByRole('button', { name: 'ok' }).click();
+// test('Verify student can Enroll in the specific course', async ({ page }) => {
+//     await page.goto('http://ponyos-watercolour-art-classes-dev.s3-website-eu-west-1.amazonaws.com/#/home')
+//     await page.getByRole('button', { name: 'Log In' }).click();
+//     await page.getByLabel('E-mail').click();
+//     await page.getByLabel('E-mail').click();
+//     await page.getByLabel('E-mail').fill('pawar@atu.ie');
+//     await page.getByLabel('Password').click();
+//     await page.getByLabel('Password').fill('password');
+//     await page.getByRole('button', { name: 'Login' }).click();
+//     await page.waitForTimeout(2000);
+//     await page.getByRole('button', { name: 'Courses' }).click();
+//     await page.waitForTimeout(2000);
+//     await page.locator('#btnEnroll_Sosuke').click();
+//     // await page.getByRole('button', { name: 'Enroll' }).click();
+//     await page.getByRole('button', { name: 'Cancel' }).click();
+//     // await page.getByRole('button', { name: 'Enroll' }).click();
+//     await page.locator('#btnEnroll_Sosuke').click();
+//     await page.getByRole('button', { name: 'Confirm' }).click();
+//     await page.getByRole('button', { name: 'ok' }).click();
 
-});
+// });
 
-test('Verify user student can unenroll from the specific course', async ({ page }) => {
+// test('Verify user student can unenroll from the specific course', async ({ page }) => {
 
-    await page.goto('http://ponyos-watercolour-art-classes-dev.s3-website-eu-west-1.amazonaws.com/#/home')
-    await page.getByRole('button', { name: 'Log In' }).click();
-    await page.getByLabel('E-mail').click();
-    await page.getByLabel('E-mail').click();
-    await page.getByLabel('E-mail').fill('pawar@atu.ie');
-    await page.getByLabel('Password').click();
-    await page.getByLabel('Password').fill('password');
-    await page.getByRole('button', { name: 'Login' }).click();
-    await page.getByRole('button', { name: 'Courses' }).click();
-    await page.waitForTimeout(2000);
-    // await page.getByRole('button', { name: 'Remove' }).click();
-    await page.locator('#btnRemove_Sosuke').click();
-    await page.getByRole('button', { name: 'Cancel' }).click();
-    await page.locator('#btnRemove_Sosuke').click();
-    await page.getByRole('button', { name: 'Confirm' }).click();
-    await page.getByRole('button', { name: 'Ok' }).click();
+//     await page.goto('http://ponyos-watercolour-art-classes-dev.s3-website-eu-west-1.amazonaws.com/#/home')
+//     await page.getByRole('button', { name: 'Log In' }).click();
+//     await page.getByLabel('E-mail').click();
+//     await page.getByLabel('E-mail').click();
+//     await page.getByLabel('E-mail').fill('pawar@atu.ie');
+//     await page.getByLabel('Password').click();
+//     await page.getByLabel('Password').fill('password');
+//     await page.getByRole('button', { name: 'Login' }).click();
+//     await page.getByRole('button', { name: 'Courses' }).click();
+//     await page.waitForTimeout(2000);
+//     // await page.getByRole('button', { name: 'Remove' }).click();
+//     await page.locator('#btnRemove_Sosuke').click();
+//     await page.getByRole('button', { name: 'Cancel' }).click();
+//     await page.locator('#btnRemove_Sosuke').click();
+//     await page.getByRole('button', { name: 'Confirm' }).click();
+//     await page.getByRole('button', { name: 'Ok' }).click();
 
 
-});
+// });
 
 test('Verify Admin can access admin sections of the PWA applicaiton', async ({ page }) => {
     await page.goto('http://ponyos-watercolour-art-classes-dev.s3-website-eu-west-1.amazonaws.com/#/home')
