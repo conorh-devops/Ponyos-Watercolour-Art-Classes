@@ -20,7 +20,7 @@ jobs:
     - name: Run Playwright tests
       run: |
           cd Test-Automation
-          npx playwright test Test/CreateAccount.spec.js --project=chromium
+          npx playwright test Test/CreateAccount.spec.js --project=chromium --workers 1
     - uses: actions/upload-artifact@v3
       if: always()
       with:
