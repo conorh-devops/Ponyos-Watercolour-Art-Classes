@@ -1,11 +1,23 @@
-const { test, expect } = require("@playwright/test");
+const { test } = require('@playwright/test');
 
 test.describe.configure({ mode: 'serial' });
+
 let rand1 = (Math.random() + 1).toString(36).substring(7);
 var email = (rand1 + "@atu.ie");
 console.log(email);
 
-test('Register user account', async ({ page }) => {
+/** @type {import('@playwright/test').Page} */
+let page;
+
+test.beforeAll(async ({ browser }) => {
+  page = await browser.newPage();
+});
+
+test.afterAll(async () => {
+  await page.close();
+});
+
+test('Register user account', async () => {
 
     await page.goto('http://ponyos-watercolour-art-classes-dev.s3-website-eu-west-1.amazonaws.com/#/home');
     await expect(page).toHaveTitle('art-class');
@@ -25,7 +37,7 @@ test('Register user account', async ({ page }) => {
 
 })
 
-test('Verify student can Enroll in the specific course', async ({ page }) => {
+test('Verify student can Enroll in the specific course', async () => {
     await page.goto('http://ponyos-watercolour-art-classes-dev.s3-website-eu-west-1.amazonaws.com/#/home')
     await page.getByRole('button', { name: 'Log In' }).click();
     await page.getByLabel('E-mail').click();
@@ -46,7 +58,7 @@ test('Verify student can Enroll in the specific course', async ({ page }) => {
     await page.getByRole('button', { name: 'ok' }).click();
 });
 
-test('Verify user student can unenroll from the specific course', async ({ page }) => {
+test('Verify user student can unenroll from the specific course', async () => {
 
     await page.goto('http://ponyos-watercolour-art-classes-dev.s3-website-eu-west-1.amazonaws.com/#/home')
     await page.getByRole('button', { name: 'Log In' }).click();
