@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 
-
+test.use({ viewport: { width: 1792, height: 1792 } })
 test('Register user account', async ({ page }) => {
 
 
@@ -88,7 +88,6 @@ test('Verify Admin can access admin sections of the PWA applicaiton', async ({ p
     await page.getByRole('button', { name: 'Login' }).click();
     await page.waitForTimeout(2000);
     await page.locator("#btnBarProfile123").isVisible()
-
 
 
 });
