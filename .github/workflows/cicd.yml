@@ -98,6 +98,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_DEFAULT_REGION: "eu-west-1"
       S3_BUCKET_URL: ${{ vars.S3_BUCKET_URL }}
+      ENVIRONMENT: ${{ vars.ENVIRONMENT }}
       COGNITO_USER_POOL_ID: ${{ vars.COGNITO_USER_POOL_ID }}
       COGNITO_APP_CLIENT_ID: ${{ vars.COGNITO_APP_CLIENT_ID }}
     steps:
@@ -161,6 +162,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_DEFAULT_REGION: "eu-west-1"
       S3_BUCKET_URL: ${{ vars.S3_BUCKET_URL }}
+      ENVIRONMENT: ${{ vars.ENVIRONMENT }}
       COGNITO_USER_POOL_ID: ${{ vars.COGNITO_USER_POOL_ID }}
       COGNITO_APP_CLIENT_ID: ${{ vars.COGNITO_APP_CLIENT_ID }}
     steps:
