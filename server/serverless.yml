@@ -3,7 +3,7 @@ service: ponyo
 provider:
   name: aws
   runtime: nodejs14.x
-  stage: dev
+  stage: ${env:ENVIRONMENT}
   region: eu-west-1
   environment: 
     REGION: ${self:provider.region}
