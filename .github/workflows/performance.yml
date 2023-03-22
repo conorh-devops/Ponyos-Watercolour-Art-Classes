@@ -11,8 +11,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
+      
+      - name: Step 3 - Build for development
+        run: |
+          cd Test-Automation/Test
 
       - name: Run local k6 test
         uses: grafana/k6-action@v0.2.0
         with:
-          filename: Test-Automation/Test/performance.js
+          filename: performance.js
