@@ -12,9 +12,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       
-      - name: Step 3 - Build for development
+      - name: Go to test folder
         run: |
           cd Test-Automation/Test
+          dir
 
       - name: Run local k6 test
         uses: grafana/k6-action@v0.2.0
