@@ -1,3 +1,9 @@
+name: Performance Load Testing
+
+on:
+  pull_request:
+    branches: ["main"]
+
 k6_load_test:
   name: k6 Load Test
   runs-on: ubuntu-latest
