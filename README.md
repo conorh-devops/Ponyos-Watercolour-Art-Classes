@@ -101,14 +101,70 @@ Thursday, 23 March 2023 23:59
  - The project should be run on AWS.
 
 # Frameworks
-We will be using MongoDB for our database
 
-Node.js is used for the frontend.
 
-Project will be hosted on AWS but can also run locally. Instructions are provided below.
+___Application Framework___
+
+ - Front End
+
+Vuejs 
+
+JavaScript framework builds the user interfaces on top of standard HTML, CSS, and JavaScript providing a declarative and component-based programming mode.
+
+ - Server Side
+
+Node.js
+
+An open source, cross-platform JavaScript runtime environment and library, run the applications outside the client's browser.
+
+___Cloud Framework___
+
+AWS
+
+S3 bucket
+
+Used to hold the Ponyo's Watercolour Art static website.
+
+Lambda Functions
+
+Execute server events such as Database CRUD and app business rules.
+
+___Serverless Framework___
+
+Creates the DynamoDB tables, lambda functions, API Gateway, Cognito and other required AWS resources in the AWS Account to be used by the front-end for Ponyo’s Watercolour Art application.
+
+Cognito
+
+Add user sign-up and authentication to Ponyo's Watercolour Art application.
+
+DynamoDB
+
+Fully managed NoSQL database, it holds Ponyo's Watercolour Art application users and contents.
+
+API Gateway
+
+AWS service that routers and validates the app communication between front-end and back-end, it also authorizes users' requests to the application back-end resources.
+
+___Testing Framework___
+
+Playwright
+
+A test automation framework that performs end-to-end testing across major browsers.
+
+Mocha
+
+A testing library for Node. js, it's used for unit and integration testing.
+
+___Libraries___
+
+Chai
+
+An external javascript library is used to write assertions.
 
 
 # How to install locally
+
+Project will be hosted on AWS but can also run locally. Instructions are provided below.
 
 Intellij IDE
  - Download project from Git.
@@ -276,11 +332,34 @@ The code framework to be used will be Node.js, we will be programming using the 
 
 # Security
 
-** THIS SECTION TO BE FILLED IN
+The app has a few layers of security, from source code to HTTP requests.
 
-- << >>: uses static analysis to find bugs in code. 
+- Code
  
-- <<>>.
+
+- Back end
+ 
+
+___Security in the back end___
+
+HTTPS is required to access API Gateway
+
+HTTP requests will only be accepted at API Gateway if they come from the expected domain, which is currently our S3 bucket. Any other domain request that attempts to access the API Gateway will receive a CORS error response.
+
+AWS Cognito will provide the authentication when required.
+
+API Gateway has only two paths. 
+
+“/open”: It doesn’t require authentication. This is used for Signing up. 
+
+“/auth”: It requires an authentication Token to proceed. Any access to this path will go through Cognito to validate the Token. This is path is used for any sensitive data manipulation.
+
+Based on the Token, it’s possible to identify which user is executing the HTTP request.
+
+The identified Admin can have access to all functionalities in the back end. That means users can have their data modified by the Admin. 
+
+Non-Admin users can only modify their own data. Users don’t have access to any other user data. 
+
 
 # Testing
 
@@ -319,25 +398,25 @@ Any merge to be implemented, must be approved by at least one other person.
 
 # Agile Methods
 
-Jira
+- Jira
 
-GitHub
+- GitHub
 
-Confluence
+- Confluence
 
-Individuals and Interactions: Prioritizing the value of individuals and their interactions over processes and tools.
+- Individuals and Interactions: Prioritizing the value of individuals and their interactions over processes and tools.
 
-Working Software: Focusing on delivering working software over comprehensive documentation.
+- Working Software: Focusing on delivering working software over comprehensive documentation.
 
-Customer Collaboration: Encouraging collaboration with customers to ensure that the project is aligned with their needs and expectations.
+- Customer Collaboration: Encouraging collaboration with customers to ensure that the project is aligned with their needs and expectations.
 
-Responding to Change: Embracing change and adapting to it quickly, rather than following a rigid plan.
+- Responding to Change: Embracing change and adapting to it quickly, rather than following a rigid plan.
 
-Iterative Development: Breaking down the project into smaller, manageable iterations and regularly delivering working software.
+- Iterative Development: Breaking down the project into smaller, manageable iterations and regularly delivering working software.
 
-Sustainability: Ensuring a sustainable pace of work to prevent burnout and maintain productivity.
+- Sustainability: Ensuring a sustainable pace of work to prevent burnout and maintain productivity.
 
-Technical Excellence: Promoting technical excellence and good design to ensure that the project can be maintained and scaled over time.
+- Technical Excellence: Promoting technical excellence and good design to ensure that the project can be maintained and scaled over time.
 
 
 # Social Contract
