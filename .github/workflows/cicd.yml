@@ -4,6 +4,8 @@ name: CICD
 on:
   push:
     branches: ["main"]
+  pull_request:
+    branches: ["main"]
 # Triggers the workflow on push or pull request events but only for the main branch
 # push:
 #  branches: [ main ]
@@ -152,17 +154,21 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-  
+
   k6_load_test:
     name: k6 Load Test
-    needs: test
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      
+      - name: Check directory
+        run: |
+          dir      
       - name: Run local k6 test
         uses: grafana/k6-action@v0.2.0
         with:
-          filename: performance.js
-
+          filename: Test-Automation/performance.js
 
   deployprod:
     needs: k6_load_test
