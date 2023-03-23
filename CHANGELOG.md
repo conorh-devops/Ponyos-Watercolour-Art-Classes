@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.1](https://github.com/conorh-devops/Ponyos-Watercolour-Art-Classes/compare/v1.0.0...v1.0.1) (2023-03-23)
+
+
+### Bug Fixes
+
+* Fixed K6 CICD ([09b9512](https://github.com/conorh-devops/Ponyos-Watercolour-Art-Classes/commit/09b9512c50e1c4518bc37e6d4acb066882bc7b04))
+* Fixed K6 CICD ([0915175](https://github.com/conorh-devops/Ponyos-Watercolour-Art-Classes/commit/0915175a239da2a2fbb231cb96585e2d98eee113))
+* Fixed K6 CICD ([5c0beaf](https://github.com/conorh-devops/Ponyos-Watercolour-Art-Classes/commit/5c0beaf6be839a1cdf56210faa77d6c42eb5807d))
+
 ## 1.0.0 (2023-03-23)
 
 
