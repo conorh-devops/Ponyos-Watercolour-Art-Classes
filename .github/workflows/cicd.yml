@@ -152,6 +152,16 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+  
+  k6_load_test:
+    name: k6 Load Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run local k6 test
+        uses: grafana/k6-action@v0.2.0
+        with:
+          filename: Test-Automation/performance.js
+
 
   deployprod:
     needs: test
