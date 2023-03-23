@@ -155,16 +155,17 @@ jobs:
   
   k6_load_test:
     name: k6 Load Test
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Run local k6 test
         uses: grafana/k6-action@v0.2.0
         with:
-          filename: Test-Automation/performance.js
+          filename: performance.js
 
 
   deployprod:
-    needs: test
+    needs: k6_load_test
     runs-on: ubuntu-latest
     environment: production
     env:
