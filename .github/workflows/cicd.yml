@@ -1,18 +1,7 @@
-# This is a basic workflow to help you get started with Actions.
 name: CICD
-# Controls when the action will run.
 on:
   push:
     branches: ["main"]
-# Triggers the workflow on push or pull request events but only for the main branch
-# push:
-#  branches: [ main ]
-# Allows you to run this workflow manually from the Actions tab
-#  workflow_dispatch: {}
-#  push:
-#    branches:
-#      - 'feature/DeploymentTesting'
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   buildDev:
     runs-on: ubuntu-latest
@@ -152,17 +141,18 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-  
+
   k6_load_test:
     name: k6 Load Test
-    needs: test
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      
       - name: Run local k6 test
         uses: grafana/k6-action@v0.2.0
         with:
-          filename: performance.js
-
+          filename: Test-Automation/performance.js
 
   deployprod:
     needs: k6_load_test
