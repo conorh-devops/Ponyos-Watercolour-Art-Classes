@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/conorh-devops/Ponyos-Watercolour-Art-Classes/compare/v1.0.1...v1.0.2) (2023-03-27)
+
+
+### Bug Fixes
+
+* Removed triggers on push for build validation ([d148e28](https://github.com/conorh-devops/Ponyos-Watercolour-Art-Classes/commit/d148e28097dcab0f9ab918fadb8e85319d72dd7e))
+
 ## [1.0.1](https://github.com/conorh-devops/Ponyos-Watercolour-Art-Classes/compare/v1.0.0...v1.0.1) (2023-03-23)
 
 
